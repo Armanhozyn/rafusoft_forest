@@ -1,0 +1,20 @@
+<?php
+return [
+    'welcome' => 'স্বাগতম',
+    'my_profile' => 'আমার প্রোফাইল',
+    'settings' => 'সেটিংস',
+    'support' => 'সাহায্য',
+    'logout' => 'প্রস্থান',
+    'name' => 'নাম',
+    'email' => 'ইমেইল',
+    'phone_number' => 'ফোন নম্বর',
+    'photo' => 'ছবি',
+    'password' => 'পাসওয়ার্ড',
+    'confirm_password' => 'পাসওয়ার্ড নিশ্চিত করন',
+    'submit' => 'দাখিল',
+    'profile' => 'প্রোফাইল',
+    'edit_profile' => 'প্রোফাইল সম্পাদন',
+    'choose_photo' => 'ছবি নির্বাচন',
+    'password_information' => 'পাসওয়ার্ড তথ্য',
+    '' => '',
+];

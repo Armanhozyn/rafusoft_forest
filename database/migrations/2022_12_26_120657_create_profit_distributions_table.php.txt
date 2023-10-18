@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('profit_distributions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('garden_id');
+            $table->string('office_order_no');
+            $table->date('order_date');
+            $table->decimal('forest_revenew',10,2);
+            $table->decimal('tff_profit_share', 10, 2);
+            $table->decimal('beneficiary_profit_share', 10, 2);
+            $table->decimal('land_owner_profit_share', 10, 2);
+            $table->decimal('union_parsadh_profit_share', 10, 2);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('profit_distributions');
+    }
+};
