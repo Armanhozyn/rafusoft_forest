@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css"
         type="text/css">
     {{-- <link rel="stylesheet" href="{{asset('assets/css/flag-icons.min.css')}}" type="text/css"> --}}
-    <link rel="stylesheet" href="/css/notify.min.css">
+    <link rel="stylesheet" href="{{asset('css/notify.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @stack('styles')
 

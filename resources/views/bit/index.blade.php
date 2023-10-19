@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
     @can('create-category')
-        <a href="{{ route('garden.create') }}" class="btn btn-sm btn-neutral">নতুন বাগান সৃজন</a>
+        <a href="{{ route('country.create') }}" class="btn btn-sm btn-neutral">Create New Country</a>
     @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="card-header bg-transparent">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h3 class="mb-0">সৃজিত বাগানসমূহ</h3>
+                            <h3 class="mb-0">All Countries</h3>
                         </div>
                         <div class="col-lg-4">
                             {!! Form::open(['route' => 'users.index', 'method' => 'get']) !!}
@@ -28,13 +28,8 @@
                             <table class="table table-hover align-items-center">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">সনাক্তকরন নম্বর</th>
-                                        <th scope="col">বাগানের ধরন</th>
-                                        <th scope="col">জেলা</th>
-                                        <th scope="col">উপজেলা</th>
-                                        <th scope="col">ইউনিয়ন</th>
-
-                                        <th scope="col">চুক্তিনামা</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Added by</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Created at</th>
                                         <th scope="col" class="text-center">Action</th>
@@ -44,30 +39,8 @@
                                     @foreach ($categories as $category)
                                         <tr>
                                             <th scope="row">
-                                                {{ $category->id }}
+                                                {{ $category->name }}
                                             </th>
-                                            <th scope="row">
-                                                {{ $category->garden_information->garden_type->name }}
-                                            </th>
-
-                                            <th scope="row">
-                                                {{ $category->garden_information->district->name }}
-                                            </th>
-                                            <th scope="row">
-                                                {{ $category->garden_information->thana->name }}
-                                            </th>
-                                            <th scope="row">
-                                                {{-- {{ $category->garden_information->garden_type->name }} --}}
-                                            </th>
-                                            <th scope="row">
-
-                                                @if($category->agreement_attachment)
-                                                <a download="garden_creation_agreement_{{ $category->agreement_attachment }}" href='{{url("/uploads/agreements/$category->agreement_attachment") }}'>ডাউনলোড</a>
-                                                @else
-                                                <a href="{{url('/garden/agree')}}"></a>
-                                                @endif
-                                            </th>
-
                                             <td class="budget">
                                                 {{-- {{$category->user->name}} --}}
                                             </td>
@@ -91,11 +64,11 @@
                                                 @endcan
 
                                                 @can('update-category')
-         {{--                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip"
+                                                    <a class="btn btn-info btn-sm m-1" data-toggle="tooltip"
                                                         data-placement="top" title="Edit category details"
                                                         href="{{ route('category.edit', $category) }}">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </a> --}}
+                                                    </a>
                                                 @endcan
                                                 @can('destroy-category')
                                                     <button type="submit" class="btn delete btn-danger btn-sm m-1"

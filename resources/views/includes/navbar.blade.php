@@ -46,48 +46,54 @@
                                 <ul class="nav nav-sm flex-column">
                                     @can('view-user')
                                         <li class="nav-item">
-                                            <a href="/country" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                            <a href="{{url('/country')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.countries') }}</span></a>
                                         </li>
                                     @endcan
 
                                     @can('view-user')
                                         <li class="nav-item">
-                                            <a href="/districts" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                            <a href="{{url('/districts')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.districts') }}</span></a>
                                         </li>
                                     @endcan
 
                                     @can('view-user')
                                         <li class="nav-item">
-                                            <a href="/projects" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                            <a href="{{url('/projects')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.projects') }}</span></a>
                                         </li>
                                     @endcan
 
                                     @can('view-user')
                                         <li class="nav-item">
-                                            <a href="/ranges" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                            <a href="{{url('/ranges')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.ranges') }}</span></a>
                                         </li>
                                     @endcan
                                     @can('view-user')
                                         <li class="nav-item">
-                                            <a href="/union" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                            <a href="{{url('/union')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.unions') }}</span></a>
                                         </li>
                                     @endcan
                                     @can('create-user')
                                         <li class="nav-item">
-                                            <a href="/land-owners" class="nav-link"><span class="sidenav-mini-icon">D
+                                            <a href="{{url('/land-owners')}}" class="nav-link"><span class="sidenav-mini-icon">D
                                                 </span><span class="sidenav-normal">{{ __('navbar.land_owners') }}</span></a>
                                         </li>
                                     @endcan
 
                                     @can('create-user')
                                         <li class="nav-item">
-                                            <a href="/beneficiary" class="nav-link"><span class="sidenav-mini-icon">D
+                                            <a href="{{url('/beneficiary')}}" class="nav-link"><span class="sidenav-mini-icon">D
                                                 </span><span class="sidenav-normal">{{ __('navbar.beneficiaries') }}</span></a>
+                                        </li>
+                                    @endcan
+                                    @can('create-user')
+                                        <li class="nav-item">
+                                            <a href="{{url('/bit')}}" class="nav-link"><span class="sidenav-mini-icon">D
+                                                </span><span class="sidenav-normal">{{ __('navbar.bit') }}</span></a>
                                         </li>
                                     @endcan
                                 </ul>
@@ -242,7 +248,7 @@
                             <ul class="nav nav-sm flex-column">
                                 @can('view-category')
                                     <li class="nav-item">
-                                        <a  href="/report/index" class="nav-link"><span
+                                        <a  href="{{url('/report/index')}}" class="nav-link"><span
                                                 class="sidenav-mini-icon">D </span><span class="sidenav-normal">প্রতিবেদন তৈরি করুন</span></a>
                                     </li>
                                 @endcan

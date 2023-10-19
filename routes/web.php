@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::post('/settings', 'SettingController@update')->name('settings.update');
 
     Route::resource('country', 'CountryController')->except('show');
+    Route::resource('bit', 'BitController')->except('show');
     Route::resource('union', 'UnionParishadController')->except('show');
     Route::resource('paymenthistory', 'PaymentHistoryController');
     Route::resource('projects', 'ProjectController');

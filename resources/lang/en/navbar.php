@@ -31,7 +31,7 @@ return [
     'lot_description' => 'Lot Description',
     'lot_money_collection_and_deposit' => 'Lot Money Collection & Deposit',
     '"bank_deposit_details' => 'Bank Deposit Details',
-    '' => '',
+    'bit' => 'Bit',
     '' => '',
 
 ];

@@ -31,6 +31,6 @@ return [
     'lot_description' => 'লটের বিবরন',
     'lot_money_collection_and_deposit' => 'লটের টাকা আদায় ও জমার বিবরণ',
     'bank_deposit_details' => 'ব্যাংক জমার বিবরন',
-    '' => '',
+    'bit' => 'বিট',
 
 ];
