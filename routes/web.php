@@ -57,6 +57,10 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
 
     Route::resource('country', 'CountryController')->except('show');
     Route::resource('bit', 'BitController')->except('show');
+    Route::resource('district', 'DistrictController')->except('show');
+    Route::resource('land_owner', 'LandOwnerController')->except('show');
+    Route::resource('beneficiary', 'BeneficiaryController')->except('show');
+    Route::resource('range', 'RangeController')->except('show');
     Route::resource('union', 'UnionParishadController')->except('show');
     Route::resource('paymenthistory', 'PaymentHistoryController');
     Route::resource('projects', 'ProjectController');

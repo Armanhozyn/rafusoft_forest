@@ -1,104 +1,80 @@
 @extends('layouts.app')
 @push('pg_btn')
-    @can('create-category')
-        <a href="{{ route('country.create') }}" class="btn btn-sm btn-neutral">Create New Country</a>
-    @endcan
+@can('create-category')
+<a href="{{ route('bit.create') }}" class="btn btn-sm btn-neutral">Create New Bits</a>
+@endcan
 @endpush
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card mb-5">
-                <div class="card-header bg-transparent">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h3 class="mb-0">All Countries</h3>
-                        </div>
-                        <div class="col-lg-4">
-                            {!! Form::open(['route' => 'users.index', 'method' => 'get']) !!}
-                            <div class="form-group mb-0">
-                                {{ Form::text('search', request()->query('search'), ['class' => 'form-control form-control-sm', 'placeholder' => 'Search users']) }}
-                            </div>
-                            {!! Form::close() !!}
-                        </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-5">
+            <div class="card-header bg-transparent">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3 class="mb-0">All Bits</h3>
                     </div>
                 </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <div>
-                            <table class="table table-hover align-items-center">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Added by</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Created at</th>
-                                        <th scope="col" class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list">
-                                    @foreach ($categories as $category)
-                                        <tr>
-                                            <th scope="row">
-                                                {{ $category->name }}
-                                            </th>
-                                            <td class="budget">
-                                                {{-- {{$category->user->name}} --}}
-                                            </td>
-                                            <td>
-                                                {{-- @if ($category->status)
-                                                    <span class="badge badge-pill badge-lg badge-success">Active</span>
-                                                @else
-                                                    <span class="badge badge-pill badge-lg badge-danger">Disabled</span>
-                                                @endif --}}
-                                            </td>
-                                            <td>
-                                                {{ $category->created_at->diffForHumans() }}
-                                            </td>
-                                            <td class="text-center">
-                                                @can('destroy-category')
-                                                    {!! Form::open([
-                                                        'route' => ['category.destroy', $category],
-                                                        'method' => 'delete',
-                                                        'class' => 'd-inline-block dform',
-                                                    ]) !!}
-                                                @endcan
-
-                                                @can('update-category')
-                                                    <a class="btn btn-info btn-sm m-1" data-toggle="tooltip"
-                                                        data-placement="top" title="Edit category details"
-                                                        href="{{ route('category.edit', $category) }}">
-                                                        <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </a>
-                                                @endcan
-                                                @can('destroy-category')
-                                                    <button type="submit" class="btn delete btn-danger btn-sm m-1"
-                                                        data-toggle="tooltip" data-placement="top" title="Delete category"
-                                                        href="">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                    {!! Form::close() !!}
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="6">
-                                            {{ $categories->links() }}
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+            </div>
+            <div class="card-body px-2">
+                <div class="table-responsive">
+                    <div>
+                        <table id="taxBillTable" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>{{trans('lang.serial_no')}}</th>
+                                    <th>{{trans('lang.range_name')}}</th>
+                                    <th>{{trans('navbar.bit')}} {{trans('lang.name')}}</th>
+                                    <th>{{trans('lang.name_in_english')}}</th>
+                                    <th>{{trans('lang.office_head_designation')}}</th>
+                                    <th>{{trans('lang.created_at')}}</th>
+                                    <th>{{trans('lang.Action')}}</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>{{trans('lang.serial_no')}}</th>
+                                    <th>{{trans('lang.range_name')}}</th>
+                                    <th>{{trans('navbar.bit')}} {{trans('lang.name')}}</th>
+                                    <th>{{trans('navbar.bit')}} {{trans('lang.name_in_english')}}</th>
+                                    <th>{{trans('lang.office_head_designation')}}</th>
+                                    <th>{{trans('lang.created_at')}}</th>
+                                    <th>{{trans('lang.Action')}}</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 @push('scripts')
-    <script>
+<script>
+    $(document).ready(function() {
+
+$('#taxBillTable').DataTable({
+    processing: true,
+    serverSide: true,
+    responsive: true,
+    ajax: '{{ route('bit.index') }}',
+    columns: [
+        { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+        { data: 'range_name', name: 'range_name' },
+        { data: 'name', name: 'name' },
+        { data: 'name_english', name: 'name_english' },
+        { data: 'office_head_designation', name: 'office_head_designation' },
+        { data: 'created_at_read', name: 'created_at_read' },
+        { data: 'actions', name: 'actions' }
+        // Add other fields as needed
+    ],
+    initComplete: function(settings, json) {
+        debugger;
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
         jQuery(document).ready(function() {
             $('.delete').on('click', function(e) {
                 e.preventDefault();
@@ -122,5 +98,16 @@
                 });
             })
         })
-    </script>
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+    // Handle the error your own way here
+    console.error("Ajax error: ", textStatus, errorThrown);
+    }
+});
+});
+
+
+
+
+</script>
 @endpush

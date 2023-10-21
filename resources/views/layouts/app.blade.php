@@ -10,6 +10,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{-- DataTable Css Start --}}
+        <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+
+        <!-- Buttons Extension CSS and JS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+    {{-- DataTable Css Stop --}}
+
     <link rel="stylesheet" href="{{ asset('assets/fonts/stylesheet.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/solaiman-lipi/font.css') }}">
     <!-- Icons -->
@@ -57,6 +65,17 @@
         <script src="{{ asset('assets/js/dashboard.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js" integrity="sha512-bUg5gaqBVaXIJNuebamJ6uex//mjxPk8kljQTdM1SwkNrQD7pjS+PerntUSD+QRWPNJ0tq54/x4zRV8bLrLhZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+        {{-- DataTable Start  --}}
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+            <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script> <!-- Column Visibility -->
+        {{-- DataTable Stop --}}
         @stack('scripts')
         <script>
 let currentUrlWithoutQueryStrings = window.location.protocol + "//" + window.location.host + window.location.pathname;

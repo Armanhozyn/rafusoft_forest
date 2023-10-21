@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Bit;
+use App\Http\Requests\BitRequest;
+use App\Range;
 use Illuminate\Http\Request;
+use DataTables;
 
 class BitController extends Controller
 {
@@ -14,17 +17,44 @@ class BitController extends Controller
      */
     public function index(Request $request)
     {
-        // dd('works2');
-        // if ($request->has('search')) {
-        //     $categories = Country::where('name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
-        // } else {
-        //     $categories = Country::paginate(setting('record_per_page', 15));
-        // }
+        $bits = Bit::join('ranges', 'bits.range_id', '=', 'ranges.id')
+        ->select('bits.*', 'ranges.name as range_name')
+        ->latest()
+        ->get();
 
-        $bits = Bit::latest()->get();
-        dd($bits);
-        $title = 'Manage Countries';
-        return view('bit.index', compact('categories', 'title'));
+        if (request()->ajax()) {
+            return DataTables::of($bits)
+            ->addIndexColumn()
+            ->addColumn('created_at_read',function($row){
+                return $row->created_at->diffForHumans();
+
+            })
+            ->addColumn('actions',function($row){
+                $delete_api = route('bit.destroy',$row->id);
+                $edit_api = route('bit.edit',$row->id);
+                $csrf = csrf_token();
+                $action = <<<CODE
+                <form method='POST' action='$delete_api' accept-charset='UTF-8' class='d-inline-block dform'>
+
+                    <input name='_method' type='hidden' value='DELETE'><input name='_token' type='hidden' value='$csrf'>
+                    <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$edit_api' data-original-title='Edit category details'>
+                        <i class='fa fa-edit' aria-hidden='true'></i>
+                    </a>
+                    <button type='submit' class='btn delete btn-danger btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='' data-original-title='Delete category'>
+                        <i class='fas fa-trash'></i>
+                    </button>
+                </form>
+                CODE;
+
+                   return $action;
+
+            })
+            ->rawColumns(['created_at_read','actions'])
+            ->make(true);
+        }
+        // dd($bits);
+        $title = 'Manage Bits';
+        return view('bit.index', compact('bits', 'title'));
     }
 
     /**
@@ -34,8 +64,9 @@ class BitController extends Controller
      */
     public function create()
     {
-        $title = 'Create Country';
-        return view('country.create', compact('title'));
+        $title = 'Create Bit';
+        $ranges = Range::latest()->get();
+        return view('bit.create', compact('ranges','title'));
     }
 
     /**
@@ -44,23 +75,12 @@ class BitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CountryRequest $request)
+    public function store(BitRequest $request)
     {
-        $request->merge(['user_id' => Auth::user()->id]);
-        Country::create($request->except('_token'));
-        flash('Country created successfully!')->success();
-        return redirect()->route('country.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Country $category)
-    {
-        return back();
+        // $request->merge(['user_id' => Auth::user()->id]);
+        Bit::create($request->except('_token'));
+        flash('Bit created successfully!')->success();
+        return redirect()->route('bit.index');
     }
 
     /**
@@ -69,11 +89,11 @@ class BitController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $category)
+    public function edit(Bit $bit)
     {
-        $title = "Country Details";
-        $category->with('user');
-        return view('country.edit', compact('title', 'category'));
+        $title = "Bit Details";
+        $ranges = Range::latest()->get();
+        return view('bit.edit', compact('title', 'bit','ranges'));
     }
 
     /**
@@ -83,23 +103,23 @@ class BitController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CountryRequest $request, Country $category)
+    public function update(Request $request, Bit $bit)
     {
-        $category->update($request->all());
-        flash('Country updated successfully!')->success();
+        $bit->update($request->all());
+        flash('Bit updated successfully!')->success();
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Bit  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $category)
+    public function destroy(Bit $bit)
     {
-        $category->delete();
-        flash('Country deleted successfully!')->info();
+        $bit->delete();
+        flash('Bit deleted successfully!')->info();
         return back();
     }
 }

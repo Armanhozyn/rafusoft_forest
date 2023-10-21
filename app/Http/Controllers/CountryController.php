@@ -7,7 +7,7 @@ use App\Http\Requests\CountryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class countryController extends Controller
+class CountryController extends Controller
 {
     public function __construct()
     {

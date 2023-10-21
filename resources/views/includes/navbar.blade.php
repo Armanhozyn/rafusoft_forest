@@ -53,7 +53,7 @@
 
                                     @can('view-user')
                                         <li class="nav-item">
-                                            <a href="{{url('/districts')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                            <a href="{{url('/district')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.districts') }}</span></a>
                                         </li>
                                     @endcan
@@ -67,7 +67,7 @@
 
                                     @can('view-user')
                                         <li class="nav-item">
-                                            <a href="{{url('/ranges')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                            <a href="{{url('/range')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.ranges') }}</span></a>
                                         </li>
                                     @endcan
@@ -79,7 +79,7 @@
                                     @endcan
                                     @can('create-user')
                                         <li class="nav-item">
-                                            <a href="{{url('/land-owners')}}" class="nav-link"><span class="sidenav-mini-icon">D
+                                            <a href="{{url('/land_owner')}}" class="nav-link"><span class="sidenav-mini-icon">D
                                                 </span><span class="sidenav-normal">{{ __('navbar.land_owners') }}</span></a>
                                         </li>
                                     @endcan
