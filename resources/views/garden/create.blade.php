@@ -36,6 +36,7 @@
 
                     <div class="pl-lg-4 mb-4">
                         <div class="row">
+                            Hello
                             <div class="col-lg-12">
 {{--                                 <table id="info-table">
                                     <tr>
@@ -175,7 +176,7 @@
                                     {{ Form::label('land_owner_name', __('garden.land_owner_name'), ['class' => 'form-control-label']) }}
                                     {{ Form::text('land_owner_name', null, ['class' => 'form-control form-control-sm']) }}
                                 </div>
- 
+
                                 <div class="form-group">
                                     {{ Form::label('union_parishad_id', __('garden.select_union'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('union_parishad_id', $unions, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select union...']) }}
