@@ -51,10 +51,24 @@
                                         </li>
                                     @endcan
 
+                                    @can('create-country_division')
+                                        <li class="nav-item">
+                                            <a href="{{url('/country_division')}}" class="nav-link"><span class="sidenav-mini-icon">D
+                                                </span><span class="sidenav-normal">{{ __('lang.country_division') }}</span></a>
+                                        </li>
+                                    @endcan
+
                                     @can('view-user')
                                         <li class="nav-item">
                                             <a href="{{url('/district')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
                                                     class="sidenav-normal">{{ __('navbar.districts') }}</span></a>
+                                        </li>
+                                    @endcan
+
+                                    @can('view-user')
+                                        <li class="nav-item">
+                                            <a href="{{url('/thana')}}" class="nav-link"><span class="sidenav-mini-icon">D </span><span
+                                                    class="sidenav-normal">{{ __('lang.thana') }}</span></a>
                                         </li>
                                     @endcan
 
@@ -96,6 +110,13 @@
                                                 </span><span class="sidenav-normal">{{ __('navbar.bit') }}</span></a>
                                         </li>
                                     @endcan
+                                    @can('create-forest_type')
+                                        <li class="nav-item">
+                                            <a href="{{url('/forest_type')}}" class="nav-link"><span class="sidenav-mini-icon">D
+                                                </span><span class="sidenav-normal">{{ __('lang.forest_type') }}</span></a>
+                                        </li>
+                                    @endcan
+
                                 </ul>
                             </div>
                         </li>

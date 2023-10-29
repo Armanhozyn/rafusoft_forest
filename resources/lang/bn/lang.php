@@ -13,6 +13,9 @@ return [
     'country_division' => 'দেশ বিভাগ',
     'circle' => 'সার্কেল',
     'districts' => 'জেলাসমূহ',
+    'forest_type' => "বাগানের ধরন",
+    "country_division" => "দেশ বিভাগ",
+    "thana" => "থানা"
 
 
 ]

@@ -18,10 +18,13 @@
             <div class="card-body px-2">
                 <div class="table-responsive">
                     <div>
-                        <table id="thana" class="table table-striped table-bordered" style="width:100%">
+                        <table id="thanatable" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>{{trans('lang.serial_no')}}</th>            <th>{{trans('lang.name')}}</th>            <th>{{trans('lang.district_id')}}</th>                                    <th>{{trans('lang.created_at')}}</th>
+                                    <th>{{trans('lang.serial_no')}}</th>
+                                    <th>{{trans('lang.name')}}</th>
+                                    <th>{{trans('lang.district')}}</th>
+                                    <th>{{trans('lang.created_at')}}</th>
                                     <th>{{trans('lang.Action')}}</th>
                                 </tr>
                             </thead>
@@ -35,16 +38,19 @@
 @endsection
 @push('scripts')
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
 
-$('#thana').DataTable({
+$('#thanatable').DataTable({
 processing: true,
 serverSide: true,
 responsive: true,
 ajax: `{{ route('thana.index') }}`,
 columns: [
-    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },            { data: 'name', name: 'name' },            { data: 'district_id', name: 'district_id' },{ data: 'created_at_read', name: 'created_at_read' },
-{ data: 'actions', name: 'actions' }
+    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+    { data: 'name', name: 'name' },
+    { data: 'district_name', name: 'district_name' },
+    { data: 'created_at_read', name: 'created_at_read' },
+    { data: 'actions', name: 'actions' }
 ],
 initComplete: function(settings, json) {
     debugger;

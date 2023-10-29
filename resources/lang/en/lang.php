@@ -11,6 +11,9 @@ return [
     'country_division' => 'Country Division',
     'circle' => 'Circle',
     'districts' => 'District',
+    'forest_type' => "Forest Type",
+    'country_division' => "Country Division",
+    "thana" => "Thana"
 
 ]
 

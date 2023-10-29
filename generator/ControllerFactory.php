@@ -1,132 +1,134 @@
 <?php
+// Replace # to $ after generate
+// Change zero space from UModel
+// remove front space from -> symbol object
 
-
-$model = "range";
+$model = "thana";
+$models = "thanas";
 $UModel = ucfirst($model);
-
-$fh = fopen("./view/table.php", 'w') or die("can't open file");
-$stringData = <<<CODE
-            @extends('layouts.app')
-            @push('pg_btn')
-            @can('create-$model')
-            <a href="{{ route('$model.create') }}" class="btn btn-sm btn-neutral">Create New $UModel</a>
-            @endcan
-            @endpush
-            @section('content')
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-5">
-                        <div class="card-header bg-transparent">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <h3 class="mb-0">All $UModel</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body px-2">
-                            <div class="table-responsive">
-                                <div>
-                                    <table id="$model.table" class="table table-striped table-bordered" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>{{trans('lang.serial_no')}}</th>
-            CODE;
-for ($i=0; $i < count($dataArray); $i++) {
-    $lang = "lang.";
-
-    $formName = $dataArray[$i];
-    $formNameLang = $lang . $formName;
-    $UFormName = ucfirst($dataArray[$i]);
+$code = "CODE;";
+$controller = 'ThanaController';
 
 
+$fh = fopen("./view/controller.php", 'w') or die("can't open file");
+$stringData =
+<<<CODE
+                    <?php
 
-    $stringData .= <<<CODE
-                <th>{{trans('$formNameLang')}}</th>
-    CODE;
-}
+                    namespace App\Http\Controllers;
+                    use App\ $UModel;
+                    use Illuminate\Http\Request;
+                    use DataTables;
 
-$stringData .= <<<CODE
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endsection
-            @push('scripts')
-            <script>
-            $(document).ready(function() {
+                    class $controller extends Controller
+                    {
+                        /**
+                        * Display a listing of the resource.
+                        *
+                        * @return \Illuminate\Http\Response
+                        */
+                        public function index(Request #request)
+                        {
+                            $$models = $UModel::latest()->get();
 
-            $('#$model.table').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: '{{ route('$model.index') }}',
-            columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-            CODE;
+                            if (request()->ajax()) {
+                                return DataTables::of($$models)
+                                ->addIndexColumn()
+                                ->addColumn('created_at_read',function(#row){
+                                    return #row->created_at->diffForHumans();
 
-            for ($i=0; $i < count($dataArray); $i++) {
-                $lang = "lang.";
+                                })
+                                ->addColumn('actions',function(#row){
+                                    #delete_api = route('$model.destroy',#row->id);
+                                    #edit_api = route('$model.edit',#row->id);
+                                    #csrf = csrf_token();
+                                    #action = <<<CODE
+                                    <form method='POST' action='#delete_api' accept-charset='UTF-8' class='d-inline-block dform'>
 
-                $formName = $dataArray[$i];
-                $formNameLang = $lang . $formName;
-                $UFormName = ucfirst($dataArray[$i]);
+                                        <input name='_method' type='hidden' value='DELETE'><input name='_token' type='hidden' value='#csrf'>
+                                        <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='#edit_api' data-original-title='Edit category details'>
+                                            <i class='fa fa-edit' aria-hidden='true'></i>
+                                        </a>
+                                        <button type='submit' class='btn delete btn-danger btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='' data-original-title='Delete category'>
+                                            <i class='fas fa-trash'></i>
+                                        </button>
+                                    </form>
+                                    $code
 
+                                    return #action;
 
-
-                $stringData .= <<<CODE
-                            { data: '$formName', name: '$formName' },
-                CODE;
-            }
-            $stringData .= <<<CODE
-            ],
-            initComplete: function(settings, json) {
-                debugger;
-                $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-                });
-                jQuery(document).ready(function() {
-                    $('.delete').on('click', function(e) {
-                        e.preventDefault();
-                        let that = jQuery(this);
-                        jQuery.confirm({
-                            icon: 'fas fa-wind-warning',
-                            closeIcon: true,
-                            title: 'Are you sure!',
-                            content: 'You can not undo this action.!',
-                            type: 'red',
-                            typeAnimated: true,
-                            buttons: {
-                                confirm: function() {
-                                    that.parent('form').submit();
-                                    //$.alert('Confirmed!');
-                                },
-                                cancel: function() {
-                                    //$.alert('Canceled!');
-                                }
+                                })
+                                ->rawColumns(['created_at_read','actions'])
+                                ->make(true);
                             }
-                        });
-                    })
-                })
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-            // Handle the error your own way here
-            console.error("Ajax error: ", textStatus, errorThrown);
-            }
-            });
-            });
+                            #title = 'Manage $UModel';
+                            return view('$model.index', compact('$models', 'title'));
+                        }
 
+                        /**
+                        * Show the form for creating a new resource.
+                        *
+                        * @return \Illuminate\Http\Response
+                        */
+                        public function create()
+                        {
+                            #title = 'Create  $UModel';
+                            return view('$model.create', compact('title'));
+                        }
 
+                        /**
+                        * Store a newly created resource in storage.
+                        *
+                        * @param  \Illuminate\Http\Request  #request
+                        * @return \Illuminate\Http\Response
+                        */
+                        public function store(Request #request)
+                        {
+                            // #request->merge(['user_id' => Auth::user()->id]);
+                            $UModel::create(#request->except('_token'));
+                            flash('$UModel created successfully!')->success();
+                            return redirect()->route('$model.index');
+                        }
 
+                        /**
+                        * Show the form for editing the specified resource.
+                        *
+                        * @param  \App\ $UModel  $$model
+                        * @return \Illuminate\Http\Response
+                        */
+                        public function edit($UModel $$model)
+                        {
+                            #title = "$UModel Details";
+                            return view('$model.edit', compact('title', '$model'));
+                        }
 
-            </script>
-            @endpush
+                        /**
+                        * Update the specified resource in storage.
+                        *
+                        * @param  \Illuminate\Http\Request  #request
+                        * @param  \App\Category  $$model
+                        * @return \Illuminate\Http\Response
+                        */
+                        public function update(Request #request, $UModel $$model)
+                        {
+                            $$model ->update(#request->all());
+                            flash('$UModel updated successfully!')->success();
+                            return back();
+                        }
+
+                        /**
+                        * Remove the specified resource from storage.
+                        *
+                        * @param  \App\ $UModel  $model
+                        * @return \Illuminate\Http\Response
+                        */
+                        public function destroy($UModel $$model)
+                        {
+                            $$model ->delete();
+                            flash('$UModel deleted successfully!')->info();
+                            return back();
+                        }
+                    }
 
             CODE;
 fwrite($fh, $stringData);

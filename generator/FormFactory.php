@@ -29,11 +29,23 @@ $beneficiary = [
     "details" => 'input'
 ];
 
+$forest_type = [
+    "name" => "input",
+];
 
-$dataArray = $beneficiary;
+
+$country_divisions = [
+    "name" => "input",
+];
+$thanas = [
+    'name' => 'input',
+    'district_id' => 'select'
+];
+
+$dataArray = $country_divisions;
 
 
-$model = "beneficiary";
+$model = "thana";
 $UModel = ucfirst($model);
 
 

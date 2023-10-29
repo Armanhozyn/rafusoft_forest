@@ -8,6 +8,7 @@ use App\User;
 use App\Range;
 use App\Garden;
 use App\Country;
+use App\District;
 use App\Project;
 use App\ForestType;
 use App\GardenInformation;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CountryRequest;
 use App\PartyInGarden;
 use Spatie\Permission\Models\Role;
+use DataTables;
 
 
 class GardenController extends Controller
@@ -41,15 +43,51 @@ class GardenController extends Controller
     public function index(Request $request)
     {
         // dd('works2');
-        if ($request->has('search')) {
-            $categories = Garden::with('garden_information', 'garden_information.garden_type', 'garden_information.district', 'garden_information.thana', 'garden_information.union')->where('location', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
-        } else {
-            $categories = Garden::with('garden_information', 'garden_information.garden_type', 'garden_information.district', 'garden_information.thana', 'garden_information.union')->paginate(setting('record_per_page', 15));
-        }
+        // if ($request->has('search')) {
+        //     $categories = Garden::with('garden_information', 'garden_information.garden_type', 'garden_information.district', 'garden_information.thana', 'garden_information.union')->where('location', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
+        // } else {
+        //     $categories = Garden::with('garden_information', 'garden_information.garden_type', 'garden_information.district', 'garden_information.thana', 'garden_information.union')->paginate(setting('record_per_page', 15));
+        // }
+        $gardens =Garden::join('districts', 'districts.id', '=', 'gardens.district_id')
+        ->join('thanas', 'thanas.id', '=', 'gardens.thana_id')
+        ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
+        ->select('gardens.*','thanas.name as thana_name','districts.name as district_name','forest_types.name as forest_type_name')
+        ->latest()
+        ->get();
 
+        if (request()->ajax()) {
+            return DataTables::of($gardens)
+            ->addIndexColumn()
+            ->addColumn('created_at_read',function($row){
+                return $row->created_at->diffForHumans();
+
+            })
+            ->addColumn('actions',function($row){
+                $delete_api = route('garden.destroy',$row->id);
+                $edit_api = route('garden.edit',$row->id);
+                $csrf = csrf_token();
+                $action = <<<CODE
+                <form method='POST' action='$delete_api' accept-charset='UTF-8' class='d-inline-block dform'>
+
+                    <input name='_method' type='hidden' value='DELETE'><input name='_token' type='hidden' value='$csrf'>
+                    <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$edit_api' data-original-title='Edit category details'>
+                        <i class='fa fa-edit' aria-hidden='true'></i>
+                    </a>
+                    <button type='submit' class='btn delete btn-danger btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='' data-original-title='Delete category'>
+                        <i class='fas fa-trash'></i>
+                    </button>
+                </form>
+                CODE;
+
+                return $action;
+
+            })
+            ->rawColumns(['created_at_read','actions'])
+            ->make(true);
+        }
         // dd($categories);
         $title = 'Manage Gardens';
-        return view('garden.index', compact('categories', 'title'));
+        return view('garden.index', compact('gardens', 'title'));
     }
 
     /**
@@ -122,7 +160,9 @@ class GardenController extends Controller
             ->where('range_id', $user->id)->get();
         // dd($gardens);
         // dd($roles);
-        return view('garden.create', compact('title', 'gardenTypes', 'projects', 'rotations', 'unions', 'rangeInfo', 'sfpcList', 'bitList', 'forestTypes', 'yearPairs', 'gardens'));
+
+        $districtInRange = District::latest()->pluck('name', 'id');
+        return view('garden.create', compact('title', 'gardenTypes', 'projects', 'rotations', 'unions', 'rangeInfo', 'sfpcList', 'bitList', 'forestTypes', 'yearPairs', 'gardens','districtInRange'));
     }
 
     /**
@@ -161,9 +201,9 @@ class GardenController extends Controller
             ]
         );
 
-        dd($request->all());
+        // dd($request->all());
 
-        $create = Garden::create($request->except('_token', 'parties', 'contract_attachment'));
+        $create = Garden::create($request->except('_token', 'parties', 'contract_attachment','union_parishad_id'));
         if (!empty($create)) {
             $gardenId = $create->id;
             if (!empty($parties)) {

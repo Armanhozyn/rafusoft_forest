@@ -103,13 +103,19 @@
         });
 
         $('#district').change(function() {
+            debugger;
             $('#thana').html('');
             $('#union').html('');
             var dropdown = $('#thana'); // Assuming you have a dropdown with id "myDropdown"
                 dropdown.html('');
             let disctrictId = $(this).val();
             console.log(disctrictId);
-            $.get("/ajax/upazilla-by-district/" + disctrictId, function(response) {
+
+            // debugger;
+            var routeUrl = "{{ route('upozila_by_district',0) }}";
+            var generatedUrl = routeUrl.replace('0', disctrictId);
+
+            $.get(generatedUrl, function(response) {
                 // Success callback
                 console.log("Response:", response);
                 dropdown.append($('<option></option>').attr('value', '').text('উপজেলা নির্বাচন করুন...'));
@@ -130,8 +136,9 @@
                 dropdown.html('');
             let unionId = $(this).val();
             console.log(unionId);
-
-            $.get("/ajax/union-by-thana/" + unionId, function(response) {
+            var routeUrl = "{{ route('union_by_thana',0) }}";
+            var generatedUrl = routeUrl.replace('0', unionId);
+            $.get(generatedUrl, function(response) {
                 // Success callback
                 console.log("Response:", response);
                 dropdown.append($('<option></option>').attr('value', '').text('ইউনিয়ন নির্বাচন করুন...'));

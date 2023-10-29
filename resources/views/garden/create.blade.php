@@ -36,15 +36,7 @@
 
                     <div class="pl-lg-4 mb-4">
                         <div class="row">
-                            Hello
                             <div class="col-lg-12">
-{{--                                 <table id="info-table">
-                                    <tr>
-                                        <td>{{ __('garden.range_center_name') }} </td>
-                                        <td>:</td>
-                                        <td>{{ @$rangeInfo->name }}</td>
-                                    </tr>
-                                </table> --}}
 
                             </div>
                         </div>
@@ -52,44 +44,33 @@
 
                     <div class="pl-lg-4">
 
-                        {{--                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {{ Form::label('bit_id', __('garden.select_bit'), ['class' => 'form-control-label']) }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ Form::select('bit_id', $bitList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select BIT...', 'id' => 'bit-list']) }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {{ Form::label('sfpc_id', __('garden.select_sfpc'), ['class' => 'form-control-label']) }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ Form::select('sfpc_id', $sfpcList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select SFPC...', 'id' => 'sfpc-list']) }}
-                                    </div>
-                                </div>
-                                <!-- ... Continue the same pattern for all of your other form groups ... -->
-                            </div>
-                        </div> --}}
-
-                        {{-- {{ dd($gardens[0]->union->pluck('union.name')) }} --}}
-
-                        {{-- {{ implode(', ',$gardens[0]->union->pluck('union.name')->toArray())  }} --}}
-
                         <div class="row">
                             <div class="col-lg-6">
-
-                                <div class="form-group">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="bit_radio" name="bit_sfc" value="bit"
+                                        class="custom-control-input" >
+                                    <label class="custom-control-label" for="bit_radio">{{__('garden.select_bit')}}</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="sfc_radio" name="bit_sfc" value="sfc"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="sfc_radio">{{__('garden.select_sfpc')}}</label>
+                                </div>
+                                <div class="form-group" id="bit">
+                                    {{ Form::label('bit_id', __('garden.select_bit'), ['class' => 'form-control-label']) }}
+                                    {{ Form::select('bit_id', $bitList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select BIT...', 'id' => 'bit-list']) }}
+                                </div>
+                                <div class="form-group" id="sfc">
+                                    {{ Form::label('sfpc_id', __('garden.select_sfpc'), ['class' => 'form-control-label']) }}
+                                    {{ Form::select('sfpc_id', $sfpcList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select SFPC...', 'id' => 'sfpc-list']) }}
+                                </div>
+                                {{-- <div class="form-group">
                                     <label for="garden_id" class="form-control-label">বাগান নির্বাচন করুন</label>
                                     <select id="garden_id" name="garden_information_id" class="form-control form-control-sm">
                                         <option selected="selected" value="">বাগান নির্বাচন করুন...</option>
 
                                         @foreach ($gardens as $garden)
-                                            {{-- {{ dd($garden->union) }} --}}
 
-                                            {{-- {{ print_r($garden->union) }} --}}
                                             <option value="{{ $garden->id }}">{{ $garden->id }} -
                                                 {{ $garden->district->name }} - {{ $garden->thana->name }} -
                                                 {{ !empty($garden->union) ? implode(', ', $garden->union->pluck('union.name')->toArray()) : '' }}
@@ -98,34 +79,26 @@
 
 
                                     </select>
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('bit_id', __('garden.select_bit'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('bit_id', $bitList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select BIT...', 'id' => 'bit-list']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('sfpc_id', __('garden.select_sfpc'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('sfpc_id', $sfpcList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select SFPC...', 'id' => 'sfpc-list']) }}
-                                </div>
-                                {{--                                 <div class="form-group">
-                                    {{ Form::label('forest_type_id', __('garden.select_garden_type'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('forest_type_id', $forestTypes, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select type...']) }}
                                 </div> --}}
+
                                 <div class="form-group">
                                     {{ Form::label('project_id', __('garden.select_project'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('project_id', $projects, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select project...']) }}
                                 </div>
 
                                 <div class="form-group">
+                                    {{ Form::label('forest_type_id', __('lang.forest_type'), ['class' => 'form-control-label']) }}
+                                    {{ Form::select('forest_type_id', $forestTypes, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select Forest Type...']) }}
+                                </div>
+
+
+
+
+                                <div class="form-group">
                                     {{ Form::label('creation_year', __('garden.creation_year'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('creation_year', $yearPairs, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select garden type...']) }}
                                 </div>
 
-                                {{--                                 <div class="form-group">
-                                    {{ Form::label('location', __('garden.location'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('location', null, ['class' => 'form-control form-control-sm']) }}
-                                </div> --}}
                                 <div class="form-group">
                                     {{ Form::label('rotation', __('garden.select_rotation'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('rotation', $rotations, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select rotation...']) }}
@@ -134,10 +107,6 @@
                                     {{ Form::label('cut_year', __('garden.year_of_cut'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('cut_year', $yearPairs, null, ['class' => 'form-control form-control-sm']) }}
                                 </div>
-                                {{--                                 <div class="form-group">
-                                    {{ Form::label('harvested_amount', __('garden.harvest_amount'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('harvested_amount', null, ['class' => 'form-control form-control-sm']) }}
-                                </div> --}}
                                 <div id="garden-size-wrap" class="form-group">
                                     {{ Form::label('garden_size', __('garden.garden_size'), ['class' => 'form-control-label']) }}
                                     {{ Form::text('garden_size', null, ['class' => 'form-control form-control-sm']) }}
@@ -145,6 +114,21 @@
                                 <div class="form-group">
                                     {{ Form::label('expiration_year', __('garden.expiration_year'), ['class' => 'form-control-label']) }}
                                     {{ Form::text('expiration_year', null, ['class' => 'form-control form-control-sm']) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('district', 'জেলা', ['class' => 'form-control-label']) }}
+                                    {{ Form::select('district_id', $districtInRange, null, ['class' => 'form-control', 'placeholder' => 'বাগানের ধরন নির্বাচন করুন...', 'id' => 'district']) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('thana', 'উপজেলা', ['class' => 'form-control-label']) }}
+                                    {{ Form::select('thana_id', [], null, ['class' => 'form-control', 'placeholder' => 'উপজেলা নির্বাচন করুন...', 'id' => 'thana']) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('union', 'ইউনিয়ন পরিষদ', ['class' => 'form-control-label']) }}
+                                    {{ Form::select('union_parishad_id[]', [], null, ['multiple'=> 'multiple','class' => 'form-control', 'placeholder' => 'ইউনিয়ন পরিষদ নির্বাচন করুন...', 'id' => 'union']) }}
                                 </div>
 
                                 <div class="form-group">
@@ -167,36 +151,6 @@
                                     {{ Form::number('beneficiary_female', null, ['class' => 'form-control form-control-sm']) }}
                                 </div>
 
-
-
-
-
-
-                                {{--           <div class="form-group">
-                                    {{ Form::label('land_owner_name', __('garden.land_owner_name'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('land_owner_name', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('union_parishad_id', __('garden.select_union'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('union_parishad_id', $unions, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select union...']) }}
-                                </div> --}}
-                                {{-- <div class="form-group">
-                                    {{ Form::label('forest_revenew', __('garden.forest_revenew'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('forest_revenew', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('tff_profit_share', __('garden.tff_profit_share'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('tff_profit_share', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('beneficiarys_profit_share', __('garden.beneficiarys_profit_share'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('beneficiarys_profit_share', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('union_parisadh_profit_share', __('garden.union_parisadh_profit_share'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('union_parisadh_profit_share', null, ['class' => 'form-control form-control-sm']) }}
-                                </div> --}}
                                 <div class="form-group">
                                     {{ Form::label('contract_attachment', __('garden.deed_of_agreement'), ['class' => 'form-control-label']) }}
                                     {{ Form::file('contract_attachment', ['class' => 'form-control form-control-sm']) }}
@@ -260,7 +214,6 @@
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
-                                                            {{-- <label for="percentageDropdown">Select or Enter Text:</label> --}}
                                                             <div class="input-group">
                                                                 <select class="form-control form-control-sm"
                                                                     id="percentageDropdown">
@@ -284,19 +237,10 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
-
-
-
                                 </fieldset>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
                     <div class="pl-lg-4">
                         <div class="row">
 
@@ -306,11 +250,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -341,8 +280,6 @@
             $.each(parties, function(index, party) {
                 $('<option>').val(party).text(party).appendTo(selectElement);
             });
-
-            // jQuery('#uploadFile').filemanager('file');
 
             $('#bit-list').on('change', function() {
                 $('#sfpc-list').val('');
@@ -389,8 +326,6 @@
                 method: "GET",
                 dataType: "json",
                 success: function(response) {
-                    // This function is called if the request succeeds
-                    // console.log(response);
                     gardenInfo = response.data;
                     showGardenInfo(gardenInfo);
                     unionList = gardenInfo.union.map(function(item) {
@@ -878,5 +813,77 @@
             });
 
         }
+        $("#sfc").hide();
+        $("#bit").hide();
+        $("input[name='bit_sfc']").change(function(){
+            debugger;
+            if ($("input[name='bit_sfc']:checked").val() === 'bit') {
+                $("#bit").show('slow');
+                $("#sfc").hide('slow');
+                return;
+
+            }
+            if($("input[name='bit_sfc']:checked").val() === 'sfc'){
+                $("#sfc").show('slow');
+                $("#bit").hide('slow');
+                return;
+            }
+
+            $("#sfc").hide();
+            $("#bit").hide();
+            return;
+        });
+
+        $('#district').change(function() {
+            debugger;
+            $('#thana').html('');
+            $('#union').html('');
+            var dropdown = $('#thana'); // Assuming you have a dropdown with id "myDropdown"
+                dropdown.html('');
+            let disctrictId = $(this).val();
+            console.log(disctrictId);
+
+            // debugger;
+            var routeUrl = "{{ route('upozila_by_district',0) }}";
+            var generatedUrl = routeUrl.replace('0', disctrictId);
+
+            $.get(generatedUrl, function(response) {
+                // Success callback
+                console.log("Response:", response);
+                dropdown.append($('<option></option>').attr('value', '').text('উপজেলা নির্বাচন করুন...'));
+                $.each(response.data, function(key, value) {
+                    dropdown.append($('<option></option>').attr('value', key).text(value));
+                });
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                // Error callback
+                console.error("Error:", errorThrown);
+            });
+
+        });
+
+
+        $('#thana').change(function(){
+            $('#union').html('');
+            var dropdown = $('#union'); // Assuming you have a dropdown with id "myDropdown"
+                dropdown.html('');
+            let unionId = $(this).val();
+            console.log(unionId);
+            var routeUrl = "{{ route('union_by_thana',0) }}";
+            var generatedUrl = routeUrl.replace('0', unionId);
+            $.get(generatedUrl, function(response) {
+                // Success callback
+                console.log("Response:", response);
+                dropdown.append($('<option></option>').attr('value', '').text('ইউনিয়ন নির্বাচন করুন...'));
+                $.each(response.data, function(key, value) {
+                    dropdown.append($('<option></option>').attr('value', key).text(value));
+                });
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                // Error callback
+                console.error("Error:", errorThrown);
+            });
+
+        });
     </script>
+
+
 @endpush

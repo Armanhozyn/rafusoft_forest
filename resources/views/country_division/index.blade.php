@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
-@can('create-thana')
-<a href="{{ route('thana.create') }}" class="btn btn-sm btn-neutral">Create New Thana</a>
+@can('create-country_division')
+<a href="{{ route('country_division.create') }}" class="btn btn-sm btn-neutral">Create New Country_division</a>
 @endcan
 @endpush
 @section('content')
@@ -11,17 +11,19 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Thana</h3>
+                        <h3 class="mb-0">All Country_division</h3>
                     </div>
                 </div>
             </div>
             <div class="card-body px-2">
                 <div class="table-responsive">
                     <div>
-                        <table id="thana" class="table table-striped table-bordered" style="width:100%">
+                        <table id="country_division" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>{{trans('lang.serial_no')}}</th>            <th>{{trans('lang.name')}}</th>            <th>{{trans('lang.district_id')}}</th>                                    <th>{{trans('lang.created_at')}}</th>
+                                    <th>{{trans('lang.serial_no')}}</th>
+                                    <th>{{trans('lang.name')}}</th>
+                                    <th>{{trans('lang.created_at')}}</th>
                                     <th>{{trans('lang.Action')}}</th>
                                 </tr>
                             </thead>
@@ -35,16 +37,18 @@
 @endsection
 @push('scripts')
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
 
-$('#thana').DataTable({
+$('#country_division').DataTable({
 processing: true,
 serverSide: true,
 responsive: true,
-ajax: `{{ route('thana.index') }}`,
+ajax: `{{ route('country_division.index') }}`,
 columns: [
-    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },            { data: 'name', name: 'name' },            { data: 'district_id', name: 'district_id' },{ data: 'created_at_read', name: 'created_at_read' },
-{ data: 'actions', name: 'actions' }
+    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+    { data: 'name', name: 'name' },
+    { data: 'created_at_read', name: 'created_at_read' },
+    { data: 'actions', name: 'actions' }
 ],
 initComplete: function(settings, json) {
     debugger;

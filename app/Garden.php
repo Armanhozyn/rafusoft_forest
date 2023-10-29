@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Garden extends Model
 {
     public $timestamps = true;
-    protected $fillable = ['agreement_attachment', 'garden_information_id', 'nursery_expense', 'creation_cost', 'project_id', 'creation_year', 'rotation', 'cut_year', 'harvested_amount', 'land_owner_name', 'beneficiary_male', 'beneficiary_female', 'location', 'union_parishad_id', 'expiration_year', 'garden_area', 'contract_attachment', 'approved_by', 'created_by', 'bit_id', 'sfpc_id', 'forest_type_id', 'forest_revenew', 'tff_profit_share', 'beneficiarys_profit_share', 'union_parisadh_profit_share'];
+    protected $fillable = ['agreement_attachment', 'garden_information_id', 'nursery_expense', 'creation_cost', 'project_id', 'creation_year', 'rotation', 'cut_year', 'harvested_amount', 'land_owner_name', 'beneficiary_male', 'beneficiary_female', 'location', 'union_parishad_id', 'expiration_year', 'garden_area', 'contract_attachment', 'approved_by', 'created_by', 'bit_id', 'sfpc_id', 'forest_type_id', 'forest_revenew', 'tff_profit_share', 'beneficiarys_profit_share', 'union_parisadh_profit_share','forest_type_id'];
     public function garden_type_info()
     {
         return $this->hasOne(GardenType::class, 'id', 'garden_type');

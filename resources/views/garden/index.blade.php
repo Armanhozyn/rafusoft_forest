@@ -13,109 +13,26 @@
                         <div class="col-lg-8">
                             <h3 class="mb-0">সৃজিত বাগানসমূহ</h3>
                         </div>
-                        <div class="col-lg-4">
-                            {!! Form::open(['route' => 'users.index', 'method' => 'get']) !!}
-                            <div class="form-group mb-0">
-                                {{ Form::text('search', request()->query('search'), ['class' => 'form-control form-control-sm', 'placeholder' => 'Search users']) }}
-                            </div>
-                            {!! Form::close() !!}
-                        </div>
                     </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-0 pt-3">
                     <div class="table-responsive">
                         <div>
-                            <table class="table table-hover align-items-center">
+                            <table  id="garden" class="table table-striped table-bordered" style="width:100%">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">সনাক্তকরন নম্বর</th>
                                         <th scope="col">বাগানের ধরন</th>
                                         <th scope="col">জেলা</th>
                                         <th scope="col">উপজেলা</th>
-                                        <th scope="col">ইউনিয়ন</th>
+                                        {{-- <th scope="col">ইউনিয়ন</th> --}}
 
                                         <th scope="col">চুক্তিনামা</th>
-                                        <th scope="col">Status</th>
+                                        {{-- <th scope="col">Status</th> --}}
                                         <th scope="col">Created at</th>
                                         <th scope="col" class="text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody class="list">
-                                    @foreach ($categories as $category)
-                                        <tr>
-                                            <th scope="row">
-                                                {{ $category->id }}
-                                            </th>
-                                            <th scope="row">
-                                                {{ $category->garden_information->garden_type->name }}
-                                            </th>
-
-                                            <th scope="row">
-                                                {{ $category->garden_information->district->name }}
-                                            </th>
-                                            <th scope="row">
-                                                {{ $category->garden_information->thana->name }}
-                                            </th>
-                                            <th scope="row">
-                                                {{-- {{ $category->garden_information->garden_type->name }} --}}
-                                            </th>
-                                            <th scope="row">
-
-                                                @if($category->agreement_attachment)
-                                                <a download="garden_creation_agreement_{{ $category->agreement_attachment }}" href='{{url("/uploads/agreements/$category->agreement_attachment") }}'>ডাউনলোড</a>
-                                                @else
-                                                <a href="{{url('/garden/agree')}}"></a>
-                                                @endif
-                                            </th>
-
-                                            <td class="budget">
-                                                {{-- {{$category->user->name}} --}}
-                                            </td>
-                                            <td>
-                                                {{-- @if ($category->status)
-                                                    <span class="badge badge-pill badge-lg badge-success">Active</span>
-                                                @else
-                                                    <span class="badge badge-pill badge-lg badge-danger">Disabled</span>
-                                                @endif --}}
-                                            </td>
-                                            <td>
-                                                {{ $category->created_at->diffForHumans() }}
-                                            </td>
-                                            <td class="text-center">
-                                                @can('destroy-category')
-                                                    {!! Form::open([
-                                                        'route' => ['category.destroy', $category],
-                                                        'method' => 'delete',
-                                                        'class' => 'd-inline-block dform',
-                                                    ]) !!}
-                                                @endcan
-
-                                                @can('update-category')
-         {{--                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip"
-                                                        data-placement="top" title="Edit category details"
-                                                        href="{{ route('category.edit', $category) }}">
-                                                        <i class="fa fa-edit" aria-hidden="true"></i>
-                                                    </a> --}}
-                                                @endcan
-                                                @can('destroy-category')
-                                                    <button type="submit" class="btn delete btn-danger btn-sm m-1"
-                                                        data-toggle="tooltip" data-placement="top" title="Delete category"
-                                                        href="">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                    {!! Form::close() !!}
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="6">
-                                            {{ $categories->links() }}
-                                        </td>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -125,29 +42,61 @@
     </div>
 @endsection
 @push('scripts')
+
     <script>
-        jQuery(document).ready(function() {
-            $('.delete').on('click', function(e) {
-                e.preventDefault();
-                let that = jQuery(this);
-                jQuery.confirm({
-                    icon: 'fas fa-wind-warning',
-                    closeIcon: true,
-                    title: 'Are you sure!',
-                    content: 'You can not undo this action.!',
-                    type: 'red',
-                    typeAnimated: true,
-                    buttons: {
-                        confirm: function() {
-                            that.parent('form').submit();
-                            //$.alert('Confirmed!');
-                        },
-                        cancel: function() {
-                            //$.alert('Canceled!');
-                        }
+         $(document).ready(function() {
+
+$('#garden').DataTable({
+processing: true,
+serverSide: true,
+responsive: true,
+ajax: `{{ route('garden.index') }}`,
+columns: [
+    // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+    { data: 'id', name: 'id' },
+    { data: 'forest_type_name', name: 'forest_type_name' },
+    { data: 'district_name', name: 'district_name' },
+    { data: 'thana_name', name: 'thana_name' },
+    { data: 'agreement_attachment', name: 'agreement_attachment' },
+    { data: 'created_at_read', name: 'created_at_read' },
+    { data: 'actions', name: 'actions' }
+],
+initComplete: function(settings, json) {
+    debugger;
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    jQuery(document).ready(function() {
+        $('.delete').on('click', function(e) {
+            e.preventDefault();
+            let that = jQuery(this);
+            jQuery.confirm({
+                icon: 'fas fa-wind-warning',
+                closeIcon: true,
+                title: 'Are you sure!',
+                content: 'You can not undo this action.!',
+                type: 'red',
+                typeAnimated: true,
+                buttons: {
+                    confirm: function() {
+                        that.parent('form').submit();
+                        //$.alert('Confirmed!');
+                    },
+                    cancel: function() {
+                        //$.alert('Canceled!');
                     }
-                });
-            })
+                }
+            });
         })
+    })
+},
+error: function(jqXHR, textStatus, errorThrown) {
+// Handle the error your own way here
+console.error("Ajax error: ", textStatus, errorThrown);
+}
+});
+});
     </script>
 @endpush

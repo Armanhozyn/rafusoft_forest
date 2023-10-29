@@ -48,10 +48,11 @@ class UnionParishadController extends Controller
     public function create()
     {
         $title = 'Create Union';
-        $thanaList = Thana::pluck('name', 'id');
-        $districtList = District::pluck('name', 'id');
+        $thanaList = Thana::latest()->pluck('name', 'id');
+        $districtList = District::latest()->pluck('name', 'id');
+        $countries = Country::latest()->pluck('name', 'id');
         // dd($thanaList);
-        return view('union.create', compact('title','thanaList','districtList'));
+        return view('union.create', compact('title','thanaList','districtList','countries'));
     }
 
     /**
@@ -62,7 +63,7 @@ class UnionParishadController extends Controller
      */
     public function store(UnionRequest $request)
     {
-        $request->merge(['user_id' => Auth::user()->id]);
+        // $request->merge(['user_id' => Auth::user()->id]);
         UnionParishad::create($request->except('_token'));
         flash('Country created successfully!')->success();
         return redirect()->route('union.index');
@@ -88,7 +89,8 @@ class UnionParishadController extends Controller
     public function edit(UnionParishad $category)
     {
         $title = "Union Details";
-        $category->with('user');
+        // $category->with('user');
+        dd($category);
         return view('union.edit', compact('title', 'category'));
     }
 

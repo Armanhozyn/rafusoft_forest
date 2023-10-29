@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Sfpc;
 use App\User;
 use App\Category;
+use App\District;
 use App\ForestType;
 use App\GardenType;
 use App\GardenInformation;
@@ -51,21 +52,13 @@ class GardenInformationController extends Controller
         $title = 'বাগানের তথ্য প্রদান';
 
         $user = Auth::user();
-        // dd($user->name);
         $rangeInfo = $user->name;
         $sfpcList = Sfpc::where('range_id', $user->range_id)->pluck('name', 'id');
-        // $bitList = Bit::where('range_id', $user->range_id)->pluck('name', 'id');
         $bitList = User::role('বীট')->pluck('name', 'id');
-        $districtInRange = RangeInDistrict::with('district')->where('range_id',  $user->id)->get()->pluck('district.name', 'district_id');
-
-        // dd($districtInRange);
-        // dd($sfpcList);
-        // dd($bitList);
-        // dd($user);
-        // dd($rangeInfo);
-        // dd('works');
-        // $gardenTypes = GardenType::pluck('name', 'id');
-        $forestTypes = ForestType::pluck('name', 'id');
+        // $districtInRange = RangeInDistrict::with('district')->where('range_id',  $user->id)->get()->pluck('district.name', 'district_id');
+        // dd(Auth::user());
+        $districtInRange = District::latest()->pluck('name', 'id');
+        $forestTypes = ForestType::latest()->pluck('name', 'id');
         return view('garden_information.create', compact('title', 'forestTypes', 'districtInRange'));
     }
 

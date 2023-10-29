@@ -26,10 +26,26 @@ $beneficiary = [
     "mobile" => 'input',
     "details" => 'input'
 ];
-$dataArray = $beneficiary;
 
 
-$model = "beneficiary";
+$forest_type = [
+    "name" => "input",
+];
+
+
+$country_divisions = [
+    "name" => "input",
+];
+$thanas = [
+    'name' => 'input',
+    'district_id' => 'select'
+];
+
+
+$dataArray = $thanas;
+
+
+$model = "thana";
 $UModel = ucfirst($model);
 
 
@@ -44,7 +60,7 @@ $stringData = <<<CODE
                         <div class="col-md-12">
                             <div class="card mb-5">
                                 <div class="card-body">
-                                    @can('update-category')
+                                    @can('update-$model')
                                     {!! Form::open(['route' => ['$model.update', $$model], 'method'=>'put']) !!}
                                     @endcan
                                         <h6 class="heading-small text-muted mb-4">$UModel information</h6>

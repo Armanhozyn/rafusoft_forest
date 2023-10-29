@@ -65,6 +65,9 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::resource('paymenthistory', 'PaymentHistoryController');
     Route::resource('projects', 'ProjectController');
     Route::resource('garden-information', 'GardenInformationController');
+    Route::resource('forest_type', 'Forest_TypeController');
+    Route::resource('country_division', 'CountryDivisionController');
+    Route::resource('thana', 'ThanaController');
 
 
 
@@ -117,8 +120,8 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::get('ajax/serials', [WoodLotController::class, 'ajaxSerialList']);
     Route::get('ajax/gardens', [WoodLotController::class, 'ajaxGardenList']);
 
-    Route::get('ajax/upazilla-by-district/{district_id}', [AjaxController::class, 'getUpazillaByDistrict']);
-    Route::get('ajax/union-by-thana/{thana_id}', [AjaxController::class, 'getUnionByUpazilla']);
+    Route::get('ajax/upazilla-by-district/{district_id}', [AjaxController::class, 'getUpazillaByDistrict'])->name('upozila_by_district');
+    Route::get('ajax/union-by-thana/{thana_id}', [AjaxController::class, 'getUnionByUpazilla'])->name("union_by_thana");
     Route::get('ajax/garden-info/{garden_id}', [AjaxController::class, 'getGardenInfo']);
 
     Route::any('test', function () {

@@ -31,9 +31,22 @@ $beneficiary = [
     "details"
 ];
 
-$dataArray = $beneficiary;
+$forest_type = [
+    "name",
+];
 
-$model = "beneficiary";
+$countey_divisions = [
+    "name",
+];
+
+$thanas = [
+    'name',
+    'district_id'
+];
+
+$dataArray = $thanas;
+
+$model = "thana";
 $UModel = ucfirst($model);
 
 $fh = fopen("./view/table.php", 'w') or die("can't open file");
@@ -58,7 +71,7 @@ $stringData = <<<CODE
                         <div class="card-body px-2">
                             <div class="table-responsive">
                                 <div>
-                                    <table id="$model.table" class="table table-striped table-bordered" style="width:100%">
+                                    <table id="$model" class="table table-striped table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>{{trans('lang.serial_no')}}</th>
@@ -78,6 +91,8 @@ for ($i=0; $i < count($dataArray); $i++) {
 }
 
 $stringData .= <<<CODE
+                                                <th>{{trans('lang.created_at')}}</th>
+                                                <th>{{trans('lang.Action')}}</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -92,7 +107,7 @@ $stringData .= <<<CODE
             <script>
             $(document).ready(function() {
 
-            $('#$model.table').DataTable({
+            $('#$model').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -115,6 +130,8 @@ $stringData .= <<<CODE
                 CODE;
             }
             $stringData .= <<<CODE
+            { data: 'created_at_read', name: 'created_at_read' },
+            { data: 'actions', name: 'actions' }
             ],
             initComplete: function(settings, json) {
                 debugger;

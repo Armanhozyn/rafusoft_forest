@@ -24,7 +24,7 @@ class GardenRequest extends FormRequest
     public function rules()
     {
         return [
-            'garden_information_id' => 'required',
+            // 'garden_information_id' => 'required',
             'bit_id' => 'required_without_all:sfpc_id',
             'sfpc_id' => 'required_without_all:bit_id',
             'project_id' => 'required',

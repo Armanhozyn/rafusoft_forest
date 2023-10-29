@@ -12,7 +12,7 @@ class RangeController extends Controller
 {
     public function index(Request $request)
     {
-        $ranges = Range::join('districts', 'districts.id', '=', 'ranges.id')
+        $ranges = Range::join('districts', 'districts.id', '=', 'ranges.district_id')
         ->select('ranges.*', 'districts.name as district_name')
         ->latest()
         ->get();
