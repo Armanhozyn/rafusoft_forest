@@ -125,7 +125,7 @@
 
                     @canany(['view-category', 'create-category'])
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link {{ request()->is('garden*') ? 'active' : '' }}" href="#navbar-garden-info"
                             data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-garden-info">
                             <i class="fas text-primary fa-list-alt"></i>
@@ -143,7 +143,7 @@
 
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
 
                 @endcan
 
