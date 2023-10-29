@@ -168,7 +168,7 @@
                                     @can('view-category')
                                         <li class="nav-item">
                                             <a href="{{ route('garden.index') }}" class="nav-link"><span
-                                                    class="sidenav-mini-icon">D </span><span class="sidenav-normal">{{__('ড্রাফট')}}</span></a>
+                                                    class="sidenav-mini-icon">D </span><span class="sidenav-normal">বাগানের তালিকা</span></a>
                                         </li>
                                     @endcan
 
