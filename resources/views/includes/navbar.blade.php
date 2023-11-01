@@ -148,7 +148,7 @@
                 @endcan
 
 
-                    @canany(['view-category', 'create-category'])
+                    @canany(['view-garden', 'create-garden'])
 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('garden*') ? 'active' : '' }}" href="#navbar-garden"
@@ -158,14 +158,14 @@
                             </a>
                             <div class="collapse" id="navbar-garden">
                                 <ul class="nav nav-sm flex-column">
-                                    @can('view-category')
+                                    @can('view-garden')
                                     <li class="nav-item">
                                         <a href="{{ route('garden.create') }}" class="nav-link"><span
                                                 class="sidenav-mini-icon">D </span><span class="sidenav-normal">{{__('নতুন বাগান সৃজনের তথ্য')}}</span></a>
                                     </li>
                                 @endcan
 
-                                    @can('view-category')
+                                    @can('view-garden')
                                         <li class="nav-item">
                                             <a href="{{ route('garden.index') }}" class="nav-link"><span
                                                     class="sidenav-mini-icon">D </span><span class="sidenav-normal">বাগানের তালিকা</span></a>

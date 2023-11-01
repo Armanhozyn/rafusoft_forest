@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\District;
 use Illuminate\Http\Request;
 use App\Http\Requests\RangeRequest;
 use App\Range;
+use App\RangeInUnion;
 use DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -61,7 +63,7 @@ class RangeController extends Controller
     public function create()
     {
         $title = 'Create Range';
-        $districts = DB::table('districts')->latest()->get();
+        $districts = District::latest()->pluck('name', 'id');
         return view('range.create', compact('districts','title'));
     }
 
@@ -74,7 +76,22 @@ class RangeController extends Controller
     public function store(RangeRequest $request)
     {
         // $request->merge(['user_id' => Auth::user()->id]);
-        Range::create($request->except('_token'));
+        $create = Range::create($request->except('_token','union_parishad_id'));
+        $unions = $request->union_parishad_id;
+        if ($create) {
+            $rangeId = $create->id;
+            $unions = array_map(function ($value) use ($rangeId) {
+                return [
+                    'range_id' => $rangeId,
+                    'union_parishad_id' => $value
+                ];
+            }, $unions);
+
+            // dd($unions);
+            if (!empty($unions)) {
+                RangeInUnion::insert($unions);
+            }
+        }
         flash('Range created successfully!')->success();
         return redirect()->route('range.index');
     }

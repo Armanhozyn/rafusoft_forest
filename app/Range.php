@@ -10,6 +10,7 @@ class Range extends Model
         "district_id",
         "name",
         "name_english",
-        "office_head_designation"
+        "office_head_designation",
+        "thana_id"
     ];
 }

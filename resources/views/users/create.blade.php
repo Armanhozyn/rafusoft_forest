@@ -58,7 +58,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         {{ Form::label('role', 'Select Role', ['class' => 'form-control-label']) }}
-                                        {{ Form::select('role', $roles, null, [ 'class'=> 'selectpicker form-control', 'placeholder' => 'Select role...']) }}
+                                        {{ Form::select('role', $roles, null, [ 'class'=> 'form-control', 'placeholder' => 'Select role...']) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6" id="range_wrap">
+                                    <div class="form-group">
+                                        {{ Form::label('range_id', 'Select Range', ['class' => 'form-control-label']) }}
+                                        {{ Form::select('range_id', $ranges, null, [ 'class'=> 'form-control', 'placeholder' => 'Select Range...']) }}
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +79,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {{ Form::label('username', 'User Name', ['class' => 'form-control-label']) }}
-                                      
+
                                         {{ Form::text('username', null, ['class' => 'form-control']) }}
                                     </div>
                                 </div>
@@ -121,5 +128,18 @@
         jQuery(document).ready(function(){
             jQuery('#uploadFile').filemanager('file');
         })
+        if($('#range_id').val() == ""){
+            $("#range_wrap").hide();
+        }
+        $("#role").change(function(){
+            debugger;
+            if ($(this).val() == 6) {
+                $("#range_wrap").show('slow');
+                return;
+            }
+
+            $("#range_wrap").hide();
+            return;
+        });
     </script>
 @endpush

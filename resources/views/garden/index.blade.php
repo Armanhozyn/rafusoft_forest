@@ -23,6 +23,7 @@
                                     <tr>
                                         <th scope="col">সনাক্তকরন নম্বর</th>
                                         <th scope="col">বাগানের ধরন</th>
+                                        <th scope="col">রেঞ্জ</th>
                                         <th scope="col">জেলা</th>
                                         <th scope="col">উপজেলা</th>
                                         {{-- <th scope="col">ইউনিয়ন</th> --}}
@@ -55,6 +56,7 @@ columns: [
     // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
     { data: 'id', name: 'id' },
     { data: 'forest_type_name', name: 'forest_type_name' },
+    { data: 'range_name', name: 'range_name' },
     { data: 'district_name', name: 'district_name' },
     { data: 'thana_name', name: 'thana_name' },
     { data: 'agreement_attachment', name: 'agreement_attachment' },

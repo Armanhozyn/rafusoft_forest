@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\District;
 use App\Http\Requests\CategoryRequest;
+use App\RangeInDistrict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,6 +26,12 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
+        // dd(Auth::user());
+        $districts_range = RangeInDistrict::join('districts','districts.id','=','range_in_districts.district_id')
+        ->where('range_id',Auth::user()->range_id)
+        ->select('districts.*')
+        ->get();
+        dd($districts_range);
         if ($request->has('search')) {
             $categories = Category::with(['user'])->where('category_name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
         } else {

@@ -60,6 +60,12 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
+        if($request->role == 6){
+            $request->validate([
+                'range_id' => 'required',
+            ]);
+        }
+
         $userData = $request->except(['role', 'profile_photo']);
         if ($request->profile_photo) {
             $userData['profile_photo'] = parse_url($request->profile_photo, PHP_URL_PATH);

@@ -1,54 +1,15 @@
 <?php
-
-$district = [
-    "country_division_id",
-    "circle_id",
+$users = [
     "name",
-    "name_english",
-    "created_at_read",
-    "actions",
+    "email",
+    "status",
+    "email_verified_at",
+    "profile_photo"
 ];
 
-$range = [
-    "district_id",
-    "name",
-    "name_english",
-    "office_head_designation"
-];
+$dataArray = $users;
 
-$landowner = [
-    'name' ,
-    'address' ,
-    'phone' ,
-    'description',
-    "created_at_read",
-    "actions",
-];
-$beneficiary = [
-    "garden_id",
-    "voter_id",
-    "mobile",
-    "details"
-];
-
-$forest_type = [
-    "name",
-];
-
-$countey_divisions = [
-    "name",
-];
-
-$thanas = [
-    'name',
-    'district_id'
-];
-
-
-
-$dataArray = $thanas;
-
-$model = "thana";
+$model = "bit";
 $UModel = ucfirst($model);
 
 $fh = fopen("./view/table.php", 'w') or die("can't open file");

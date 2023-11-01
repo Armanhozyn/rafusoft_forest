@@ -21,7 +21,7 @@ use App\Http\Requests\CountryRequest;
 use App\PartyInGarden;
 use Spatie\Permission\Models\Role;
 use DataTables;
-
+use Illuminate\Support\Facades\Storage;
 
 class GardenController extends Controller
 {
@@ -48,12 +48,28 @@ class GardenController extends Controller
         // } else {
         //     $categories = Garden::with('garden_information', 'garden_information.garden_type', 'garden_information.district', 'garden_information.thana', 'garden_information.union')->paginate(setting('record_per_page', 15));
         // }
-        $gardens =Garden::join('districts', 'districts.id', '=', 'gardens.district_id')
-        ->join('thanas', 'thanas.id', '=', 'gardens.thana_id')
-        ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
-        ->select('gardens.*','thanas.name as thana_name','districts.name as district_name','forest_types.name as forest_type_name')
-        ->latest()
-        ->get();
+        // dd(Auth::user()->id);
+        $user = Auth::user();
+        if ($user->hasRole('super-admin')) {
+
+            $gardens =Garden::join('ranges','ranges.id','gardens.range_id')
+            ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
+            ->join('districts', 'districts.id', '=', 'ranges.district_id')
+            ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
+            ->select('gardens.*','ranges.name as range_name','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+            ->latest('gardens.created_at')
+            ->get();
+        }else{
+            $gardens =Garden::join('ranges','ranges.id','gardens.range_id')
+            ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
+            ->join('districts', 'districts.id', '=', 'ranges.district_id')
+            ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
+            ->select('gardens.*','ranges.name as range_name','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+            ->where('gardens.range_id',$user->range_id)
+            ->latest('gardens.created_at')
+            ->get();
+        }
+
 
         if (request()->ajax()) {
             return DataTables::of($gardens)
@@ -61,6 +77,22 @@ class GardenController extends Controller
             ->addColumn('created_at_read',function($row){
                 return $row->created_at->diffForHumans();
 
+            })
+            ->addColumn('agreement_attachment',function($row){
+
+                $attach_url = url("/uploads/agreements/$row->agreement_attachment");
+                if(Storage::exists($attach_url)){
+                    $attach = <<<CODE
+                    <a download="garden_creation_agreement_$row->agreement_attachment" href='$attach_url'>ডাউনলোড</a>
+                    CODE;
+                }else{
+                    $attach_url = url('/garden/agree');
+                    $attach = <<<CODE
+                    no attachment
+                    CODE;
+                }
+
+                return $attach;
             })
             ->addColumn('actions',function($row){
                 $delete_api = route('garden.destroy',$row->id);
@@ -82,7 +114,7 @@ class GardenController extends Controller
                 return $action;
 
             })
-            ->rawColumns(['created_at_read','actions'])
+            ->rawColumns(['created_at_read','actions','agreement_attachment'])
             ->make(true);
         }
         // dd($categories);
@@ -106,16 +138,16 @@ class GardenController extends Controller
         $rangeInfo = $user->name;
         $sfpcList = Sfpc::where('range_id', $user->range_id)->pluck('name', 'id');
         // $bitList = Bit::where('range_id', $user->range_id)->pluck('name', 'id');
-        $bitList = User::role('বীট')->pluck('name', 'id');
+        $bitList = User::latest()->role('বীট')->pluck('name', 'id');
         // dd($sfpcList);
         // dd($bitList);
         // dd($user);
         // dd($rangeInfo);
         // dd('works');
         $title = __('garden.create_garden');
-        $gardenTypes = GardenType::pluck('name', 'id');
-        $forestTypes = ForestType::pluck('name', 'id');
-        $projects = Project::pluck('name', 'id');
+        $gardenTypes = GardenType::latest()->pluck('name', 'id');
+        $forestTypes = ForestType::latest()->pluck('name', 'id');
+        $projects = Project::latest()->pluck('name', 'id');
         $rotations = [
             1 => '1st',
             2 => '2nd',
@@ -154,15 +186,15 @@ class GardenController extends Controller
 
         $unions = UnionParishad::pluck('name', 'id');
 
-        $gardens = GardenInformation::with('garden_type', 'thana', 'union', 'union.union', 'district')
-            ->orderByDesc('id')
+        // $gardens = GardenInformation::with('garden_type', 'thana', 'union', 'union.union', 'district')
+            // ->orderByDesc('id')
             // ->selectRaw("id,CONCAT(id,'-',districts.name)as name")
-            ->where('range_id', $user->id)->get();
+            // ->where('range_id', $user->id)->get();
         // dd($gardens);
         // dd($roles);
 
         $districtInRange = District::latest()->pluck('name', 'id');
-        return view('garden.create', compact('title', 'gardenTypes', 'projects', 'rotations', 'unions', 'rangeInfo', 'sfpcList', 'bitList', 'forestTypes', 'yearPairs', 'gardens','districtInRange'));
+        return view('garden.create', compact('title', 'gardenTypes', 'projects', 'rotations', 'unions', 'rangeInfo', 'sfpcList', 'bitList', 'forestTypes', 'yearPairs','districtInRange'));
     }
 
     /**
@@ -174,7 +206,6 @@ class GardenController extends Controller
      */
     public function store(GardenRequest $request)
     {
-        // dd($request);
         $parties = $request->parties;
         $user = Auth::user();
         $fileName = '';
@@ -203,7 +234,7 @@ class GardenController extends Controller
 
         // dd($request->all());
 
-        $create = Garden::create($request->except('_token', 'parties', 'contract_attachment','union_parishad_id'));
+        $create = Garden::create($request->except('_token', 'parties', 'contract_attachment'));
         if (!empty($create)) {
             $gardenId = $create->id;
             if (!empty($parties)) {
@@ -237,6 +268,7 @@ class GardenController extends Controller
                 // dd($updatedArray);
                 PartyInGarden::insert($updatedArray);
             }
+
             // dd($create);
         }
         // dd($create);

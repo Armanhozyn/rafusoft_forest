@@ -117,21 +117,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('district', 'জেলা', ['class' => 'form-control-label']) }}
-                                    {{ Form::select('district_id', $districtInRange, null, ['class' => 'form-control', 'placeholder' => 'বাগানের ধরন নির্বাচন করুন...', 'id' => 'district']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('thana', 'উপজেলা', ['class' => 'form-control-label']) }}
-                                    {{ Form::select('thana_id', [], null, ['class' => 'form-control', 'placeholder' => 'উপজেলা নির্বাচন করুন...', 'id' => 'thana']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('union', 'ইউনিয়ন পরিষদ', ['class' => 'form-control-label']) }}
-                                    {{ Form::select('union_parishad_id[]', [], null, ['multiple'=> 'multiple','class' => 'form-control', 'placeholder' => 'ইউনিয়ন পরিষদ নির্বাচন করুন...', 'id' => 'union']) }}
-                                </div>
-
-                                <div class="form-group">
                                     {{ Form::label('nursery_expense', 'নার্সারি উত্তোলন ব্যয়', ['class' => 'form-control-label']) }}
                                     {{ Form::number('nursery_expense', null, ['id' => 'nursery_expense', 'class' => 'form-control form-control-sm']) }}
                                 </div>
