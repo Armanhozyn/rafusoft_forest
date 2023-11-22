@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class WoodLot extends Model
 {
     public $timestamps = true;
-    protected $fillable = ['garden_id', 'division_group_no_year', 'range_lot_no_year',  'fuel', 'bolli_count', 'tenderer_name_address',  'quoted_rate', 'total_number_of_trees', 'total_wood_amount','collection_amount'];
+    protected $fillable = ['garden_id', 'division_group_no_year', 'range_lot_no_year',  'fuel', 'bolli_count', 'tenderer_name_address',  'quoted_rate', 'tree_type','tree_count','wood_amount_sft','advance_details','advance_amount','collateral_details','collateral_amount'];
 
     public function garden()
     {

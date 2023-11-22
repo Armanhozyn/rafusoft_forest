@@ -110,6 +110,12 @@
                                                 </span><span class="sidenav-normal">{{ __('navbar.bit') }}</span></a>
                                         </li>
                                     @endcan
+                                    @can('create-user')
+                                        <li class="nav-item">
+                                            <a href="{{url('/sfpc')}}" class="nav-link"><span class="sidenav-mini-icon">D
+                                                </span><span class="sidenav-normal">{{ __('navbar.sfpc') }}</span></a>
+                                        </li>
+                                    @endcan
                                     @can('create-forest_type')
                                         <li class="nav-item">
                                             <a href="{{url('/forest_type')}}" class="nav-link"><span class="sidenav-mini-icon">D
@@ -194,6 +200,14 @@
 
                                     @can('create-category')
                                         <li class="nav-item">
+                                            <a href="" class="nav-link"><span
+                                                    class="sidenav-mini-icon"></span><span class="sidenav-normal">{{ __('sold_garden.sold_garden_totto') }}
+                                                    </span></a>
+                                        </li>
+                                    @endcan
+
+                                    @can('create-category')
+                                        <li class="nav-item">
                                             <a href="{{ route('garden.woodlot.create') }}" class="nav-link"><span
                                                     class="sidenav-mini-icon"></span><span class="sidenav-normal">{{ __('navbar.lot_description') }}
                                                     </span></a>
@@ -202,7 +216,7 @@
 
                                         @can('create-category')
                                             <li class="nav-item">
-                                                <a href="{{ route('garden.woodlot.payment') }}" class="nav-link"><span
+                                                <a href="{{ route('lot_payment') }}" class="nav-link"><span
                                                         class="sidenav-mini-icon"></span><span class="sidenav-normal">{{ __('navbar.lot_money_collection_and_deposit') }}</span></a>
                                             </li>
                                         @endcan

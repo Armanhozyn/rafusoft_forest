@@ -38,14 +38,36 @@ $country_divisions = [
     "name" => "input",
 ];
 $thanas = [
-    'name' => 'input',
-    'district_id' => 'select'
+
 ];
 
-$dataArray = $country_divisions;
+$woodlot = [
+    'division_group_no_year' => 'input',
+    'range_lot_no_year' => 'input',
+    'tree_type' => 'input',
+    'tree_count' => 'input',
+    'wood_amount_sft' => 'input',
+    'fuel' => 'input',
+    'bolli_count' => 'input',
+    'tenderer_name_address' => 'input',
+    'quoted_rate' => 'input',
+    'advance_details' => 'input',
+    'advance_amount' => 'input',
+    'collateral_details' => 'input',
+    'collateral_amount' => 'input',
+];
 
 
-$model = "thana";
+$woodlotpayment = [
+    'division_group_no_year' => 'input',
+    'range_lot_no_year' => 'input',
+    'tree_type' => 'input',
+];
+
+$dataArray = $woodlot;
+
+
+$model = "woodlot";
 $UModel = ucfirst($model);
 
 
@@ -67,7 +89,7 @@ $stringData = <<<CODE
                                             <div class="col-lg-6">
             CODE;
 foreach ($dataArray as $key => $value) {
-    $lang = "lang.";
+    $lang = "sold_garden.";
 
     $formName = $key;
     $formNameLang = $lang . $formName;

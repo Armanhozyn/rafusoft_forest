@@ -46,7 +46,7 @@ class UserController extends Controller
     public function create()
     {
         $title = 'Create user';
-        $roles = Role::pluck('name', 'id');
+        $roles = Role::latest()->get();
         $ranges = Range::pluck('name', 'id');
         // dd($ranges);
         return view('users.create', compact('roles', 'title', 'ranges'));

@@ -6,8 +6,6 @@ use App\Http\Controllers\GardenInformationController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\WoodLotController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,6 +66,15 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::resource('forest_type', 'Forest_TypeController');
     Route::resource('country_division', 'CountryDivisionController');
     Route::resource('thana', 'ThanaController');
+    Route::resource('sfpc', 'SfpcController')->except('show');
+    Route::resource('sfpc', 'SfpcController')->except('show');
+
+    Route::get('/lot-payment', 'WoodLotController@lot_payment')->name('lot_payment');
+    Route::get('/all-lot-payment', 'WoodLotController@all_lot_payment')->name('all_lot_payment');
+    Route::get('/woodlot/collect_money/{range_lot_year_no}', 'WoodLotController@collect_money')->name('woodlot.collect_money');
+
+    //garden_bikrito
+    Route::get('/garden-bikrito', 'GardenBikritoController@garden_bikrito')->name('garden.bikrito');
 
 
 
@@ -121,6 +128,7 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::get('ajax/gardens', [WoodLotController::class, 'ajaxGardenList']);
 
     Route::get('ajax/upazilla-by-district/{district_id}', [AjaxController::class, 'getUpazillaByDistrict'])->name('upozila_by_district');
+    Route::get('ajax/woodlot-by-garder/{garden_id}', [AjaxController::class, 'getWoodLotByGarden'])->name('wood_lot_by_garden');
     Route::get('ajax/union-by-thana/{thana_id}', [AjaxController::class, 'getUnionByUpazilla'])->name("union_by_thana");
     Route::get('ajax/garden-info/{garden_id}', [AjaxController::class, 'getGardenInfo']);
 

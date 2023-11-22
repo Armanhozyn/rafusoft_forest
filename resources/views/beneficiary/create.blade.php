@@ -13,11 +13,11 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="garden_id" class="form-control-label">{{ trans('lang.garden_id') }} নির্বাচন
+                                <label for="garden_id" class="form-control-label">{{trans('garden.garden_id')}} নির্বাচন
                                     করুন</label>
                                 <select id="garden_id" name="garden_id" class="form-control form-control-sm">
-                                    <option selected="selected" value="">{{ trans('lang.garden_id') }} নির্বাচন করুন...
-                                    </option>
+                                    <option selected="selected" value="">{{trans('garden.garden_id')}} নির্বাচন
+                                        করুন</option>
 
                                     @foreach ($gardens as $garden)
                                     <option {{$garden->id == old('garden_id') ? 'selected' : ''}} value="{{ $garden->id
@@ -45,7 +45,7 @@
                                 </select>
                             </div> --}}
                             <div class="form-group">
-                                <label for="mobile" class="form-control-label">{{trans('lang.mobile')}}</label>
+                                <label for="mobile" class="form-control-label">{{trans('profile.phone_number')}}</label>
                                 <input class="form-control" name="mobile" value="{{old('mobile')}}" type="text"
                                     id="mobile">
                             </div>
