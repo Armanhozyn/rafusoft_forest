@@ -200,7 +200,7 @@
 
                                     @can('create-category')
                                         <li class="nav-item">
-                                            <a href="" class="nav-link"><span
+                                            <a href="{{route('garden.bikrito')}}" class="nav-link"><span
                                                     class="sidenav-mini-icon"></span><span class="sidenav-normal">{{ __('sold_garden.sold_garden_totto') }}
                                                     </span></a>
                                         </li>

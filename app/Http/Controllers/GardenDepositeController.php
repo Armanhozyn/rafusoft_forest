@@ -14,7 +14,7 @@ use DataTables;
 class GardenBikritoController extends Controller
 {
 
-    public function garden_bikrito(Request $request){
+    public function garden_deposite(Request $request){
         $gardens = DB::table('gardens')->latest()->get();
         $bitList = User::latest()->role('বীট')->get();
 
@@ -67,22 +67,6 @@ class GardenBikritoController extends Controller
                 ->latest('gardens.created_at')
                 ->get();
             }
-            // $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
-            // ->join('ranges','ranges.id','gardens.range_id')
-            // ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
-            // ->join('districts', 'districts.id', '=', 'ranges.district_id')
-            // ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-            // ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
-            // ->when(!empty($garden_id), function ($query) use ($garden_id) {
-            //     return $query->where('garden_id', $garden_id);
-            // })
-            // ->when(!empty($range_or_center_lot_no_and_year), function ($query) use ($range_or_center_lot_no_and_year) {
-            //     return $query->where('range_lot_no_year', $range_or_center_lot_no_and_year);
-            // })
-            // ->latest('gardens.created_at')
-            // ->get();
-
-
             return DataTables::of($gardens)
             ->addIndexColumn()
             ->addColumn('created_at_read',function($row){
@@ -119,7 +103,7 @@ class GardenBikritoController extends Controller
 
 
 
-    public function garden_bikrito_list(Request $request){
+    public function garden_deposite_list(Request $request){
         if (request()->ajax()) {
 
             $user = Auth::user();
@@ -128,22 +112,6 @@ class GardenBikritoController extends Controller
             ->where('gardens.range_id',$user->range_id)
             ->latest('garden_bikritos.created_at')
             ->get();
-            // $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
-            // ->join('ranges','ranges.id','gardens.range_id')
-            // ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
-            // ->join('districts', 'districts.id', '=', 'ranges.district_id')
-            // ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-            // ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
-            // ->when(!empty($garden_id), function ($query) use ($garden_id) {
-            //     return $query->where('garden_id', $garden_id);
-            // })
-            // ->when(!empty($range_or_center_lot_no_and_year), function ($query) use ($range_or_center_lot_no_and_year) {
-            //     return $query->where('range_lot_no_year', $range_or_center_lot_no_and_year);
-            // })
-            // ->latest('gardens.created_at')
-            // ->get();
-
-
             return DataTables::of($gardens)
             ->addIndexColumn()
             ->addColumn('created_at_read',function($row){
@@ -182,7 +150,7 @@ class GardenBikritoController extends Controller
     }
 
 
-    public function garden_sell_create($garden_id)
+    public function garden_deposite_create($garden_id)
     {
         $startYear = 2000;
         $endYear = date('Y');
@@ -196,7 +164,7 @@ class GardenBikritoController extends Controller
         return view('garden_bikrito.create', compact('garden_id','yearPairs'));
     }
 
-    public function garden_sell_store(GardenBikritoRequest $request){
+    public function garden_deposite_store(GardenBikritoRequest $request){
         // $request->merge(['user_id' => Auth::user()->id]);
         $garden_bikrito = GardenBikrito::create($request->except('_token'));
         flash('Garden Sold Successfully!')->success();

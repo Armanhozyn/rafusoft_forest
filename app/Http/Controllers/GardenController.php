@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GardenRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CountryRequest;
+use App\Party;
 use App\PartyInGarden;
 use Spatie\Permission\Models\Role;
 use DataTables;
@@ -42,13 +43,6 @@ class GardenController extends Controller
      */
     public function index(Request $request)
     {
-        // dd('works2');
-        // if ($request->has('search')) {
-        //     $categories = Garden::with('garden_information', 'garden_information.garden_type', 'garden_information.district', 'garden_information.thana', 'garden_information.union')->where('location', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
-        // } else {
-        //     $categories = Garden::with('garden_information', 'garden_information.garden_type', 'garden_information.district', 'garden_information.thana', 'garden_information.union')->paginate(setting('record_per_page', 15));
-        // }
-        // dd(Auth::user()->id);
         $user = Auth::user();
         if ($user->hasRole('super-admin')) {
 
@@ -184,7 +178,11 @@ class GardenController extends Controller
         // dd($yearPairs);
 
 
-        $unions = UnionParishad::pluck('name', 'id');
+        // $unions = UnionParishad::pluck('name', 'id');
+        $unions = UnionParishad::join('range_in_unions', 'union_parishads.id', '=', 'range_in_unions.union_parishad_id')
+        ->where('range_in_unions.range_id', '=', Auth::user()->range_id)
+        ->select('union_parishads.*') // Select the columns you want from the unionparishod table
+        ->pluck('name', 'id');
 
         // $gardens = GardenInformation::with('garden_type', 'thana', 'union', 'union.union', 'district')
             // ->orderByDesc('id')
@@ -194,7 +192,8 @@ class GardenController extends Controller
         // dd($roles);
 
         $districtInRange = District::latest()->pluck('name', 'id');
-        return view('garden.create', compact('title', 'gardenTypes', 'projects', 'rotations', 'unions', 'rangeInfo', 'sfpcList', 'bitList', 'forestTypes', 'yearPairs','districtInRange'));
+        $parties = Party::latest()->pluck('name', 'id');
+        return view('garden.create', compact('title', 'parties','gardenTypes', 'projects', 'rotations', 'unions', 'rangeInfo', 'sfpcList', 'bitList', 'forestTypes', 'yearPairs','districtInRange'));
     }
 
     /**

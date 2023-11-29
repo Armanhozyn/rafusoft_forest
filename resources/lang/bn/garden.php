@@ -27,5 +27,10 @@ return [
     'beneficiarys_profit_share' => 'উপকারভোগীর লভ্যাংশ',
     'union_parisadh_profit_share' => 'ইউনিয়ন পরিষদের লভ্যাংশ',
     'garden_id' => 'সৃজিত বাগানের আইডি',
+    'project_id' => 'প্রকল্প/খাত',
+    'forest_type_id' => 'বাগানের ধরন',
+    'creation_year' => 'বাগান সৃজনের সন',
+    'rotation' => 'আবর্ত',
+    'garden_size' => 'সৃজিত বাগানের পরিমাণ'
 
 ];

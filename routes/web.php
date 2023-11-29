@@ -75,7 +75,16 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
 
     //garden_bikrito
     Route::get('/garden-bikrito', 'GardenBikritoController@garden_bikrito')->name('garden.bikrito');
+    Route::get('/garden-bikrito-list', 'GardenBikritoController@garden_bikrito_list')->name('garden.bikrito.list');
+    Route::get('/garden-sell-create/{garden_id}', 'GardenBikritoController@garden_sell_create')->name('garden.sell.creat');
+    Route::post('/garden-sell-store', 'GardenBikritoController@garden_sell_store')->name('garden.sell.store');
 
+
+    //garden_deposite
+    Route::get('/garden-deposite', 'GardenDepositeController@garden_deposite')->name('garden.deposite');
+    Route::get('/garden-diposite-list', 'GardenDepositeController@garden_deposite_list')->name('garden.deposite.list');
+    Route::get('/garden-diposite-create/{garden_id}', 'GardenDepositeController@garden_deposite_create')->name('garden.diposite.creat');
+    Route::post('/garden-diposite-store', 'GardenDepositeController@garden_deposite_store')->name('garden.diposite.store');
 
 
     Route::get('media', function () {
@@ -131,6 +140,8 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::get('ajax/woodlot-by-garder/{garden_id}', [AjaxController::class, 'getWoodLotByGarden'])->name('wood_lot_by_garden');
     Route::get('ajax/union-by-thana/{thana_id}', [AjaxController::class, 'getUnionByUpazilla'])->name("union_by_thana");
     Route::get('ajax/garden-info/{garden_id}', [AjaxController::class, 'getGardenInfo']);
+    Route::get('ajax/garden-by-bit/{bit_id}', [AjaxController::class, 'GardenByBit'])->name('garden_by_bit');
+    Route::get('ajax/institute-by-party/{party_id}', [AjaxController::class, 'instituteByParty'])->name('institute_by_party');
 
     Route::any('test', function () {
         $locale = app()->getLocale();

@@ -247,24 +247,23 @@
     <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
 
     <script>
-        // const parties = [
-        //     'বন অধিদপ্তর',
-        //     'ভূমি মালিক সংস্থা',
-        //     'উপকারভোগীগণ',
-        //     'স্থানীয় ইউনিয়ন পরিষদ',
-        //     'বৃক্ষরোপণ তহবিল'
-        // ];
-        var parties = @json($parties->toArray());
+        const parties = [
+            'বন অধিদপ্তর',
+            'ভূমি মালিক সংস্থা',
+            'উপকারভোগীগণ',
+            'স্থানীয় ইউনিয়ন পরিষদ',
+            'বৃক্ষরোপণ তহবিল'
+        ];
 
 
         var gardenInfo;
-        var unionList = @json($unions->toArray());;
+        var unionList;
         jQuery(document).ready(function() {
 
             const selectElement = $('select#PartiesDropdown');
             $('<option>').val('').text('নির্বাচন করুন').appendTo(selectElement);
             $.each(parties, function(index, party) {
-                $('<option>').val(index).text(party).appendTo(selectElement);
+                $('<option>').val(party).text(party).appendTo(selectElement);
             });
 
             $('#bit-list').on('change', function() {
@@ -398,11 +397,35 @@
             let institueDropDown = $('#institute-dropdown');
             institueDropDown.html('');
 
-            debugger;
-            var routeUrl = "{{ route('institute_by_party',0) }}";
-            var generatedUrl = routeUrl.replace('0', partyValue);
+            if (partyValue == 'বন অধিদপ্তর') {
+                $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
+                $('<option>').val('বন অধিদপ্তর').text('বন অধিদপ্তর').appendTo(institueDropDown);
+                return;
+            }
+            if (partyValue == 'ভূমি মালিক সংস্থা') {
 
-            if (partyValue == 4) {
+                const organizations = [
+                    "সড়ক ও জনপথ",
+                    "পানি উন্নয়ন বোর্ড",
+                    "বাংলাদেশ রেলওয়ে",
+                    "স্থানীয় প্রকৌশল অধিদপ্তর",
+                    "জেলা পরিষদ",
+                    "জেলা প্রশাসন",
+                    "অন্যান্য সংস্থা"
+                ];
+                $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
+                $.each(organizations, function(index, organization) {
+                    $('<option>').val(organization).text(organization).appendTo(institueDropDown);
+                });
+                return;
+            }
+            if (partyValue == 'উপকারভোগীগণ') {
+                $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
+                $('<option>').val('চুক্তিনামা অনুযায়ী সংশ্লিষ্ট উপকারভোগীগণ').text(
+                    'চুক্তিনামা অনুযায়ী সংশ্লিষ্ট উপকারভোগীগণ').appendTo(institueDropDown);
+                return;
+            }
+            if (partyValue == 'স্থানীয় ইউনিয়ন পরিষদ') {
                 $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
                 $.each(unionList, function(index, union) {
                     $('<option>').val(union).text(union).appendTo(institueDropDown);
@@ -410,54 +433,12 @@
 
                 return;
             }
-
-            $.get(generatedUrl, function(response) {
-                // Success callback
-                console.log("Response:", response);
-                institueDropDown.append($('<option></option>').attr('value', '').text('নির্বাচন করুন...'));
-                $.each(response.data, function(key, value) {
-                    institueDropDown.append($('<option></option>').attr('value', key).text(value));
-                });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                // Error callback
-                console.error("Error:", errorThrown);
-            });
-
-            // if (partyValue == 'বন অধিদপ্তর') {
-            //     $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
-            //     $('<option>').val('বন অধিদপ্তর').text('বন অধিদপ্তর').appendTo(institueDropDown);
-            //     return;
-            // }
-            // if (partyValue == 'ভূমি মালিক সংস্থা') {
-
-            //     const organizations = [
-            //         "সড়ক ও জনপথ",
-            //         "পানি উন্নয়ন বোর্ড",
-            //         "বাংলাদেশ রেলওয়ে",
-            //         "স্থানীয় প্রকৌশল অধিদপ্তর",
-            //         "জেলা পরিষদ",
-            //         "জেলা প্রশাসন",
-            //         "অন্যান্য সংস্থা"
-            //     ];
-            //     $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
-            //     $.each(organizations, function(index, organization) {
-            //         $('<option>').val(organization).text(organization).appendTo(institueDropDown);
-            //     });
-            //     return;
-            // }
-            // if (partyValue == 'উপকারভোগীগণ') {
-            //     $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
-            //     $('<option>').val('চুক্তিনামা অনুযায়ী সংশ্লিষ্ট উপকারভোগীগণ').text(
-            //         'চুক্তিনামা অনুযায়ী সংশ্লিষ্ট উপকারভোগীগণ').appendTo(institueDropDown);
-            //     return;
-            // }
-
-            // if (partyValue == 'বৃক্ষরোপণ তহবিল') {
-            //     $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
-            //     $('<option>').val('সংশ্লিষ্ট বৃক্ষরোপণ তহবিল ব্যবস্থাপনা কমিটি').text(
-            //         'সংশ্লিষ্ট বৃক্ষরোপণ তহবিল ব্যবস্থাপনা কমিটি').appendTo(institueDropDown);
-            //     return;
-            // }
+            if (partyValue == 'বৃক্ষরোপণ তহবিল') {
+                $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
+                $('<option>').val('সংশ্লিষ্ট বৃক্ষরোপণ তহবিল ব্যবস্থাপনা কমিটি').text(
+                    'সংশ্লিষ্ট বৃক্ষরোপণ তহবিল ব্যবস্থাপনা কমিটি').appendTo(institueDropDown);
+                return;
+            }
 
 
 
@@ -475,7 +456,7 @@
             let currentVal = $(this).val();
             console.log('Instiute value: ', currentVal);
 
-            if (partyVal == 1) {
+            if (partyVal == 'বন অধিদপ্তর') {
                 $('<option>').val('').text('নির্বাচন করুন').appendTo(percentageDropdown);
                 $('<option>').val('45').text(
                     '৪৫%').attr('selected', 'selected').appendTo(percentageDropdown);
@@ -484,7 +465,7 @@
                 return;
             }
 
-            if (partyVal == 2) {
+            if (partyVal == 'ভূমি মালিক সংস্থা') {
                 $('<option>').val('').text('নির্বাচন করুন').appendTo(percentageDropdown);
                 $('<option>').val('20').text(
                     '২০%').attr('selected', 'selected').appendTo(percentageDropdown);
@@ -492,7 +473,7 @@
 
                 return;
             }
-            if (partyVal == 3) {
+            if (partyVal == 'উপকারভোগীগণ') {
                 $('<option>').val('').text('নির্বাচন করুন').appendTo(percentageDropdown);
                 $('<option>').val('45').text(
                     '৪৫%').attr('selected', 'selected').appendTo(percentageDropdown);
@@ -501,13 +482,13 @@
                 return;
             }
 
-            if (partyVal == 4) {
+            if (partyVal == 'স্থানীয় ইউনিয়ন পরিষদ') {
                 $('<option>').val('').text('নির্বাচন করুন').appendTo(percentageDropdown);
                 $('<option>').val('5').text(
                     '৫%').attr('selected', 'selected').appendTo(percentageDropdown);
                 return;
             }
-            if (partyVal == 5) {
+            if (partyVal == 'বৃক্ষরোপণ তহবিল') {
                 $('<option>').val('').text('নির্বাচন করুন').appendTo(percentageDropdown);
                 $('<option>').val('10').text(
                     '১০%').attr('selected', 'selected').appendTo(percentageDropdown);

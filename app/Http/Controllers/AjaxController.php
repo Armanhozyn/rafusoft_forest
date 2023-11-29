@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Garden;
 use App\GardenInformation;
+use App\Institute;
 use App\Thana;
 use App\UnionParishad;
 use App\WoodLot;
@@ -38,6 +40,42 @@ class AjaxController extends Controller
             'success' => true,
             'data' => $gardenlist,
             'message' => 'Woodlot list fetched successfully',
+        ];
+
+        // Using the response() helper function
+        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
+
+        // Using the Response class
+        // return new Response(json_encode($data), 200, ['Content-Type' => 'application/json']);
+    }
+
+    public function GardenByBit($bit_id)
+    {
+        // dd($districtId);
+        $gardenlist = Garden::where('bit_id', $bit_id)->pluck('id', 'id');
+
+        $data = [
+            'success' => true,
+            'data' => $gardenlist,
+            'message' => 'Woodlot list fetched successfully',
+        ];
+
+        // Using the response() helper function
+        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
+
+        // Using the Response class
+        // return new Response(json_encode($data), 200, ['Content-Type' => 'application/json']);
+    }
+
+    public function instituteByParty($party_id)
+    {
+        // dd($districtId);
+        $intituteList = Institute::where('party_id', $party_id)->pluck('name', 'id');
+
+        $data = [
+            'success' => true,
+            'data' => $intituteList,
+            'message' => 'Intitute list fetched successfully',
         ];
 
         // Using the response() helper function
