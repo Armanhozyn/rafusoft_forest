@@ -1,6 +1,7 @@
 <?php
 return [
     'all_gardens' => 'সকল বাগান',
+    'garden' => 'বাগান',
     'create_garden' => 'বাগান সৃজন',
     'garden_information' => 'বাগানের তথ্য',
     'range_center_name' => 'রেঞ্জ/কেন্দ্রের নাম',
@@ -25,6 +26,6 @@ return [
     'tff_profit_share' => 'টিএফএফ এর লভ্যাংশ',
     'beneficiarys_profit_share' => 'উপকারভোগীর লভ্যাংশ',
     'union_parisadh_profit_share' => 'ইউনিয়ন পরিষদের লভ্যাংশ',
-    '' => '',
-    '' => '',
+    'garden_id' => 'সৃজিত বাগানের আইডি',
+
 ];

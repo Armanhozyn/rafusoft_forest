@@ -26,15 +26,18 @@ class WoodLotRequest extends FormRequest
         return [
             'garden_id' => 'required',
             'division_group_no_year' => 'required',
-            'range_lot_no_year' => 'required',
+            'range_lot_no_year' => 'required|unique:wood_lots',
+            'tree_type' => 'required',
+            'tree_count' => 'required',
+            'wood_amount_sft' => 'required',
             'fuel' => 'required',
             'bolli_count' => 'required',
             'tenderer_name_address' => 'required',
             'quoted_rate' => 'required',
-            'total_number_of_trees' => 'required',
-            'total_wood_amount' => 'required',
-
-            // 'created_by' => 'required',
+            'advance_details' => 'required',
+            'advance_amount' => 'required',
+            'collateral_details' => 'required',
+            'collateral_amount' => 'required',
 
         ];
     }

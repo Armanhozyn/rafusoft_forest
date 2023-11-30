@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Bit;
-use App\Http\Requests\BitRequest;
+use App\Sfpc;
+use App\Http\Requests\SfpcRequest;
 use App\Range;
 use App\User;
 use Illuminate\Http\Request;
 use DataTables;
+use Spatie\Permission\Models\Role;
 
-class BitController extends Controller
+class SfpcController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +19,11 @@ class BitController extends Controller
      */
     public function index(Request $request)
     {
-        // $bits = Bit::join('ranges', 'bits.range_id', '=', 'ranges.id')
-        // ->select('bits.*', 'ranges.name as range_name')
-        // ->latest()
-        // ->get();
-        $bits = User::role('বীট')->get();
-        // dd($bits);
+        $sfpcs = User::role('sfpc')->get();
+
+        // dd($sfpcs);
         if (request()->ajax()) {
-            return DataTables::of($bits)
+            return DataTables::of($sfpcs)
             ->addIndexColumn()
             ->addColumn('email_verified_at_read',function($row){
                 if($row->email_verified_at){
@@ -102,9 +100,8 @@ class BitController extends Controller
             ->rawColumns(['email_verified_at_read','actions','profile_photo','status'])
             ->make(true);
         }
-        // dd($bits);
-        $title = 'Manage Bits';
-        return view('bit.index', compact('bits', 'title'));
+        $title = 'Manage sfpcs';
+        return view('sfpc.index', compact('sfpcs', 'title'));
     }
 
     /**
@@ -114,9 +111,10 @@ class BitController extends Controller
      */
     public function create()
     {
-        $title = 'Create Bit';
+        $title = 'Create Sfpc';
         $ranges = Range::latest()->get();
-        return view('bit.create', compact('ranges','title'));
+
+        return view('sfpc.create', compact('ranges','title'));
     }
 
     /**
@@ -125,13 +123,13 @@ class BitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BitRequest $request)
+    public function store(SfpcRequest $request)
     {
         // $request->merge(['user_id' => Auth::user()->id]);
         $user = User::create($request->except('_token'));
-        $user->assignRole("বীট");
-        flash('Bit created successfully!')->success();
-        return redirect()->route('bit.index');
+        $user->assignRole('sfpc');
+        flash('Sfpc created successfully!')->success();
+        return redirect()->route('sfpc.index');
     }
 
     /**
@@ -140,11 +138,11 @@ class BitController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bit $bit)
+    public function edit(Sfpc $sfpc)
     {
-        $title = "Bit Details";
+        $title = "Sfpc Details";
         $ranges = Range::latest()->get();
-        return view('bit.edit', compact('title', 'bit','ranges'));
+        return view('sfpc.edit', compact('title', 'sfpc','ranges'));
     }
 
     /**
@@ -154,23 +152,23 @@ class BitController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bit $bit)
+    public function update(Request $request, Sfpc $sfpc)
     {
-        $bit->update($request->all());
-        flash('Bit updated successfully!')->success();
+        $sfpc->update($request->all());
+        flash('Sfpc updated successfully!')->success();
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Bit  $category
+     * @param  \App\Sfpc  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bit $bit)
+    public function destroy(Sfpc $sfpc)
     {
-        $bit->delete();
-        flash('Bit deleted successfully!')->info();
+        $sfpc->delete();
+        flash('Sfpc deleted successfully!')->info();
         return back();
     }
 }

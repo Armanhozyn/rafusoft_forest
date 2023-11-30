@@ -24,21 +24,29 @@ class PaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            'range_lot_no_year' => 'required|integer',
-            'money_collection_slip_no' => 'required',
-            'collection_amount' => 'required',
-            'money_collection_date' => 'required',
+            // 'range_lot_no_year' => 'required|integer',
+            // 'money_collection_slip_no' => 'required',
+            // 'collection_amount' => 'required',
+            // 'money_collection_date' => 'required',
 
-            'money_deposit_slip_no' => [
-                Rule::requiredIf(function () {
-                    return filled($this->input('money_deposit'));
-                }),
-            ],
-            'money_deposit' => [
-                Rule::requiredIf(function () {
-                    return filled($this->input('money_deposit_slip_no'));
-                }),
-            ],
+            // 'money_deposit_slip_no' => [
+            //     Rule::requiredIf(function () {
+            //         return filled($this->input('money_deposit'));
+            //     }),
+            // ],
+            // 'money_deposit' => [
+            //     Rule::requiredIf(function () {
+            //         return filled($this->input('money_deposit_slip_no'));
+            //     }),
+            // ],
+            'range_lot_no_year' => 'required',
+            'money_collection_slip_no' => 'required',
+            'money_collection_date' => 'required',
+            'collection_amount' => 'required|integer',
+            'vat' => 'required|integer',
+            'tax' => 'required|integer',
+            'late_fees' => 'required|integer'
+
         ];
     }
 }
