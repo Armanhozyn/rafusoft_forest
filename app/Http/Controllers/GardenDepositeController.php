@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 
-class GardenBikritoController extends Controller
+class GardenDepositeController extends Controller
 {
 
     public function garden_deposite(Request $request){
