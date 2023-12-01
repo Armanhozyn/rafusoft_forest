@@ -96,23 +96,23 @@ class AjaxController extends Controller
         ->first();
 
         $garden_id = $woodlot->garden_id;
-        dd($garden_id);
         if($party_id == 4 ){
-            $ifExistPartyInGardens = PartyInGarden::where('')
-            $party_in_gardens = UnionParishad::join('range_in_unions', 'union_parishads.id', '=', 'range_in_unions.union_parishad_id')
-            ->where('range_in_unions.range_id', '=', Auth::user()->range_id)
-            ->select('union_parishads.*') // Select the columns you want from the unionparishod table
-            ->pluck('name', 'id');
+            $ifExistPartyInGardens = PartyInGarden::where(['party_id' => 4,'garden_id' => $garden_id])->first();
+            if($ifExistPartyInGardens){
+                $party_in_gardens = UnionParishad::join('range_in_unions', 'union_parishads.id', '=', 'range_in_unions.union_parishad_id')
+                ->where('range_in_unions.range_id', '=', Auth::user()->range_id)
+                ->select('union_parishads.*') // Select the columns you want from the unionparishod table
+                ->pluck('name', 'id');
+            }else{
+                $party_in_gardens = [];
+            }
         }else{
             $party_in_gardens = PartyInGarden::join('institutes','party_in_gardens.institute_id' ,'=','institutes.id')
             ->where(["party_in_gardens.garden_id" => $garden_id,'party_in_gardens.party_id' => $party_id])
             ->groupBy('party_in_gardens.institute_id')
             ->pluck('institutes.name','institutes.id');
         }
-       
-        // $intituteList = Institute::where('party_id', $party_id)->pluck('name', 'id');
-        // dd($party_in_gardens);
-       
+
         $data = [
             'success' => true,
             'data' => $party_in_gardens,
@@ -122,8 +122,6 @@ class AjaxController extends Controller
         // Using the response() helper function
         return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
 
-        // Using the Response class
-        // return new Response(json_encode($data), 200, ['Content-Type' => 'application/json']);
     }
 
     public function getUnionByUpazilla($upazillaId)
