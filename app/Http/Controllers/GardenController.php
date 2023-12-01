@@ -94,7 +94,6 @@ class GardenController extends Controller
                 $csrf = csrf_token();
                 $action = <<<CODE
                 <form method='POST' action='$delete_api' accept-charset='UTF-8' class='d-inline-block dform'>
-
                     <input name='_method' type='hidden' value='DELETE'><input name='_token' type='hidden' value='$csrf'>
                     <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$edit_api' data-original-title='Edit category details'>
                         <i class='fa fa-edit' aria-hidden='true'></i>
@@ -239,12 +238,11 @@ class GardenController extends Controller
             if (!empty($parties)) {
                 $partiesArray = json_decode($parties, true);
                 $keysMap = [
-                    "পক্ষগণ" => "party_name",
-                    "প্রতিষ্ঠান/সংস্থার নাম" => "institute_name",
+                    "পক্ষগণ" => "party_id",
+                    "প্রতিষ্ঠান/সংস্থার নাম" => "institute_id",
                     "প্রাপ্য হার" => "percentage",
                     "মন্তব্য (যদি থাকে)" => "comment"
                 ];
-
                 $replaceKeys = function ($subArray) use ($keysMap) {
                     $updatedKeys = array_map(function ($key) use ($keysMap) {
                         return $keysMap[$key] ?? $key;

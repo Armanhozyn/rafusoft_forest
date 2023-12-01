@@ -31,7 +31,7 @@
         <div class="col-md-12">
             <div class="card mb-5">
                 <div class="card-body">
-                    {!! Form::open(['route' => 'garden.store', 'files' => true, 'id' => 'garden-create-form']) !!}
+                    {!! Form::open(['route' => 'woodlot.diposite.store', 'files' => false, 'id' => 'garden-create-form']) !!}
                     <h6 class="heading-small text-muted mb-4">{{ __('garden.garden_information') }}</h6>
 
                     <div class="pl-lg-4 mb-4">
@@ -41,120 +41,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="pl-lg-4">
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="bit_radio" name="bit_sfc" value="bit"
-                                        class="custom-control-input" >
-                                    <label class="custom-control-label" for="bit_radio">{{__('garden.select_bit')}}</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="sfc_radio" name="bit_sfc" value="sfc"
-                                        class="custom-control-input">
-                                    <label class="custom-control-label" for="sfc_radio">{{__('garden.select_sfpc')}}</label>
-                                </div>
-                                <div class="form-group" id="bit">
-                                    {{ Form::label('bit_id', __('garden.select_bit'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('bit_id', $bitList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select BIT...', 'id' => 'bit-list']) }}
-                                </div>
-                                <div class="form-group" id="sfc">
-                                    {{ Form::label('sfpc_id', __('garden.select_sfpc'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('sfpc_id', $sfpcList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select SFPC...', 'id' => 'sfpc-list']) }}
-                                </div>
-                                {{-- <div class="form-group">
-                                    <label for="garden_id" class="form-control-label">বাগান নির্বাচন করুন</label>
-                                    <select id="garden_id" name="garden_information_id" class="form-control form-control-sm">
-                                        <option selected="selected" value="">বাগান নির্বাচন করুন...</option>
-
-                                        @foreach ($gardens as $garden)
-
-                                            <option value="{{ $garden->id }}">{{ $garden->id }} -
-                                                {{ $garden->district->name }} - {{ $garden->thana->name }} -
-                                                {{ !empty($garden->union) ? implode(', ', $garden->union->pluck('union.name')->toArray()) : '' }}
-                                            </option>
-                                        @endforeach
-
-
-                                    </select>
-                                </div> --}}
-
-                                <div class="form-group">
-                                    {{ Form::label('project_id', __('garden.select_project'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('project_id', $projects, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select project...']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('forest_type_id', __('lang.forest_type'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('forest_type_id', $forestTypes, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select Forest Type...']) }}
-                                </div>
-
-
-
-
-                                <div class="form-group">
-                                    {{ Form::label('creation_year', __('garden.creation_year'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('creation_year', $yearPairs, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select garden type...']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('rotation', __('garden.select_rotation'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('rotation', $rotations, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select rotation...']) }}
-                                </div>
-                                <div id="cut-year-group" class="form-group">
-                                    {{ Form::label('cut_year', __('garden.year_of_cut'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('cut_year', $yearPairs, null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div id="garden-size-wrap" class="form-group">
-                                    {{ Form::label('garden_size', __('garden.garden_size'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('garden_size', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('expiration_year', __('garden.expiration_year'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('expiration_year', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('nursery_expense', 'নার্সারি উত্তোলন ব্যয়', ['class' => 'form-control-label']) }}
-                                    {{ Form::number('nursery_expense', null, ['id' => 'nursery_expense', 'class' => 'form-control form-control-sm']) }}
-                                </div>
-
-
-                                <div class="form-group">
-                                    {{ Form::label('creation_cost', 'বাগান সৃজন ব্যয়', ['class' => 'form-control-label']) }}
-                                    {{ Form::number('creation_cost', null, ['id' => 'creation_cost', 'class' => 'form-control form-control-sm']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('beneficiary_male', __('garden.beneficiary_male'), ['class' => 'form-control-label']) }}
-                                    {{ Form::number('beneficiary_male', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('beneficiary_female', __('garden.beneficiary_female'), ['class' => 'form-control-label']) }}
-                                    {{ Form::number('beneficiary_female', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('contract_attachment', __('garden.deed_of_agreement'), ['class' => 'form-control-label']) }}
-                                    {{ Form::file('contract_attachment', ['class' => 'form-control form-control-sm']) }}
-                                </div>
-
-
-
-
-                            </div>
-
-                            <div class="col-lg-6">
-                                <h1>বাগানের তথ্যঃ</h1>
-                                <div id="user-info"></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
                     <div class="pl-lg-4 mt-4">
                         <div class="row">
                             <div class="col-md-12">
@@ -258,9 +144,9 @@
 
 
         var gardenInfo;
-        var unionList = @json($unions->toArray());
-        debugger;
-        console.log(unionList);
+        // var unionList = @json($unions->toArray());
+        var unionList = [];
+
         jQuery(document).ready(function() {
 
             const selectElement = $('select#PartiesDropdown');
@@ -268,121 +154,8 @@
             $.each(parties, function(index, party) {
                 $('<option>').val(index).text(party).appendTo(selectElement);
             });
-
-            $('#bit-list').on('change', function() {
-                $('#sfpc-list').val('');
-            });
-
-            $('#sfpc-list').on('change', function() {
-                $('#bit-list').val('');
-            });
         })
 
-        $('#rotation').on('change', function() {
-            $('#cut-year-group').hide();
-            console.log('rotation changed: ', $(this).val());
-
-            if ($(this).val() > 1) {
-                $('#cut-year-group').show();
-            }
-
-        });
-
-        $('#forest_type_id').on('change', function() {
-            $('#garden-size-wrap label').text('বাগানের পরিমান (হেক্টর)');
-
-            if ($(this).val() == '1') {
-                $('#garden-size-wrap label').text('বাগানের পরিমান (কি.মি.)');
-            }
-
-        });
-
-        $('#creation_year').on('change', function() {
-            $('#expiration_year').val(calculateFinancialYearTenYearsLater($(this).val()));
-        });
-
-
-        $('#garden_id').change(function() {
-            $('#parties-table tbody').html('');
-            $('#user-info').html('');
-            $('#saveButton').removeAttr('disabled');
-            let totalPercentageElement = $('#totalPercent');
-            totalPercentageElement.text('0');
-            let gardenId = $(this).val();
-            $.ajax({
-                url: "/ajax/garden-info/" + gardenId,
-                method: "GET",
-                dataType: "json",
-                success: function(response) {
-                    gardenInfo = response.data;
-                    showGardenInfo(gardenInfo);
-                    unionList = gardenInfo.union.map(function(item) {
-                        return item.union.name;
-                    });
-                    console.log(JSON.stringify(gardenInfo));
-
-                    console.log('union list', unionList);
-
-                    $('#garden-size-wrap label').text('বাগানের পরিমান (হেক্টর)');
-
-                    if (gardenInfo.garden_type.id == '1') {
-                        $('#garden-size-wrap label').text('বাগানের পরিমান (কি.মি.)');
-                    }
-
-
-                    //check garden info for parties table manipulation
-
-
-
-                    //**** বাগানটি উডলট/কৃষিবন নির্বাচন করা হলে পক্ষগণ অনুযায়ী প্রতিষ্ঠান/সংস্থা বন অধিদপ্তর ৪৫%, উপকারভোগী ৪৫%, বৃক্ষরোপণ তহবিল ১০% স্বয়ংক্রিয়ভাবে প্রদর্শিত হবে।
-                    if (gardenInfo.forest_type_id == 3 || gardenInfo.forest_type_id == 4) {
-
-                        let rowHtml = `<tr>
-                                <td>বন অধিদপ্তর</td>
-                                <td>বন অধিদপ্তর</td>
-                                <td>45</td>
-                                <td></td>
-                                <td><button disabled="disabled" type="button" class="btn btn-sm btn-danger remove-btn">Remove</button></td>
-                                </tr>`;
-
-                        $('#parties-table tbody').append(rowHtml);
-
-                        rowHtml = `<tr>
-                                <td>উপকারভোগীগণ</td>
-                                <td>চুক্তিনামা অনুযায়ী সংশ্লিষ্ট উপকারভোগীগণ</td>
-                                <td>45</td>
-                                <td></td>
-                                <td><button disabled="disabled" type="button" class="btn btn-sm btn-danger remove-btn">Remove</button></td>
-                                </tr>`;
-
-                        $('#parties-table tbody').append(rowHtml);
-
-                        rowHtml = `<tr>
-                                <td>বৃক্ষরোপণ তহবিল</td>
-                                <td>সংশ্লিষ্ট বৃক্ষরোপণ তহবিল ব্যবস্থাপনা কমিটি</td>
-                                <td>10</td>
-                                <td></td>
-                                <td><button disabled="disabled" type="button" class="btn btn-sm btn-danger remove-btn">Remove</button></td>
-                                </tr>`;
-
-                        $('#parties-table tbody').append(rowHtml);
-
-                        $('#totalPercent').text('100');
-
-                        $('#saveButton').attr('disabled', 'disabled');
-                        tableToData();
-
-                        return;
-                    }
-
-                },
-                error: function(xhr, status, error) {
-                    // This function is called if the request fails
-                    console.log("An error occurred: " + error);
-                }
-            });
-
-        });
 
 
         $(document).ready(function() {
@@ -401,21 +174,16 @@
             institueDropDown.html('');
 
             debugger;
-            var routeUrl = "{{ route('institute_by_party',0) }}";
+            var routeUrl = "{{ route('institute_by_lot',[0,-1]) }}";
             var generatedUrl = routeUrl.replace('0', partyValue);
+            generatedUrl = generatedUrl.replace('-1', "{{$lot_id}}");
 
-            if (partyValue == 4) {
-                $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
-                $.each(unionList, function(index, union) {
-                    $('<option>').val(index).text(union).appendTo(institueDropDown);
-                });
-
-                return;
-            }
+           
 
             $.get(generatedUrl, function(response) {
                 // Success callback
                 console.log("Response:", response);
+                
                 institueDropDown.append($('<option></option>').attr('value', '').text('নির্বাচন করুন...'));
                 $.each(response.data, function(key, value) {
                     institueDropDown.append($('<option></option>').attr('value', key).text(value));
@@ -604,33 +372,7 @@
 
         });
 
-
-
-
-
-
-
-
-
-        function calculateFinancialYearTenYearsLater(inputYear) {
-            // Split the input year into startYear and endYear
-            var years = inputYear.split("-");
-            var startYear = parseInt(years[0]);
-
-            // Create a new Date object for the starting financial year
-            var startDate = new Date(startYear, 3, 1); // Assuming financial year starts on April 1st
-
-            // Add 10 years to the starting financial year
-            startDate.setFullYear(startDate.getFullYear() + 10);
-
-            // Calculate the financial year based on the new date
-            var newStartYear = startDate.getFullYear();
-            var newEndYear = newStartYear + 1;
-            var financialYear = newStartYear + '-' + newEndYear;
-
-            return financialYear;
-        }
-
+     
         function tableToData() {
             var tableData = [];
             $("#parties-table tbody tr").each(function(rowIndex, row) {
@@ -646,50 +388,6 @@
             console.log(jsonData);
             $('#parties-input').val(jsonData);
         }
-
-
-        function showGardenInfo(info) {
-
-            let gardenArea = info.garden_area_km ?? info.garden_area_hectare;
-            let unit = (info.garden_area_km === undefined || info.garden_area_km === null || info.garden_area_km === "") ?
-                'কিঃমিঃ' : ((info.garden_area_hectare === undefined || info.garden_area_hectare === null || info
-                    .garden_area_hectare === "") ? 'হেক্টর' : '')
-            // Create and append HTML elements
-            var userInfoDiv = $('#user-info');
-            var userInfoHTML = '';
-
-            // Append district name
-            userInfoHTML += '<p><strong> জেলাঃ </strong> ' + info.district.name + '</p>';
-
-            // Append thana name
-            userInfoHTML += '<p><strong> উপজেলাঃ</strong> ' + info.thana.name + '</p>';
-
-            // Append garden area in km
-            userInfoHTML += '<p><strong> বাগানের আয়তন (' + unit + '):   </strong> ' + gardenArea + '</p>';
-
-            // Append garden type
-            userInfoHTML += '<p><strong> বাগানের ধরনঃ </strong> ' + info.garden_type.name + '</p>';
-
-            // Append union names
-            userInfoHTML += '<p><strong>ইউনিয়নঃ</strong></p><ul>';
-            info.union.forEach(function(union) {
-                userInfoHTML += '<li>' + union.union.name + '</li>';
-            });
-            userInfoHTML += '</ul>';
-
-            // Append user information to the container
-            userInfoDiv.html(userInfoHTML);
-        }
-
-
-
-
-
-
-
-
-
-
 
 
         function notify(type, title, message) {
@@ -819,76 +517,6 @@
             });
 
         }
-        $("#sfc").hide();
-        $("#bit").hide();
-        $("input[name='bit_sfc']").change(function(){
-            debugger;
-            if ($("input[name='bit_sfc']:checked").val() === 'bit') {
-                $("#bit").show('slow');
-                $("#sfc").hide('slow');
-                return;
-
-            }
-            if($("input[name='bit_sfc']:checked").val() === 'sfc'){
-                $("#sfc").show('slow');
-                $("#bit").hide('slow');
-                return;
-            }
-
-            $("#sfc").hide();
-            $("#bit").hide();
-            return;
-        });
-
-        $('#district').change(function() {
-            debugger;
-            $('#thana').html('');
-            $('#union').html('');
-            var dropdown = $('#thana'); // Assuming you have a dropdown with id "myDropdown"
-                dropdown.html('');
-            let disctrictId = $(this).val();
-            console.log(disctrictId);
-
-            // debugger;
-            var routeUrl = "{{ route('upozila_by_district',0) }}";
-            var generatedUrl = routeUrl.replace('0', disctrictId);
-
-            $.get(generatedUrl, function(response) {
-                // Success callback
-                console.log("Response:", response);
-                dropdown.append($('<option></option>').attr('value', '').text('উপজেলা নির্বাচন করুন...'));
-                $.each(response.data, function(key, value) {
-                    dropdown.append($('<option></option>').attr('value', key).text(value));
-                });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                // Error callback
-                console.error("Error:", errorThrown);
-            });
-
-        });
-
-
-        $('#thana').change(function(){
-            $('#union').html('');
-            var dropdown = $('#union'); // Assuming you have a dropdown with id "myDropdown"
-                dropdown.html('');
-            let unionId = $(this).val();
-            console.log(unionId);
-            var routeUrl = "{{ route('union_by_thana',0) }}";
-            var generatedUrl = routeUrl.replace('0', unionId);
-            $.get(generatedUrl, function(response) {
-                // Success callback
-                console.log("Response:", response);
-                dropdown.append($('<option></option>').attr('value', '').text('ইউনিয়ন নির্বাচন করুন...'));
-                $.each(response.data, function(key, value) {
-                    dropdown.append($('<option></option>').attr('value', key).text(value));
-                });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                // Error callback
-                console.error("Error:", errorThrown);
-            });
-
-        });
     </script>
 
 

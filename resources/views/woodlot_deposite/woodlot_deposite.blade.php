@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 {{-- @can('create-beneficiary') --}}
-<a href="{{ route('garden.bikrito.list') }}" class="btn btn-sm btn-neutral">All Bikrito Garden</a>
+<a href="{{ route('all_lot_payment') }}" class="btn btn-sm btn-neutral">WoodLot DepositePayment</a>
 {{-- @endcan --}}
 @endpush
 @section('content')
@@ -11,31 +11,13 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Garden</h3>
+                        <h3 class="mb-0">Woodlot Deposite </h3>
                     </div>
                 </div>
             </div>
             <div class="card-body px-2">
 
                 <div class="row">
-
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="bit_id" class="form-control-label">{{trans('navbar.bit')}} নির্বাচন
-                                করুন</label>
-                            <select id="bit_id" name="bit_id" class="form-control form-control-sm">
-                                <option selected="selected" value="">{{trans('navbar.bit')}} নির্বাচন
-                                    করুন</option>
-
-                                @foreach ($bitList as $bit)
-                                <option {{$bit->id == old('bit_id') ? 'selected' : ''}} value="{{ $bit->id }}">{{ $bit->name }}
-                                </option>
-                                @endforeach
-
-
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="garden_id" class="form-control-label">{{trans('garden.garden_id')}} নির্বাচন
@@ -55,20 +37,40 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="range_or_center_lot_no_and_year" class="form-control-label">{{trans('sold_garden.range_or_center_lot_no_and_year')}} নির্বাচন
+                                করুন</label>
+                            <select id="range_or_center_lot_no_and_year" name="range_or_center_lot_no_and_year" class="form-control form-control-sm">
+                                <option selected="selected" value="">{{trans('sold_garden.range_or_center_lot_no_and_year')}} নির্বাচন
+                                    করুন</option>
+
+                                @foreach ($woodlots as $woodlot)
+                                <option {{$woodlot->range_lot_no_year == old('range_or_center_lot_no_and_year') ? 'selected' : ''}} value="{{ $woodlot->range_lot_no_year
+                                    }}">{{ $woodlot->range_lot_no_year }}
+                                </option>
+                                @endforeach
+
+
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
                     <div>
-                        <table id="gardenBikritoTable" class="table table-striped table-bordered" style="width:100%">
+                        <table id="lotTable" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Serial No</th>
-                                    <th>{{ __('garden.project_id') }}</th>
-                                    <th>{{ __('garden.forest_type_id') }}</th>
-                                    <th>{{ __('garden.creation_year') }}</th>
+                                    <th>{{ __('sold_garden.garden_location') }}</th>
+                                    <th>{{ __('sold_garden.range_lot_no_year') }}</th>
+                                    <th>{{ __('sold_garden.money_collection_slip_no') }}</th>
+                                    <th>{{ __('sold_garden.total_money_recoverd') }}</th>
                                     <th>{{ __('garden.garden_size') }}</th>
-                                    <th>{{ __('garden.rotation') }}</th>
-                                    <th>{{ __('garden.location') }}</th>
+                                    <th>{{ __('sold_garden.division_group_no_year') }}</th>
+                                    <th>{{ __('sold_garden.tenderer_name_address') }}</th>
+                                    <th>{{ __('sold_garden.quoted_rate') }}</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
@@ -85,26 +87,28 @@
 <script>
     $(document).ready(function() {
 
-        let table = $('#gardenBikritoTable').DataTable({
+        let table = $('#lotTable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             // ajax: `{{ route('lot_payment') }}`,
             ajax: {
-                url:`{{ route('garden.bikrito') }}`,
+                url:`{{ route('garden.deposite') }}`,
                 data: function (data) {
                     data.garden_id = $('#garden_id').val()
-                    data.bit_id = $('#bit_id').val()
+                    data.range_or_center_lot_no_and_year = $('#range_or_center_lot_no_and_year').val()
                 }
             },
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'project_name', name: 'project_name' },
-                { data: 'forest_type_name', name: 'forest_type_name' },
-                { data: 'creation_year', name: 'creation_year' },
+                { data: 'garden_location', name: 'garden_location' },
+                { data: 'range_lot_no_year', name: 'range_lot_no_year' },
+                { data: 'money_collection_slip_no', name: 'money_collection_slip_no' },
+                { data: 'total_money_recoverd', name: 'total_money_recoverd' },
                 { data: 'garden_size', name: 'garden_size' },
-                { data: 'rotation', name: 'rotation' },
-                { data: 'location', name: 'location' },
+                { data: 'division_group_no_year', name: 'division_group_no_year' },
+                { data: 'tenderer_name_address', name: 'tenderer_name_address' },
+                { data: 'quoted_rate', name: 'quoted_rate' },
                 { data: 'created_at_read', name: 'created_at_read' },
                 { data: 'actions', name: 'actions' }
             ],
@@ -150,21 +154,21 @@
         // });
 
 
-        $('#bit_id').change(function() {
+        $('#garden_id').change(function() {
             debugger;
-            $('#garden_id').html('');
-            var dropdown = $('#garden_id'); // Assuming you have a dropdown with id "myDropdown"
+            $('#range_or_center_lot_no_and_year').html('');
+            var dropdown = $('#range_or_center_lot_no_and_year'); // Assuming you have a dropdown with id "myDropdown"
                 dropdown.html('');
-            let bit_id = $(this).val();
+            let garden_id = $(this).val();
 
             // debugger;
-            var routeUrl = "{{ route('garden_by_bit',0) }}";
-            var generatedUrl = routeUrl.replace('0', bit_id);
+            var routeUrl = "{{ route('wood_lot_by_garden',0) }}";
+            var generatedUrl = routeUrl.replace('0', garden_id);
 
             $.get(generatedUrl, function(response) {
                 // Success callback
                 console.log("Response:", response);
-                dropdown.append($('<option></option>').attr('value', '').text('সৃজিত বাগানের আইডি নির্বাচন করুন ...'));
+                dropdown.append($('<option></option>').attr('value', '').text('রেঞ্জ/কেন্দ্রের লট নং ও সন নির্বাচন করুন...'));
                 $.each(response.data, function(key, value) {
                     dropdown.append($('<option></option>').attr('value', key).text(value));
                 });
@@ -176,7 +180,7 @@
 
         });
 
-        $('#garden_id').on('change', function () {
+        $('#range_or_center_lot_no_and_year').on('change', function () {
                 table.draw();
         });
 });
