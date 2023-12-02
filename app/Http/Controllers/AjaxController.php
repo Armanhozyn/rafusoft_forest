@@ -12,6 +12,7 @@ use App\UnionParishad;
 use App\WoodLot;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -89,13 +90,27 @@ class AjaxController extends Controller
 
     public function instituteByLot($party_id,$lot_id)
     {
-        // dd($districtId);
-        $woodlot = WoodLot::find($lot_id);
-        $party_in_gardens = PartyInGarden::join('institutes','party_in_gardens.institute_id' ,'=','institutes.id')
-                            ->where(["party_in_gardens.garden_id" => $woodlot->garden_id,'party_in_gardens.party_id' => $party_id])
-                            ->groupBy('party_in_gardens.institute_id')
-                            ->pluck('name', 'party_in_gardens.institute_id as institute_id');
+        $woodlot = WoodLot::join('gardens','wood_lots.garden_id' ,'=' , 'gardens.id')
+        ->where('wood_lots.id','=',$lot_id)
+        ->select('gardens.id as garden_id')
+        ->first();
+
+        $garden_id = $woodlot->garden_id;
+        dd($garden_id);
+        if($party_id == 4 ){
+            $party_in_gardens = UnionParishad::join('range_in_unions', 'union_parishads.id', '=', 'range_in_unions.union_parishad_id')
+            ->where('range_in_unions.range_id', '=', Auth::user()->range_id)
+            ->select('union_parishads.*') // Select the columns you want from the unionparishod table
+            ->pluck('name', 'id');
+        }else{
+            $party_in_gardens = PartyInGarden::join('institutes','party_in_gardens.institute_id' ,'=','institutes.id')
+            ->where(["party_in_gardens.garden_id" => $garden_id,'party_in_gardens.party_id' => $party_id])
+            ->groupBy('party_in_gardens.institute_id')
+            ->pluck('institutes.name','institutes.id');
+        }
+       
         // $intituteList = Institute::where('party_id', $party_id)->pluck('name', 'id');
+        // dd($party_in_gardens);
        
         $data = [
             'success' => true,

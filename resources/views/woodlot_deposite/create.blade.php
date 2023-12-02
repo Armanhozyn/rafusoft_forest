@@ -144,7 +144,8 @@
 
 
         var gardenInfo;
-        var unionList = @json($unions->toArray());
+        // var unionList = @json($unions->toArray());
+        var unionList = [];
 
         jQuery(document).ready(function() {
 
@@ -173,22 +174,16 @@
             institueDropDown.html('');
 
             debugger;
-            var routeUrl = "{{ route('institute_by_lot',[0,1]) }}";
+            var routeUrl = "{{ route('institute_by_lot',[0,-1]) }}";
             var generatedUrl = routeUrl.replace('0', partyValue);
-            var generatedUrl = generatedUrl.replace('1', "{{$lot_id}}");
+            generatedUrl = generatedUrl.replace('-1', "{{$lot_id}}");
 
-            if (partyValue == 4) {
-                $('<option>').val('').text('নির্বাচন করুন').appendTo(institueDropDown);
-                $.each(unionList, function(index, union) {
-                    $('<option>').val(index).text(union).appendTo(institueDropDown);
-                });
-
-                return;
-            }
+           
 
             $.get(generatedUrl, function(response) {
                 // Success callback
                 console.log("Response:", response);
+                
                 institueDropDown.append($('<option></option>').attr('value', '').text('নির্বাচন করুন...'));
                 $.each(response.data, function(key, value) {
                     institueDropDown.append($('<option></option>').attr('value', key).text(value));
