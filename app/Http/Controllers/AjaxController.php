@@ -98,6 +98,7 @@ class AjaxController extends Controller
         $garden_id = $woodlot->garden_id;
         dd($garden_id);
         if($party_id == 4 ){
+            $ifExistPartyInGardens = PartyInGarden::where('')
             $party_in_gardens = UnionParishad::join('range_in_unions', 'union_parishads.id', '=', 'range_in_unions.union_parishad_id')
             ->where('range_in_unions.range_id', '=', Auth::user()->range_id)
             ->select('union_parishads.*') // Select the columns you want from the unionparishod table
