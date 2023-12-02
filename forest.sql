@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 02, 2023 at 03:52 AM
+-- Generation Time: Dec 02, 2023 at 01:48 PM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.1
 
@@ -611,7 +611,8 @@ INSERT INTO `gardens` (`id`, `garden_information_id`, `range_id`, `bit_id`, `sfp
 (9, NULL, 13, 52, NULL, 4, '2000-2001', 1, '2000-2001', NULL, NULL, 10, 10, NULL, '2010-2011', NULL, NULL, NULL, NULL, NULL, NULL, 60.00, 70.00, NULL, '', NULL, NULL, 13, 50, '2023-12-02 16:25:24', '2023-12-02 16:25:24', NULL, NULL, 60),
 (10, NULL, 13, 52, NULL, 4, '2000-2001', 1, '2000-2001', NULL, NULL, 10, 10, NULL, '2010-2011', NULL, NULL, NULL, NULL, NULL, NULL, 60.00, 70.00, NULL, '', NULL, NULL, 13, 50, '2023-12-02 16:28:36', '2023-12-02 16:28:36', NULL, NULL, 60),
 (11, NULL, 13, 52, NULL, 4, '2000-2001', 1, '2000-2001', NULL, NULL, 10, 10, NULL, '2010-2011', NULL, NULL, NULL, NULL, NULL, NULL, 60.00, 70.00, NULL, '', NULL, NULL, 13, 50, '2023-12-02 16:32:34', '2023-12-02 16:32:34', NULL, NULL, 60),
-(12, NULL, 13, 52, NULL, 4, '2000-2001', 1, '2000-2001', NULL, NULL, 22, 22, NULL, '2010-2011', NULL, NULL, NULL, NULL, NULL, NULL, 44.00, 34.00, NULL, '', NULL, NULL, 13, 50, '2023-12-02 16:38:09', '2023-12-02 16:38:09', NULL, NULL, 60);
+(12, NULL, 13, 52, NULL, 4, '2000-2001', 1, '2000-2001', NULL, NULL, 22, 22, NULL, '2010-2011', NULL, NULL, NULL, NULL, NULL, NULL, 44.00, 34.00, NULL, '', NULL, NULL, 13, 50, '2023-12-02 16:38:09', '2023-12-02 16:38:09', NULL, NULL, 60),
+(13, NULL, 13, 50, NULL, 4, '2000-2001', 2, '2000-2001', NULL, NULL, 12, 12, NULL, '2010-2011', NULL, NULL, NULL, NULL, NULL, NULL, 45.00, 456.00, NULL, '', NULL, NULL, 13, 50, '2023-12-03 02:39:34', '2023-12-03 02:39:34', NULL, NULL, 60);
 
 -- --------------------------------------------------------
 
@@ -637,7 +638,8 @@ CREATE TABLE `garden_bikritos` (
 --
 
 INSERT INTO `garden_bikritos` (`id`, `garden_id`, `bit_id`, `sfpc_id`, `bikrito_bagan_shon`, `dorpotro_biggopti_no`, `bikrito_date`, `total_lot_count`, `created_at`, `updated_at`) VALUES
-(1, 6, NULL, NULL, '2008-2009', '123123', '2023-11-28', 60, '2023-11-27 19:40:51', '2023-11-27 19:40:51');
+(1, 6, NULL, NULL, '2008-2009', '123123', '2023-11-28', 60, '2023-11-27 19:40:51', '2023-11-27 19:40:51'),
+(2, 13, NULL, NULL, '2000-2001', '777', '2023-12-02', 10, '2023-12-03 02:40:11', '2023-12-03 02:40:11');
 
 -- --------------------------------------------------------
 
@@ -992,9 +994,14 @@ CREATE TABLE `party_in_gardens` (
 --
 
 INSERT INTO `party_in_gardens` (`id`, `garden_id`, `party_id`, `institute_id`, `percentage`, `comment`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(21, 1, 1, 1, 45, '', NULL, NULL, NULL),
-(22, 1, 4, 200, 50, '', NULL, NULL, NULL),
-(23, 1, 5, 9, 5, '', NULL, NULL, NULL);
+(21, 6, 1, 1, 45, '', NULL, NULL, NULL),
+(22, 6, 4, 200, 50, '', NULL, NULL, NULL),
+(23, 6, 5, 9, 5, '', NULL, NULL, NULL),
+(24, 13, 1, 1, 10, '', NULL, NULL, NULL),
+(25, 13, 2, 4, 10, '', NULL, NULL, NULL),
+(26, 13, 2, 3, 10, '', NULL, NULL, NULL),
+(27, 13, 3, 8, 10, '', NULL, NULL, NULL),
+(29, 13, 5, 9, 50, '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2795,7 +2802,8 @@ INSERT INTO `wood_lots` (`id`, `garden_id`, `division_group_no_year`, `range_lot
 (203, 5, 'demo', 'demo', 20, 20, 'demo dorpotro', 20.00, 'demo ogrim', 20.00, 'demo jamanot', 20.00, 'demo projati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-11-20 12:16:42', '2023-11-20 12:16:42', NULL),
 (204, 6, 'demo 6', '611212023', 60, 80, 'demo dorpotro two', 50.00, 'demo ogrim two', 50.00, 'demo jamanot two', 60.00, 'demo projati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, 40, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-11-20 21:49:22', '2023-11-20 21:49:22', NULL),
 (205, 5, 'demo20', 'demo20', 20, 20, 'demo dorpotro three', 20.00, 'demo ogrim three', 20.00, 'demo jamanot three', 20.00, 'demo projati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-11-22 11:26:56', '2023-11-22 11:26:56', NULL),
-(206, 6, 'demo2030', 'demo2030', 40, 50, 'demo dorpotro four', 50.00, 'demo ogrim four', 50.00, 'demo jamanot four', 100.00, 'dark', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 50, 70, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-11-27 20:29:23', '2023-11-27 20:29:23', NULL);
+(206, 6, 'demo2030', 'demo2030', 40, 50, 'demo dorpotro four', 50.00, 'demo ogrim four', 50.00, 'demo jamanot four', 100.00, 'dark', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 50, 70, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-11-27 20:29:23', '2023-11-27 20:29:23', NULL),
+(208, 13, '778', '779776', 34, 33, 'Sumon islam', 56.00, 'ogrimer biboron demo test for lot deposite', 34.00, 'jamanoter biboron demo test for lot deposite', 33.00, 'gaser projati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 57, 67, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-12-03 02:42:12', '2023-12-03 02:42:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -2875,7 +2883,8 @@ INSERT INTO `wood_lot_payment_histories` (`id`, `wood_lot_id`, `money_collection
 (20, 204, '3030', '2023-12-01', NULL, NULL, 50.00, 10, 10, 10.00, 50, '2023-12-02 14:20:31', '2023-12-02 14:20:31', NULL),
 (21, 204, 'demo_roshid_test_02', '2023-12-08', NULL, NULL, 50.00, 10, 10, 10.00, 50, '2023-12-02 14:53:15', '2023-12-02 14:53:15', NULL),
 (22, 204, 'demo_roshid_test_02', '2023-12-08', NULL, NULL, 50.00, 10, 10, 10.00, 50, '2023-12-02 14:53:15', '2023-12-02 14:53:15', NULL),
-(23, 204, 'demo_roshid_test_03', '2023-11-30', NULL, NULL, 20.00, 10, 10, 10.00, 50, '2023-12-02 14:54:26', '2023-12-02 14:54:26', NULL);
+(23, 204, 'demo_roshid_test_03', '2023-11-30', NULL, NULL, 20.00, 10, 10, 10.00, 50, '2023-12-02 14:54:26', '2023-12-02 14:54:26', NULL),
+(24, 208, 'demo_roshid_test_02_deposit', '2023-12-15', NULL, NULL, 400.00, 10, 10, 50.00, 50, '2023-12-03 02:44:41', '2023-12-03 02:44:41', NULL);
 
 --
 -- Indexes for dumped tables
@@ -3218,13 +3227,13 @@ ALTER TABLE `forest_types`
 -- AUTO_INCREMENT for table `gardens`
 --
 ALTER TABLE `gardens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `garden_bikritos`
 --
 ALTER TABLE `garden_bikritos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `garden_information`
@@ -3272,7 +3281,7 @@ ALTER TABLE `parties`
 -- AUTO_INCREMENT for table `party_in_gardens`
 --
 ALTER TABLE `party_in_gardens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -3380,7 +3389,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wood_lots`
 --
 ALTER TABLE `wood_lots`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
 -- AUTO_INCREMENT for table `wood_lot_deposit_payment`
@@ -3398,7 +3407,7 @@ ALTER TABLE `wood_lot_payments`
 -- AUTO_INCREMENT for table `wood_lot_payment_histories`
 --
 ALTER TABLE `wood_lot_payment_histories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
