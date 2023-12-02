@@ -100,7 +100,6 @@ class GardenBikritoController extends Controller
                 $sell_garden = trans('sold_garden.sell_garden');
                 // $collect_money = trans('sold_garden.collect_money');
                 $action = <<<CODE
-
                 <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$collect_money_api' data-original-title='Collect Money details'>
                     $sell_garden
                 </a>

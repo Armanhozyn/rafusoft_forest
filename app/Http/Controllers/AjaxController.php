@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Garden;
 use App\GardenInformation;
 use App\Institute;
+use App\Party;
+use App\PartyInGarden;
 use App\Thana;
 use App\UnionParishad;
 use App\WoodLot;
@@ -75,6 +77,29 @@ class AjaxController extends Controller
         $data = [
             'success' => true,
             'data' => $intituteList,
+            'message' => 'Intitute list fetched successfully',
+        ];
+
+        // Using the response() helper function
+        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
+
+        // Using the Response class
+        // return new Response(json_encode($data), 200, ['Content-Type' => 'application/json']);
+    }
+
+    public function instituteByLot($party_id,$lot_id)
+    {
+        // dd($districtId);
+        $woodlot = WoodLot::find($lot_id);
+        $party_in_gardens = PartyInGarden::join('institutes','party_in_gardens.institute_id' ,'=','institutes.id')
+                            ->where(["party_in_gardens.garden_id" => $woodlot->garden_id,'party_in_gardens.party_id' => $party_id])
+                            ->groupBy('party_in_gardens.institute_id')
+                            ->pluck('name', 'party_in_gardens.institute_id as institute_id');
+        // $intituteList = Institute::where('party_id', $party_id)->pluck('name', 'id');
+       
+        $data = [
+            'success' => true,
+            'data' => $party_in_gardens,
             'message' => 'Intitute list fetched successfully',
         ];
 

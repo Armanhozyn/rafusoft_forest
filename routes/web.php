@@ -4,6 +4,7 @@ use App\Garden;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\GardenInformationController;
 use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,11 +81,11 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::post('/garden-sell-store', 'GardenBikritoController@garden_sell_store')->name('garden.sell.store');
 
 
-    //garden_deposite
-    Route::get('/garden-deposite', 'GardenDepositeController@garden_deposite')->name('garden.deposite');
-    Route::get('/garden-diposite-list', 'GardenDepositeController@garden_deposite_list')->name('garden.deposite.list');
-    Route::get('/garden-diposite-create/{garden_id}', 'GardenDepositeController@garden_deposite_create')->name('garden.diposite.creat');
-    Route::post('/garden-diposite-store', 'GardenDepositeController@garden_deposite_store')->name('garden.diposite.store');
+    //woodlot_deposite
+    Route::get('/woodlot-deposite', 'WoodlotDepositeController@woodlot_deposite')->name('garden.deposite');
+    Route::get('/woodlot-diposite-list', 'WoodlotDepositeController@woodlot_deposite_list')->name('garden.deposite.list');
+    Route::get('/woodlot-diposite-create/{lot_id}', 'WoodlotDepositeController@woodlot_deposite_create')->name('woodlot.diposite.create');
+    Route::post('/woodlot-diposite-store', 'WoodlotDepositeController@woodlot_deposite_store')->name('woodlot.diposite.store');
 
 
     Route::get('media', function () {
@@ -142,6 +143,7 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::get('ajax/garden-info/{garden_id}', [AjaxController::class, 'getGardenInfo']);
     Route::get('ajax/garden-by-bit/{bit_id}', [AjaxController::class, 'GardenByBit'])->name('garden_by_bit');
     Route::get('ajax/institute-by-party/{party_id}', [AjaxController::class, 'instituteByParty'])->name('institute_by_party');
+    Route::get('ajax/institute-by-lot/{party_id}/{lot_id}', [AjaxController::class, 'instituteByLot'])->name('institute_by_lot');
 
     Route::any('test', function () {
         $locale = app()->getLocale();
