@@ -82,8 +82,8 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
 
 
     //woodlot_deposite
-    Route::get('/woodlot-deposite', 'WoodlotDepositeController@woodlot_deposite')->name('garden.deposite');
-    Route::get('/woodlot-diposite-list', 'WoodlotDepositeController@woodlot_deposite_list')->name('garden.deposite.list');
+    Route::get('/woodlot-deposite', 'WoodlotDepositeController@woodlot_deposite')->name('woodlot.deposite');
+    Route::get('/woodlot-diposite-list', 'WoodlotDepositeController@woodlot_deposite_list')->name('woodlot.deposite.list');
     Route::get('/woodlot-diposite-create/{lot_id}', 'WoodlotDepositeController@woodlot_deposite_create')->name('woodlot.diposite.create');
     Route::post('/woodlot-diposite-store', 'WoodlotDepositeController@woodlot_deposite_store')->name('woodlot.diposite.store');
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 {{-- @can('create-beneficiary') --}}
-<a href="{{ route('all_lot_payment') }}" class="btn btn-sm btn-neutral">WoodLot DepositePayment</a>
+<a href="{{ route('woodlot.deposite.list') }}" class="btn btn-sm btn-neutral">Woodlot deposit List</a>
 {{-- @endcan --}}
 @endpush
 @section('content')
@@ -93,7 +93,7 @@
             responsive: true,
             // ajax: `{{ route('lot_payment') }}`,
             ajax: {
-                url:`{{ route('garden.deposite') }}`,
+                url:`{{ route('woodlot.deposite') }}`,
                 data: function (data) {
                     data.garden_id = $('#garden_id').val()
                     data.range_or_center_lot_no_and_year = $('#range_or_center_lot_no_and_year').val()

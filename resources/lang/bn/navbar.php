@@ -29,9 +29,10 @@ return [
     'profit_sharing_info' => 'লভ্যাংশ বিতরনের তথ্য',
     'detailed_report' => 'বিস্তারিত প্রতিবেদন',
     'lot_description' => 'লটের বিবরন',
-    'lot_money_collection_and_deposit' => 'লটের টাকা আদায় ও জমার বিবরণ',
+    'lot_money_collection_and_deposit' => 'লটের টাকা আদায়',
     'bank_deposit_details' => 'ব্যাংক জমার বিবরন',
     'bit' => 'বিট',
-    'sfpc' => 'এসএফপিসি'
+    'sfpc' => 'এসএফপিসি',
+    'woodlot_deposite' => ' লটের টাকা জমা'
 
 ];

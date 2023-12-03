@@ -524,6 +524,8 @@
         $('#saveButton').on('click', function() {
             let partyVal = $('#PartiesDropdown').val();
             let instituteVal = $('#institute-dropdown').val();
+            let instituteValHtml = $('#institute-dropdown :selected').html();
+            let partyValHtml = $('#PartiesDropdown :selected').html();
             let percentageVal = $.trim($('#otherPercent').val()).length !== 0 ? $('#otherPercent').val() : $(
                 '#percentageDropdown').val();
             let commentVal = $('#comment').val();
@@ -551,8 +553,8 @@
 
 
             let rowHtml = `<tr>
-                <td>${partyVal}</td>
-                <td>${instituteVal}</td>
+                <td>${partyValHtml}</td>
+                <td>${instituteValHtml}</td>
                 <td>${percentageVal}</td>
                 <td>${commentVal}</td>
                 <td><button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button></td>
@@ -561,7 +563,7 @@
             totalPercentageElement.text(totalPercentage + Number(percentageVal));
 
             $('#parties-table tbody').append(rowHtml);
-            tableToData();
+            tableToData({partyVal,instituteVal});
 
         });
 
@@ -637,7 +639,13 @@
                 var rowData = {};
                 $(row).find("td:not(:last-child)").each(function(colIndex, cell) {
                     var columnName = $("#parties-table thead th").eq(colIndex).text();
-                    rowData[columnName] = $(cell).text();
+                    if(columnName == 'পক্ষগণ'){
+                        rowData[columnName] = data.partyVal;
+                    }else if(columnName == 'প্রতিষ্ঠান/সংস্থার নাম'){
+                        rowData[columnName] = data.instituteVal;
+                    }else{
+                        rowData[columnName] = $(cell).text();
+                    }
                 });
                 tableData.push(rowData);
             });

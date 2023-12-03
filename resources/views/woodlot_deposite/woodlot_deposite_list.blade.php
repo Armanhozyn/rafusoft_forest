@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 {{-- @can('create-beneficiary') --}}
-<a href="{{ route('garden.bikrito.list') }}" class="btn btn-sm btn-neutral">All Bikrito Garden</a>
+<a href="{{ route('woodlot.deposite') }}" class="btn btn-sm btn-neutral">Make Woodlot Deposit</a>
 {{-- @endcan --}}
 @endpush
 @section('content')
@@ -24,9 +24,9 @@
                                 <tr>
                                     <th>Serial No</th>
                                     <th>{{ __('garden.garden_id') }}</th>
-                                    <th>{{ __('sold_garden.dorpotro_biggopti_no') }}</th>
-                                    <th>{{ __('sold_garden.bikrito_date') }}</th>
-                                    <th>{{ __('sold_garden.total_lot_count') }}</th>
+                                    <th>{{ __('sold_garden.range_or_center_lot_no_and_year') }}</th>
+                                    <th>{{ __('sold_garden.money_collection_slip_no_date') }}</th>
+                                    <th>{{ __('sold_garden.total_deposit_amount') }}</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
@@ -49,7 +49,7 @@
             responsive: true,
             // ajax: `{{ route('lot_payment') }}`,
             ajax: {
-                url:`{{ route('garden.bikrito.list') }}`,
+                url:`{{ route('woodlot.deposite.list') }}`,
                 data: function (data) {
                     data.garden_id = $('#garden_id').val()
                     data.bit_id = $('#bit_id').val()
@@ -58,9 +58,9 @@
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'garden_id', name: 'garden_id' },
-                { data: 'dorpotro_biggopti_no', name: 'dorpotro_biggopti_no' },
-                { data: 'bikrito_date', name: 'bikrito_date' },
-                { data: 'total_lot_count', name: 'total_lot_count' },
+                { data: 'range_lot_no_year', name: 'range_lot_no_year' },
+                { data: 'money_collection_slip_no_date', name: 'money_collection_slip_no_date' },
+                { data: 'total_deposit_amount', name: 'total_deposit_amount' },
                 { data: 'created_at_read', name: 'created_at_read' },
                 { data: 'actions', name: 'actions' }
             ],

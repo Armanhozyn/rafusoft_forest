@@ -9,6 +9,7 @@ use App\Party;
 use App\UnionParishad;
 use App\User;
 use App\WoodLot;
+use App\WoodLotDepositPayment;
 use App\WoodLotPayment;
 use App\WoodLotPaymentHistory;
 use Illuminate\Http\Request;
@@ -62,7 +63,7 @@ class WoodlotDepositeController extends Controller
                             CODE;
                 }
                 // // $collect_money = trans('sold_garden.collect_money');
-                
+
                 return $html;
 
             })
@@ -72,7 +73,7 @@ class WoodlotDepositeController extends Controller
                 $total_money_recoverd = 0;
                 foreach ($payments as $payment) {
                     $collection_amount = $payment->collection_amount;
-                    $total_money_recoverd = $total_money_recoverd + $collection_amount; 
+                    $total_money_recoverd = $total_money_recoverd + $collection_amount;
                 }
                 // // $collect_money = trans('sold_garden.collect_money');
                 $html = <<<CODE
@@ -114,14 +115,14 @@ class WoodlotDepositeController extends Controller
 
 
 
-    public function garden_deposite_list(Request $request){
+    public function woodlot_deposite_list(Request $request){
         if (request()->ajax()) {
 
             $user = Auth::user();
-            $gardens = GardenBikrito::join('gardens','gardens.id','garden_bikritos.garden_id')
-            ->select('gardens.*','garden_bikritos.*')
-            ->where('gardens.range_id',$user->range_id)
-            ->latest('garden_bikritos.created_at')
+            $gardens = WoodLot::join('wood_lot_deposit_payments','wood_lot_deposit_payments.wood_lot_id','=','wood_lots.id')
+            ->select('wood_lots.*')
+            ->latest()
+            ->groupBy('wood_lots.id')
             ->get();
             return DataTables::of($gardens)
             ->addIndexColumn()
@@ -133,6 +134,33 @@ class WoodlotDepositeController extends Controller
                     return "No date available";
                 }
 
+
+            })
+            ->addColumn('money_collection_slip_no_date',function($row){
+                $wood_lot_deposite_payments = WoodLotDepositPayment::where(['wood_lot_id' => $row->id])->latest()->get();
+                $money_slip_date_html = "";
+                foreach ($wood_lot_deposite_payments as $wldp) {
+                    # code...
+                    $money_slip_date_html .= <<<CODE
+                                                $wldp->money_deposit_slip_no, <br>
+                                            CODE;
+                }
+
+                return $money_slip_date_html;
+
+            })
+            ->addColumn('total_deposit_amount',function($row){
+                $wood_lot_deposite_payments = WoodLotDepositPayment::where(['wood_lot_id' => $row->id])->latest()->get();
+                $deposite_amount = 0;
+                foreach ($wood_lot_deposite_payments as $wldp) {
+                    # code...
+                    $deposite_amount = $deposite_amount + $wldp->deposit_amount;
+
+                }
+                $money_slip_date_html = <<<CODE
+                                                $deposite_amount
+                                            CODE;
+                return $money_slip_date_html;
 
             })
             ->addColumn('actions',function($row){
@@ -152,12 +180,12 @@ class WoodlotDepositeController extends Controller
                 return $action;
 
             })
-            ->rawColumns(['created_at_read','actions','garden_location','yearPairs'])
+            ->rawColumns(['created_at_read','actions','money_collection_slip_no_date','total_deposit_amount'])
             ->make(true);
         }
         // dd($bits);
         $title = 'Manage Wood Lot';
-        return view('garden_deposite.garden_deposite_list', compact('title'));
+        return view('woodlot_deposite.woodlot_deposite_list', compact('title'));
     }
 
 
@@ -169,15 +197,45 @@ class WoodlotDepositeController extends Controller
         ->pluck('name', 'id');
 
         $parties = Party::latest()->pluck('name', 'id');
-        
+
         return view('woodlot_deposite.create', compact('lot_id','parties','unions'));
     }
 
-    public function garden_deposite_store(GardenBikritoRequest $request){
-        // $request->merge(['user_id' => Auth::user()->id]);
-        $garden_bikrito = GardenBikrito::create($request->except('_token'));
-        flash('Garden Sold Successfully!')->success();
-        return redirect()->route('garden.deposite');
+    public function woodlot_deposite_store(Request $request){
+
+        $parties = $request->parties;
+
+        if (!empty($parties)) {
+            $partiesArray = json_decode($parties, true);
+            $keysMap = [
+                "পক্ষগণ" => "party_id",
+                "প্রতিষ্ঠান/সংস্থার নাম" => "institute_id",
+                "টাকা জমার স্লিপ/রশিদ নং ও তারিখ" => "money_deposit_slip_no",
+                "টাকা জমার পরিমাণ" => "deposit_amount",
+                "lot_id" => "wood_lot_id",
+                "মন্তব্য (যদি থাকে)" => "comment"
+            ];
+            $replaceKeys = function ($subArray) use ($keysMap) {
+                $updatedKeys = array_map(function ($key) use ($keysMap) {
+                    return $keysMap[$key] ?? $key;
+                }, array_keys($subArray));
+
+                return array_combine($updatedKeys, array_values($subArray));
+            };
+
+            $updatedArray = array_map($replaceKeys, $partiesArray);
+
+
+            // dd($updatedArray);
+            WoodLotDepositPayment::insert($updatedArray);
+
+            flash('Lot Deposit Peyment successfully completed!')->success();
+            return redirect()->back();
+        }
+
+
+        flash('Parties are Empty!!')->info();
+        return redirect()->back();
     }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-    <a href="{{ route('garden.index') }}" class="btn btn-sm btn-neutral">{{ __('garden.all_gardens') }}</a>
+    <a href="{{ route('woodlot.deposite.list') }}" class="btn btn-sm btn-neutral">Woodlot deposit List</a>
 @endpush
 @section('content')
     <style>
@@ -53,7 +53,8 @@
                                                 <tr>
                                                     <th>পক্ষগণ</th>
                                                     <th>প্রতিষ্ঠান/সংস্থার নাম</th>
-                                                    <th>প্রাপ্য হার</th>
+                                                    <th>টাকা জমার স্লিপ/রশিদ নং ও তারিখ</th>
+                                                    <th>টাকা জমার পরিমাণ</th>
                                                     <th>মন্তব্য (যদি থাকে)</th>
                                                     <th>পদক্ষেপ</th>
                                                 </tr>
@@ -64,13 +65,6 @@
                                             </tbody>
 
                                             <tfoot>
-                                                <tr>
-                                                    <td></td>
-                                                    <td style="text-align: right"><strong>মোট প্রাপ্য হারঃ</strong></td>
-                                                    <td style="text-align: left; font-weight: bold" id="totalPercent">0</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
                                                 <tr>
                                                     <td>
                                                         <select class="form-control form-control-sm" id="PartiesDropdown">
@@ -84,21 +78,12 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <select class="form-control form-control-sm"
-                                                                    id="percentageDropdown">
-                                                                    <option value="20">২০%</option>
+                                                        <input type="text" id="money_deposit_slip_no" class="form-control form-control-sm money_deposit_slip_no"/>
 
-                                                                </select>
-                                                                <div class="input-group-append">
-                                                                    <input id="otherPercent" type="number"
-                                                                        class="form-control form-control-sm"
-                                                                        placeholder="অন্যান্য">
-                                                                    <div class="dropdown-menu"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" id="deposit_amount" class="form-control form-control-sm deposit_amount"/>
+
                                                     </td>
                                                     <td>
                                                         <textarea id="comment" class="form-control form-control-sm comment" rows="1"></textarea>
@@ -117,6 +102,7 @@
 
                             <div class="col-md-12">
                                 <input id="parties-input" type="hidden" name="parties" value="">
+                                <input id="lot_id" type="hidden" name="lot_id" value="{{$lot_id}}">
                                 {{ Form::submit(__('garden.submit'), ['class' => 'mt-5 btn btn-primary btn-sm']) }}
                             </div>
                         </div>
@@ -178,12 +164,12 @@
             var generatedUrl = routeUrl.replace('0', partyValue);
             generatedUrl = generatedUrl.replace('-1', "{{$lot_id}}");
 
-           
+
 
             $.get(generatedUrl, function(response) {
                 // Success callback
                 console.log("Response:", response);
-                
+
                 institueDropDown.append($('<option></option>').attr('value', '').text('নির্বাচন করুন...'));
                 $.each(response.data, function(key, value) {
                     institueDropDown.append($('<option></option>').attr('value', key).text(value));
@@ -290,8 +276,13 @@
 
 
         $('#saveButton').on('click', function() {
+        debugger;
             let partyVal = $('#PartiesDropdown').val();
+            let partyValHtml = $('#PartiesDropdown :selected').html();
+            let money_deposit_slip_no = $('#money_deposit_slip_no').val();
+            let deposit_amount = $('#deposit_amount').val();
             let instituteVal = $('#institute-dropdown').val();
+            let instituteValHtml = $('#institute-dropdown :selected').html();
             let percentageVal = $.trim($('#otherPercent').val()).length !== 0 ? $('#otherPercent').val() : $(
                 '#percentageDropdown').val();
             let commentVal = $('#comment').val();
@@ -307,29 +298,40 @@
                 notify('error', 'পক্ষগণ যুক্তকরন', 'প্রতিষ্ঠান/সংস্থার নামের স্থানটি ফাঁকা রয়েছে');
                 return;
             }
-            if ($.trim(percentageVal).length === 0) {
-                notify('error', 'পক্ষগণ যুক্তকরন', 'প্রাপ্য হারের স্থানটি ফাঁকা রয়েছে');
+
+            if ($.trim(money_deposit_slip_no).length === 0) {
+                notify('error', 'টাকা জমার স্লিপ/রশিদ নং ও তারিখ', 'টাকা জমার স্লিপ/রশিদ নং ও তারিখ স্থানটি ফাঁকা রয়েছে ');
                 return;
             }
 
-            if(newPercent > 100){
-                notify('error', 'পক্ষগণ যুক্তকরন', 'মোট প্রাপ্য হার ১০০%  এর বেশি হওয়া যাবে না');
+            if ($.trim(deposit_amount).length === 0) {
+                notify('error', 'টাকা জমার পরিমাণ', 'টাকা জমার পরিমাণ');
                 return;
             }
+            // if ($.trim(percentageVal).length === 0) {
+            //     notify('error', 'পক্ষগণ যুক্তকরন', 'প্রাপ্য হারের স্থানটি ফাঁকা রয়েছে');
+            //     return;
+            // }
+
+            // if(newPercent > 100){
+            //     notify('error', 'পক্ষগণ যুক্তকরন', 'মোট প্রাপ্য হার ১০০%  এর বেশি হওয়া যাবে না');
+            //     return;
+            // }
 
 
             let rowHtml = `<tr>
-                <td>${partyVal}</td>
-                <td>${instituteVal}</td>
-                <td>${percentageVal}</td>
+                <td>${partyValHtml}</td>
+                <td>${instituteValHtml} </td>
+                <td>${money_deposit_slip_no}</td>
+                <td>${deposit_amount}</td>
                 <td>${commentVal}</td>
                 <td><button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button></td>
                 </tr>`;
 
-            totalPercentageElement.text(totalPercentage + Number(percentageVal));
+            // totalPercentageElement.text(totalPercentage + Number(percentageVal));
 
             $('#parties-table tbody').append(rowHtml);
-            tableToData();
+            tableToData({partyVal,instituteVal,money_deposit_slip_no,deposit_amount,commentVal});
 
         });
 
@@ -358,29 +360,36 @@
 
 
 
-        $('#garden-create-form').submit(function(event) {
-            let element = $('#party-table-container');
-            let totalPercentageElement = $('#totalPercent');
-            let totalPercentage = Number(totalPercentageElement.text());
-            if(totalPercentage < 100 && !element.is(":hidden")){
-                event.preventDefault(); // Prevent the default form submission
-                notify('error', 'বাগান সৃজনের তথ্য দাখিল', 'পক্ষগণের মোট প্রাপ্য হার ১০০%  হতে হবে।');
-                return;
-            }
+        // $('#garden-create-form').submit(function(event) {
+        //     let element = $('#party-table-container');
+        //     let totalPercentageElement = $('#totalPercent');
+        //     let totalPercentage = Number(totalPercentageElement.text());
+        //     if(totalPercentage < 100 && !element.is(":hidden")){
+        //         event.preventDefault(); // Prevent the default form submission
+        //         notify('error', 'বাগান সৃজনের তথ্য দাখিল', 'পক্ষগণের মোট প্রাপ্য হার ১০০%  হতে হবে।');
+        //         return;
+        //     }
 
 
 
-        });
+        // });
 
-     
-        function tableToData() {
+
+        function tableToData(data) {
             var tableData = [];
             $("#parties-table tbody tr").each(function(rowIndex, row) {
                 var rowData = {};
                 $(row).find("td:not(:last-child)").each(function(colIndex, cell) {
                     var columnName = $("#parties-table thead th").eq(colIndex).text();
-                    rowData[columnName] = $(cell).text();
+                    if(columnName == 'পক্ষগণ'){
+                        rowData[columnName] = data.partyVal;
+                    }else if(columnName == 'প্রতিষ্ঠান/সংস্থার নাম'){
+                        rowData[columnName] = data.instituteVal;
+                    }else{
+                        rowData[columnName] = $(cell).text();
+                    }
                 });
+                rowData['lot_id'] = $('#lot_id').val();
                 tableData.push(rowData);
             });
 
