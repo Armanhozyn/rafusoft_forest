@@ -31,6 +31,8 @@ return [
     'forest_type_id' => 'বাগানের ধরন',
     'creation_year' => 'বাগান সৃজনের সন',
     'rotation' => 'আবর্ত',
-    'garden_size' => 'সৃজিত বাগানের পরিমাণ'
+    'garden_size' => 'সৃজিত বাগানের পরিমাণ',
+    'lot_count' => 'লটের সংখ্যা',
+    'total_sell' => 'মোট বিক্রিত অর্থ',
 
 ];
