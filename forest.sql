@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 02, 2023 at 01:48 PM
+-- Generation Time: Dec 05, 2023 at 01:22 PM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.1
 
@@ -38,7 +38,7 @@ CREATE TABLE `activity_log` (
   `properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `activity_log`
@@ -1000,7 +1000,7 @@ INSERT INTO `party_in_gardens` (`id`, `garden_id`, `party_id`, `institute_id`, `
 (24, 13, 1, 1, 10, '', NULL, NULL, NULL),
 (25, 13, 2, 4, 10, '', NULL, NULL, NULL),
 (26, 13, 2, 3, 10, '', NULL, NULL, NULL),
-(27, 13, 3, 8, 10, '', NULL, NULL, NULL),
+(27, 13, 2, 8, 10, '', NULL, NULL, NULL),
 (29, 13, 5, 9, 50, '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -2808,17 +2808,30 @@ INSERT INTO `wood_lots` (`id`, `garden_id`, `division_group_no_year`, `range_lot
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wood_lot_deposit_payment`
+-- Table structure for table `wood_lot_deposit_payments`
 --
 
-CREATE TABLE `wood_lot_deposit_payment` (
+CREATE TABLE `wood_lot_deposit_payments` (
   `id` int NOT NULL,
   `wood_lot_id` int NOT NULL,
-  `money_deposit_slip_no` varchar(255) NOT NULL,
+  `money_deposit_slip_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `party_id` int NOT NULL,
-  `institue_id` int NOT NULL,
-  `deposit_amount` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `institute_id` int NOT NULL,
+  `deposit_amount` decimal(10,2) NOT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `wood_lot_deposit_payments`
+--
+
+INSERT INTO `wood_lot_deposit_payments` (`id`, `wood_lot_id`, `money_deposit_slip_no`, `party_id`, `institute_id`, `deposit_amount`, `comment`, `created_at`, `updated_at`) VALUES
+(1, 208, 'hello', 2, 3, 60.00, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 208, '60', 2, 4, 80.00, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 208, '80', 2, 4, 90.00, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 208, 'ththy', 2, 4, 80.00, '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3148,9 +3161,9 @@ ALTER TABLE `wood_lots`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `wood_lot_deposit_payment`
+-- Indexes for table `wood_lot_deposit_payments`
 --
-ALTER TABLE `wood_lot_deposit_payment`
+ALTER TABLE `wood_lot_deposit_payments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3173,7 +3186,7 @@ ALTER TABLE `wood_lot_payment_histories`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=310;
 
 --
 -- AUTO_INCREMENT for table `beneficiaries`
@@ -3392,10 +3405,10 @@ ALTER TABLE `wood_lots`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
--- AUTO_INCREMENT for table `wood_lot_deposit_payment`
+-- AUTO_INCREMENT for table `wood_lot_deposit_payments`
 --
-ALTER TABLE `wood_lot_deposit_payment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `wood_lot_deposit_payments`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wood_lot_payments`
