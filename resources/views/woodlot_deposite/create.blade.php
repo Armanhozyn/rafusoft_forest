@@ -320,8 +320,8 @@
 
 
             let rowHtml = `<tr>
-                <td>${partyValHtml}</td>
-                <td>${instituteValHtml} </td>
+                <td id='${partyVal}'>${partyValHtml}</td>
+                <td id='${instituteVal}'>${instituteValHtml}</td>
                 <td>${money_deposit_slip_no}</td>
                 <td>${deposit_amount}</td>
                 <td>${commentVal}</td>
@@ -382,9 +382,9 @@
                 $(row).find("td:not(:last-child)").each(function(colIndex, cell) {
                     var columnName = $("#parties-table thead th").eq(colIndex).text();
                     if(columnName == 'পক্ষগণ'){
-                        rowData[columnName] = data.partyVal;
+                        rowData[columnName] = $(cell).attr('id');;
                     }else if(columnName == 'প্রতিষ্ঠান/সংস্থার নাম'){
-                        rowData[columnName] = data.instituteVal;
+                        rowData[columnName] = $(cell).attr('id');;
                     }else{
                         rowData[columnName] = $(cell).text();
                     }

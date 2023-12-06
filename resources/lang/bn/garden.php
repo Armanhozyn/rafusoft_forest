@@ -34,5 +34,9 @@ return [
     'garden_size' => 'সৃজিত বাগানের পরিমাণ',
     'lot_count' => 'লটের সংখ্যা',
     'total_sell' => 'মোট বিক্রিত অর্থ',
+    'office_order_no' => 'অফিস আদেশ নং',
+    'benefit_female' => 'উপকারভোগী মহিলা সংখ্যা',
+    'benefit_male' => 'উপকারভোগী পুরুষ সংখ্যা',
+    'payment_date' => 'তারিখ',
 
 ];

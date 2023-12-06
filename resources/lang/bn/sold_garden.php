@@ -43,7 +43,7 @@ return [
     'woodlot_deposite' => 'জমা করুন',
     'money_collection_slip_no_date' => 'টাকা জমার স্লিপ/রশিদ নং ও তারিখ',
     'total_deposit_amount' => 'সর্বমোট জমাকৃত টাকার পরিমাণ',
-    '' => '',
+    'benefit_share' => 'লভ্যাংশ বিতরণ করুন',
     '' => '',
     '' => '',
     '' => '',

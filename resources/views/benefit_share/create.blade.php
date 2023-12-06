@@ -1,248 +1,123 @@
 @extends('layouts.app')
 @push('pg_btn')
-    <a href="{{ route('garden.index') }}" class="btn btn-sm btn-neutral">{{ __('garden.all_gardens') }}</a>
+<a href="{{ route('benefit.share') }}" class="btn btn-sm btn-neutral">Make Benefit Share</a>
 @endpush
 @section('content')
-    <style>
-        table#info-table td:nth-child(2) {
-            /* border: 1px solid red; */
-            padding-left: 10px;
-            padding-right: 10px;
-        }
+<div class="row" id="app">
+    <div class="col-md-12">
+        <div class="card mb-5">
+            <div class="card-body">
+                {!! Form::open(['route' => 'benefit.share.store', 'files' => false, 'id' => 'garden-create-form']) !!}
+                <h6 class="heading-small text-muted mb-4">{{ __('garden.garden_information') }}</h6>
 
-        .form-group {
-            margin-bottom: 0rem;
-        }
+                <div class="pl-lg-4 mb-4">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ Form::label('office_order_no', trans('garden.office_order_no'), ['class' =>
+                                'form-control-label']) }}
+                                {{ Form::text('office_order_no', null, ['class' => 'form-control form-control-sm',
+                                'id' => 'office_order_no', 'value' => old('office_order_no')]) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ Form::label('payment_date', trans('garden.payment_date'), ['class' =>
+                                'form-control-label']) }}
+                                {{ Form::date('payment_date', null, ['class' => 'form-control form-control-sm',
+                                'id' => 'collectionDate', 'value' => date('Y-m-d')]) }}
+                            </div>
+                        </div>
 
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ Form::label('benefit_female', trans('garden.benefit_female'), ['class' =>
+                                'form-control-label']) }}
+                                {{ Form::text('benefit_female', null, ['class' => 'form-control form-control-sm',
+                                'id' => 'benefit_female', 'value' => old('benefit_female')]) }}
+                            </div>
+                        </div>
 
-        #cut-year-group {
-            display: none;
-        }
-
-        #user-info ul li {
-            font-size: 14px;
-        }
-
-        #user-info h1 {
-            font-size: 16pt;
-        }
-    </style>
-    <div class="row" id="app">
-        <div class="col-md-12">
-            <div class="card mb-5">
-                <div class="card-body">
-                    {!! Form::open(['route' => 'garden.store', 'files' => true, 'id' => 'garden-create-form']) !!}
-                    <h6 class="heading-small text-muted mb-4">{{ __('garden.garden_information') }}</h6>
-
-                    <div class="pl-lg-4 mb-4">
-                        <div class="row">
-                            <div class="col-lg-12">
-
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                {{ Form::label('benefit_male', trans('garden.benefit_male'), ['class' =>
+                                'form-control-label']) }}
+                                {{ Form::text('benefit_male', null, ['class' => 'form-control form-control-sm',
+                                'id' => 'benefit_male', 'value' => old('benefit_male')]) }}
                             </div>
                         </div>
                     </div>
-
-                    <div class="pl-lg-4">
-
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="bit_radio" name="bit_sfc" value="bit"
-                                        class="custom-control-input" >
-                                    <label class="custom-control-label" for="bit_radio">{{__('garden.select_bit')}}</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="sfc_radio" name="bit_sfc" value="sfc"
-                                        class="custom-control-input">
-                                    <label class="custom-control-label" for="sfc_radio">{{__('garden.select_sfpc')}}</label>
-                                </div>
-                                <div class="form-group" id="bit">
-                                    {{ Form::label('bit_id', __('garden.select_bit'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('bit_id', $bitList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select BIT...', 'id' => 'bit-list']) }}
-                                </div>
-                                <div class="form-group" id="sfc">
-                                    {{ Form::label('sfpc_id', __('garden.select_sfpc'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('sfpc_id', $sfpcList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select SFPC...', 'id' => 'sfpc-list']) }}
-                                </div>
-                                {{-- <div class="form-group">
-                                    <label for="garden_id" class="form-control-label">বাগান নির্বাচন করুন</label>
-                                    <select id="garden_id" name="garden_information_id" class="form-control form-control-sm">
-                                        <option selected="selected" value="">বাগান নির্বাচন করুন...</option>
-
-                                        @foreach ($gardens as $garden)
-
-                                            <option value="{{ $garden->id }}">{{ $garden->id }} -
-                                                {{ $garden->district->name }} - {{ $garden->thana->name }} -
-                                                {{ !empty($garden->union) ? implode(', ', $garden->union->pluck('union.name')->toArray()) : '' }}
-                                            </option>
-                                        @endforeach
-
-
-                                    </select>
-                                </div> --}}
-
-                                <div class="form-group">
-                                    {{ Form::label('project_id', __('garden.select_project'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('project_id', $projects, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select project...']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('forest_type_id', __('lang.forest_type'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('forest_type_id', $forestTypes, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select Forest Type...']) }}
-                                </div>
-
-
-
-
-                                <div class="form-group">
-                                    {{ Form::label('creation_year', __('garden.creation_year'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('creation_year', $yearPairs, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select garden type...']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('rotation', __('garden.select_rotation'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('rotation', $rotations, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select rotation...']) }}
-                                </div>
-                                <div id="cut-year-group" class="form-group">
-                                    {{ Form::label('cut_year', __('garden.year_of_cut'), ['class' => 'form-control-label']) }}
-                                    {{ Form::select('cut_year', $yearPairs, null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div id="garden-size-wrap" class="form-group">
-                                    {{ Form::label('garden_size', __('garden.garden_size'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('garden_size', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('expiration_year', __('garden.expiration_year'), ['class' => 'form-control-label']) }}
-                                    {{ Form::text('expiration_year', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('nursery_expense', 'নার্সারি উত্তোলন ব্যয়', ['class' => 'form-control-label']) }}
-                                    {{ Form::number('nursery_expense', null, ['id' => 'nursery_expense', 'class' => 'form-control form-control-sm']) }}
-                                </div>
-
-
-                                <div class="form-group">
-                                    {{ Form::label('creation_cost', 'বাগান সৃজন ব্যয়', ['class' => 'form-control-label']) }}
-                                    {{ Form::number('creation_cost', null, ['id' => 'creation_cost', 'class' => 'form-control form-control-sm']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('beneficiary_male', __('garden.beneficiary_male'), ['class' => 'form-control-label']) }}
-                                    {{ Form::number('beneficiary_male', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::label('beneficiary_female', __('garden.beneficiary_female'), ['class' => 'form-control-label']) }}
-                                    {{ Form::number('beneficiary_female', null, ['class' => 'form-control form-control-sm']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('contract_attachment', __('garden.deed_of_agreement'), ['class' => 'form-control-label']) }}
-                                    {{ Form::file('contract_attachment', ['class' => 'form-control form-control-sm']) }}
-                                </div>
-
-
-
-
-                            </div>
-
-                            <div class="col-lg-6">
-                                <h1>বাগানের তথ্যঃ</h1>
-                                <div id="user-info"></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="pl-lg-4 mt-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <fieldset id="party-table-container">
-                                    <legend>পক্ষগণের বিস্তারিত</legend>
-
-                                    <div class="table-responsive">
-                                        <table class="table" id="parties-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>পক্ষগণ</th>
-                                                    <th>প্রতিষ্ঠান/সংস্থার নাম</th>
-                                                    <th>প্রাপ্য হার</th>
-                                                    <th>মন্তব্য (যদি থাকে)</th>
-                                                    <th>পদক্ষেপ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-
-                                            </tbody>
-
-                                            <tfoot>
-                                                <tr>
-                                                    <td></td>
-                                                    <td style="text-align: right"><strong>মোট প্রাপ্য হারঃ</strong></td>
-                                                    <td style="text-align: left; font-weight: bold" id="totalPercent">0</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <select class="form-control form-control-sm" id="PartiesDropdown">
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select class="form-control form-control-sm"
-                                                            id="institute-dropdown">
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <select class="form-control form-control-sm"
-                                                                    id="percentageDropdown">
-                                                                    <option value="20">২০%</option>
-
-                                                                </select>
-                                                                <div class="input-group-append">
-                                                                    <input id="otherPercent" type="number"
-                                                                        class="form-control form-control-sm"
-                                                                        placeholder="অন্যান্য">
-                                                                    <div class="dropdown-menu"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <textarea id="comment" class="form-control form-control-sm comment" rows="1"></textarea>
-                                                    </td>
-                                                    <td><button id="saveButton" type="button"
-                                                            class="btn btn-success btn-sm">Add Row</button></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pl-lg-4">
-                        <div class="row">
-
-                            <div class="col-md-12">
-                                <input id="parties-input" type="hidden" name="parties" value="">
-                                {{ Form::submit(__('garden.submit'), ['class' => 'mt-5 btn btn-primary btn-sm']) }}
-                            </div>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
                 </div>
+                <div class="pl-lg-4 mt-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <fieldset id="party-table-container">
+                                <legend>পক্ষগণের বিস্তারিত</legend>
+
+                                <div class="table-responsive">
+                                    <table class="table" id="parties-table">
+                                        <thead>
+                                            <tr>
+                                                <th>পক্ষগণ</th>
+                                                <th>প্রতিষ্ঠান/সংস্থার নাম</th>
+                                                <th>প্রাপ্ত লভ্যাংশ</th>
+                                                <th>মন্তব্য (যদি থাকে)</th>
+                                                <th>পদক্ষেপ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                        </tbody>
+
+                                        <tfoot>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-control form-control-sm" id="PartiesDropdown">
+
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control form-control-sm"
+                                                        id="institute-dropdown">
+
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="number" id="amount" class="form-control form-control-sm amount"/>
+
+                                                </td>
+                                                <td>
+                                                    <textarea id="comment" class="form-control form-control-sm comment" rows="1"></textarea>
+                                                </td>
+                                                <td><button id="saveButton" type="button"
+                                                        class="btn btn-success btn-sm">Add Row</button></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="pl-lg-4">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <input id="parties-input" type="hidden" name="parties" value="">
+                            <input id="garden_id" type="hidden" name="garden_id" value="{{$garden_id}}">
+                            {{ Form::submit(__('garden.submit'), ['class' => 'mt-5 btn btn-primary btn-sm']) }}
+                        </div>
+                    </div>
+                </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
-    </div>
+</div>
+</div>
 @endsection
 @push('scripts')
+<script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
     {{-- <script src="/js/app.js"></script> --}}
     <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
 
@@ -523,6 +398,7 @@
 
         $('#saveButton').on('click', function() {
             let partyVal = $('#PartiesDropdown').val();
+            let amount = $('#amount').val();
             let instituteVal = $('#institute-dropdown').val();
             let instituteValHtml = $('#institute-dropdown :selected').html();
             let partyValHtml = $('#PartiesDropdown :selected').html();
@@ -541,13 +417,8 @@
                 notify('error', 'পক্ষগণ যুক্তকরন', 'প্রতিষ্ঠান/সংস্থার নামের স্থানটি ফাঁকা রয়েছে');
                 return;
             }
-            if ($.trim(percentageVal).length === 0) {
-                notify('error', 'পক্ষগণ যুক্তকরন', 'প্রাপ্য হারের স্থানটি ফাঁকা রয়েছে');
-                return;
-            }
-
-            if(newPercent > 100){
-                notify('error', 'পক্ষগণ যুক্তকরন', 'মোট প্রাপ্য হার ১০০%  এর বেশি হওয়া যাবে না');
+            if ($.trim(amount).length === 0) {
+                notify('error', 'পক্ষগণ যুক্তকরন', 'প্রাপ্ত লভ্যাংশ স্থানটি ফাঁকা রয়েছে');
                 return;
             }
 
@@ -555,7 +426,7 @@
             let rowHtml = `<tr>
                 <td id='${partyVal}'>${partyValHtml}</td>
                 <td id='${instituteVal}'>${instituteValHtml}</td>
-                <td>${percentageVal}</td>
+                <td>${amount}</td>
                 <td>${commentVal}</td>
                 <td><button type="button" class="btn btn-sm btn-danger remove-btn">Remove</button></td>
                 </tr>`;
@@ -596,11 +467,11 @@
             let element = $('#party-table-container');
             let totalPercentageElement = $('#totalPercent');
             let totalPercentage = Number(totalPercentageElement.text());
-            if(totalPercentage < 100 && !element.is(":hidden")){
-                event.preventDefault(); // Prevent the default form submission
-                notify('error', 'বাগান সৃজনের তথ্য দাখিল', 'পক্ষগণের মোট প্রাপ্য হার ১০০%  হতে হবে।');
-                return;
-            }
+            // if(totalPercentage < 100 && !element.is(":hidden")){
+            //     event.preventDefault(); // Prevent the default form submission
+            //     notify('error', 'বাগান সৃজনের তথ্য দাখিল', 'পক্ষগণের মোট প্রাপ্য হার ১০০%  হতে হবে।');
+            //     return;
+            // }
 
 
 
@@ -633,8 +504,9 @@
             return financialYear;
         }
 
-        function tableToData() {
+        function tableToData(data) {
             var tableData = [];
+            debugger;
             $("#parties-table tbody tr").each(function(rowIndex, row) {
                 var rowData = {};
                 $(row).find("td:not(:last-child)").each(function(colIndex, cell) {

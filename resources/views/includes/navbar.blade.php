@@ -273,7 +273,7 @@
 
                                 @can('create-category')
                                 <li class="nav-item">
-                                    <a href="{{ route('garden.profit_share.create') }}" class="nav-link"><span
+                                    <a href="{{ route('benefit.share') }}" class="nav-link"><span
                                             class="sidenav-mini-icon">D </span><span class="sidenav-normal">{{
                                             __('navbar.profit_share') }}
                                         </span></a>

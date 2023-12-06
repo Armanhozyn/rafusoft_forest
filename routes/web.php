@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     //garden_bikrito
     Route::get('/benefit-share', 'BenefitShareController@benefit_share')->name('benefit.share');
     Route::get('/benefit-share-list', 'BenefitShareController@benefit_share_list')->name('benefit.share.list');
-    Route::get('/benefit-share-create/{garden_id}', 'BenefitShareController@benefit_share_create')->name('benefit.share.creat');
+    Route::get('/benefit-share-create/{garden_id}', 'BenefitShareController@benefit_share_create')->name('benefit.share.create');
     Route::post('/benefit-share-store', 'BenefitShareController@benefit_share_store')->name('benefit.share.store');
 
 
