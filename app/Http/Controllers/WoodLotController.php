@@ -128,7 +128,7 @@ class WoodLotController extends Controller
         ->select('gardens.*')
         ->latest()
         ->get();
-        $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
+        $woodlots = WoodLot::join('gardens','wood_lots.garden_id','=','gardens.id')
         ->join('ranges','ranges.id','gardens.range_id')
         ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
         ->join('districts', 'districts.id', '=', 'ranges.district_id')
