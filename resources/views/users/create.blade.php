@@ -141,7 +141,7 @@
         }
         $("#role").change(function(){
             debugger;
-            if ($(this).val() == 'sfpc' || $(this).val() == "বীট") {
+            if ($(this).val() == 'sfpc' || $(this).val() == "বীট" || $(this).val() == "range" )  {
                 $("#range_wrap").show('slow');
                 return;
             }

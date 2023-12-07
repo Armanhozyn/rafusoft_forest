@@ -93,6 +93,12 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
     Route::get('/benefit-share-create/{garden_id}', 'BenefitShareController@benefit_share_create')->name('benefit.share.create');
     Route::post('/benefit-share-store', 'BenefitShareController@benefit_share_store')->name('benefit.share.store');
 
+     //tff
+     Route::get('/tff', 'TffController@tff')->name('tff');
+     Route::get('/tff-list', 'TffController@tff_list')->name('tff.list');
+     Route::get('/tff-create/{garden_id}', 'TffController@tff_create')->name('tff.create');
+     Route::post('/tff-store', 'TffController@tff_store')->name('tff.store');
+
 
     Route::get('media', function () {
         return view('media.index');

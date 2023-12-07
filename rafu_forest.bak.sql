@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2023 at 04:12 PM
+-- Generation Time: Dec 06, 2023 at 11:11 PM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.29
 
@@ -38,323 +38,31 @@ CREATE TABLE `activity_log` (
   `properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `activity_log`
 --
 
 INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_id`, `subject_type`, `causer_id`, `causer_type`, `properties`, `created_at`, `updated_at`) VALUES
-(1, 'user', 'created', 1, 'App\\User', NULL, NULL, '{\"attributes\": {\"name\": \"Admin\", \"email\": \"admin@email.com\", \"status\": 1, \"password\": \"$2y$10$ZcnE7sHTcL2k/AYzld5sg.ubdOf6Bsf5lRImCxTQ9cAq5uL/Ut7AO\", \"phone_number\": null, \"profile_photo\": null}}', '2023-04-08 06:51:18', '2023-04-08 06:51:18'),
-(2, 'user', 'created', 2, 'App\\User', NULL, NULL, '{\"attributes\": {\"name\": \"User\", \"email\": \"user@email.com\", \"status\": 1, \"password\": \"$2y$10$V1.QihIb9O8tPHGrrdIPtuEa3EDvuXW9lORPkOXPBTmiZVpcMgGle\", \"phone_number\": null, \"profile_photo\": null}}', '2023-04-08 06:51:18', '2023-04-08 06:51:18'),
-(3, 'category', 'created', 1, 'App\\Category', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"category_name\": \"et\"}}', '2023-04-08 06:51:18', '2023-04-08 06:51:18'),
-(4, 'category', 'created', 2, 'App\\Category', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"category_name\": \"aut\"}}', '2023-04-08 06:51:18', '2023-04-08 06:51:18'),
-(5, 'category', 'created', 3, 'App\\Category', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"category_name\": \"nulla\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(6, 'category', 'created', 4, 'App\\Category', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"category_name\": \"quo\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(7, 'category', 'created', 5, 'App\\Category', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"category_name\": \"odit\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(8, 'post', 'created', 1, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Quia soluta quam perferendis ab cum. Enim quae quo ullam harum exercitationem aut delectus. Consequatur necessitatibus voluptatem exercitationem et. Ut aspernatur voluptatem eum in voluptatem. Blanditiis et quia corporis ut ab.\", \"post_title\": \"Quaerat non et et consequatur tempora.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?52981\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(9, 'post', 'created', 2, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Rem qui inventore blanditiis aut quasi. Rerum nihil possimus est quas nostrum.\", \"post_title\": \"Rerum vel porro ea dolorem.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?75636\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(10, 'post', 'created', 3, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Voluptas reiciendis ratione velit nostrum. Deleniti laboriosam sint provident nam consequatur sint aliquid. Quia sed rem labore odit dolor beatae sunt. Dolorem consequatur dignissimos nobis praesentium perspiciatis.\", \"post_title\": \"Quia est cupiditate beatae autem et qui nobis.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?52291\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(11, 'post', 'created', 4, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Fuga mollitia quaerat deleniti eveniet quia. Quis amet in enim enim omnis. Molestias vel ex ut quo soluta quam. Consequatur quia dignissimos ut ipsa laudantium fugiat.\", \"post_title\": \"Labore et architecto sequi culpa sed non.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?97980\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(12, 'post', 'created', 5, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Et officiis eos quia aut maiores a magni in. Odit quos quisquam beatae sint quisquam.\", \"post_title\": \"Labore unde amet et beatae delectus.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?29798\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(13, 'post', 'created', 6, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Dolore ut aut numquam dolorem. Consequatur sint reprehenderit nisi est est rerum ut. Eum voluptas iste et repellendus repudiandae in. Tempore ut libero qui expedita architecto nisi voluptate est.\", \"post_title\": \"Consequuntur vel et consectetur error neque ut esse quo.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?40774\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(14, 'post', 'created', 7, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Occaecati enim est veritatis repellat et nostrum voluptas. Omnis accusantium culpa velit hic quibusdam repudiandae velit. Voluptatem deleniti fugit vel maxime. Earum nihil est voluptatem voluptates doloremque commodi.\", \"post_title\": \"Nihil iure voluptates totam qui.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?85997\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(15, 'post', 'created', 8, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Ut dicta officia tempore necessitatibus. Totam quia suscipit provident quibusdam corporis earum. Odio nulla ducimus eos recusandae odio. Qui est ipsam voluptatem temporibus nihil.\", \"post_title\": \"Veniam laborum repudiandae quia fugiat fugiat.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?30549\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(16, 'post', 'created', 9, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Et eos vero accusantium sit voluptatem. Et ducimus pariatur est excepturi quam. Voluptatem provident quis magni explicabo voluptatem cum. Sapiente error et ea dolorem ex nesciunt.\", \"post_title\": \"Ad voluptatem facere tempore beatae debitis quae.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?23103\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(17, 'post', 'created', 10, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Reprehenderit consequatur ipsam vel nisi quisquam esse recusandae. Voluptatem enim quae esse cupiditate suscipit rerum dolore. Voluptates occaecati sed id vitae necessitatibus.\", \"post_title\": \"Voluptas consequatur numquam optio eum ut.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?12168\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(18, 'post', 'created', 11, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Vel quae suscipit enim aut sint dolorem. Repellat quia minus non debitis ut esse est tenetur. Temporibus ut libero eos architecto sunt. Modi numquam totam et et.\", \"post_title\": \"Quisquam vitae aperiam et in.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?55089\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(19, 'post', 'created', 12, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Rerum inventore non ea quidem nisi voluptate nihil. Voluptatum dolorum voluptatem nam corrupti aut.\", \"post_title\": \"Distinctio minima vel iusto qui inventore qui.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?47872\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(20, 'post', 'created', 13, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Natus dolor assumenda ut. Culpa quia pariatur molestias ut id non unde. Quidem unde aut repellat. Aut facere alias deserunt quasi quasi voluptate. Id perferendis quam velit eos sint.\", \"post_title\": \"Voluptas saepe ut iste quisquam.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?70273\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(21, 'post', 'created', 14, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Adipisci qui hic dolor eius. Amet facilis nihil porro possimus.\", \"post_title\": \"Velit et libero ducimus vel.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?93494\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(22, 'post', 'created', 15, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Repellat doloremque enim quas amet qui qui illum. Sit modi nobis rerum doloribus architecto. Occaecati voluptatem facere explicabo iure enim et.\", \"post_title\": \"Aut eum distinctio quod dignissimos.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?88777\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(23, 'post', 'created', 16, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Unde atque et in facilis consequatur illo. Iste culpa voluptas dolorem.\", \"post_title\": \"Reiciendis dignissimos nemo et sint et non sit.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?64507\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(24, 'post', 'created', 17, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Unde qui voluptatem voluptatem est nam explicabo dolorem doloribus. Minima nulla cum aut beatae. Voluptas rem optio voluptatibus ex ut aspernatur aut.\", \"post_title\": \"Rem id in quod aspernatur sit.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?32302\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(25, 'post', 'created', 18, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Ipsa perferendis voluptatem officia vero. Qui atque itaque nobis et voluptas. Minus minus quos suscipit. Id necessitatibus sunt quis est. Hic explicabo nisi explicabo aut exercitationem nobis.\", \"post_title\": \"Dolor sint magni est enim consequatur tempora.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?86334\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(26, 'post', 'created', 19, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Nihil esse similique et optio. Animi quis natus distinctio aperiam consequatur. Sunt necessitatibus voluptatibus labore voluptatem. Earum vero et iste quidem.\", \"post_title\": \"Enim consequuntur ut non magni sed eaque tenetur.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?42453\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(27, 'post', 'created', 20, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Et sunt doloremque aliquam ratione atque atque. Tempore iure fuga ea quod dolore rerum. Eos et tenetur dolores. Modi totam fuga repellendus optio aut.\", \"post_title\": \"Eos eveniet perspiciatis voluptas illo qui dignissimos et sequi.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?16308\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(28, 'post', 'created', 21, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Aliquid alias sunt rerum. Veritatis quia consequuntur inventore quis excepturi ad eaque. Ut mollitia assumenda neque voluptas autem. Tempore nobis necessitatibus deserunt quas itaque eligendi.\", \"post_title\": \"Voluptas animi illum et distinctio.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?68856\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(29, 'post', 'created', 22, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Est delectus atque animi aut velit. In nostrum vitae illo rerum a eligendi et. Saepe architecto fugit et.\", \"post_title\": \"Pariatur provident in et quidem.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?38001\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(30, 'post', 'created', 23, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Id ut voluptatibus ut eligendi voluptatem repellendus illo. Est sit doloremque voluptas illo magni beatae. Corporis qui voluptates quam nobis accusantium.\", \"post_title\": \"Consequatur distinctio necessitatibus est culpa illo eaque.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?50052\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(31, 'post', 'created', 24, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Eius et nulla laborum ex voluptates unde natus delectus. Ut saepe explicabo dolore nam magni perferendis voluptatem asperiores. Facilis velit sed dicta enim amet.\", \"post_title\": \"Corporis est nisi error eum sit qui nulla.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?50830\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(32, 'post', 'created', 25, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Eveniet a molestiae asperiores optio id. Sapiente et harum cumque aut et. Dolore quasi beatae sed fugiat. Commodi quae similique quis neque aut dolores odio.\", \"post_title\": \"Ut ut et rerum eligendi nostrum possimus et.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?30520\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(33, 'post', 'created', 26, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Voluptatem aut odit inventore eligendi voluptas autem quos. Veniam porro voluptatem impedit unde. Eius consequatur expedita doloremque qui maiores qui.\", \"post_title\": \"Aut voluptatem nemo laudantium corporis et aliquid similique.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?39567\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(34, 'post', 'created', 27, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Iste ut ut vel sunt. Dolor ut excepturi nihil architecto enim ut libero. Consequatur ut dolores quia in non architecto fugiat alias. Ad earum est aut dolores molestiae.\", \"post_title\": \"Rerum architecto similique porro tenetur.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?68341\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(35, 'post', 'created', 28, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Et laborum ut ut nihil quisquam placeat expedita quia. Omnis rerum quod sit inventore veniam. Quaerat atque earum veritatis voluptatem. Ut sit perspiciatis excepturi non tenetur magni impedit.\", \"post_title\": \"Illo dolores repellendus hic numquam ipsum.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?73270\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(36, 'post', 'created', 29, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Nesciunt qui officia ea voluptatem sed. Eos id dolor incidunt est qui. Quas explicabo dolor voluptas molestiae voluptates. Inventore provident tenetur error numquam quasi est nobis.\", \"post_title\": \"Culpa facilis consequatur doloribus possimus ipsa ut impedit.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?34776\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(37, 'post', 'created', 30, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Nemo ut et quo nobis. Iure delectus aut molestiae quas saepe. Est tempore sed eos ut.\", \"post_title\": \"Sint inventore natus dolor nulla.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?17884\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(38, 'post', 'created', 31, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Aut laborum libero voluptate qui quis. Neque recusandae voluptatem molestiae eum et consequatur. Voluptatem vel praesentium natus accusantium cumque aut rerum. Placeat suscipit ad pariatur et occaecati non laudantium quae.\", \"post_title\": \"Aut blanditiis numquam perspiciatis neque nulla dolor labore.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?14298\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(39, 'post', 'created', 32, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Ratione eum quae odio excepturi vero eum cupiditate. Ut ab modi earum maiores. Molestias quidem minima accusantium porro eos. In exercitationem beatae quam sunt harum.\", \"post_title\": \"Cumque ex possimus nesciunt sunt iste.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?38559\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(40, 'post', 'created', 33, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Distinctio reprehenderit cupiditate cupiditate perspiciatis. Culpa ut qui vel rerum qui. Perferendis at aut molestias doloribus rem iste non quibusdam.\", \"post_title\": \"In amet voluptatem ex nam qui.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?68724\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(41, 'post', 'created', 34, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Ab hic facere et. In eos corporis qui nihil. Recusandae qui fuga occaecati exercitationem quidem repellendus sunt. Recusandae eveniet et tenetur cum pariatur. Et est unde aperiam ducimus.\", \"post_title\": \"Ut voluptatem qui quis eius odit et.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?19872\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(42, 'post', 'created', 35, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Soluta nesciunt unde non aut qui suscipit. Ab ex error et aliquid voluptas. Consequuntur aspernatur repellendus quasi architecto quasi magnam qui quos.\", \"post_title\": \"Eligendi vero voluptatem rerum odio.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?64586\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(43, 'post', 'created', 36, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Corporis iusto inventore repudiandae fuga voluptatibus. Atque dolor et facere doloribus qui. Tempora aut quibusdam consequatur rem libero consequatur. Est veritatis est numquam amet quibusdam voluptas.\", \"post_title\": \"Quo rem sed soluta eum temporibus.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?53387\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(44, 'post', 'created', 37, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Corporis delectus dolor eius in. Qui labore qui dignissimos praesentium velit veritatis. Ducimus molestias atque eum voluptatem. Quaerat amet explicabo enim distinctio quisquam cumque.\", \"post_title\": \"Harum iste aperiam illum labore earum ab.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?71546\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(45, 'post', 'created', 38, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Quisquam incidunt maiores est mollitia. Aut omnis reiciendis ut consequatur. Id non veniam voluptate qui rerum hic quia.\", \"post_title\": \"Quo fugit pariatur doloribus modi optio sit.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?33771\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(46, 'post', 'created', 39, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Facilis occaecati nihil sed aspernatur vel iusto. Dolorem ut hic possimus velit consectetur nam. Recusandae omnis ipsa eum ullam dolorem. Laborum consequuntur non accusamus libero dolorum.\", \"post_title\": \"Cum doloribus corporis nihil et eos deleniti.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?88531\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(47, 'post', 'created', 40, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Voluptatem est praesentium qui earum nostrum. Nam omnis qui sunt quia beatae nostrum possimus. Velit deserunt autem molestias et possimus. Odit ipsum et in.\", \"post_title\": \"Totam officia corrupti provident et ipsa labore.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?56780\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(48, 'post', 'created', 41, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Voluptatem voluptates qui corporis ex mollitia. Modi minima vero consequuntur modi. Sapiente id rerum aspernatur ut reprehenderit vel molestiae ipsum.\", \"post_title\": \"Dolores occaecati temporibus aliquam et rerum laudantium.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?67086\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(49, 'post', 'created', 42, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Suscipit laudantium et sed quo tempora quas quia. Tempora inventore perspiciatis non eos. Non maxime nostrum earum accusamus distinctio nesciunt. Dolores commodi dolore velit corporis.\", \"post_title\": \"Eum vel voluptatem hic corporis impedit.\", \"category_id\": 1, \"featured_image\": \"https://lorempixel.com/840/580/?12986\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(50, 'post', 'created', 43, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Et quisquam earum aut laborum velit quia. Porro sapiente repellat et distinctio doloribus dolor. Voluptas reprehenderit ullam inventore non voluptates.\", \"post_title\": \"Iusto ut veniam hic aut assumenda.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?15191\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(51, 'post', 'created', 44, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Enim nisi doloremque aut veritatis necessitatibus. Non voluptatem distinctio labore quo. Laboriosam impedit id itaque omnis rerum qui.\", \"post_title\": \"Aut assumenda dolores et quo repellat odio.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?85623\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(52, 'post', 'created', 45, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Rerum explicabo natus repellat. Maxime ut voluptatibus tempora tempore. Consequuntur ut quae vitae at. Dolores natus corrupti eum corporis harum.\", \"post_title\": \"Perspiciatis quis minus facere voluptas quos quasi voluptatibus.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?41867\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(53, 'post', 'created', 46, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Quo sit fuga omnis hic placeat. Velit ea dolore nostrum ducimus alias. Voluptatem nulla harum tenetur nulla et qui.\", \"post_title\": \"Illo qui nisi accusamus delectus numquam cumque.\", \"category_id\": 2, \"featured_image\": \"https://lorempixel.com/840/580/?97765\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(54, 'post', 'created', 47, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Consequatur explicabo occaecati in autem est possimus modi. Quo quas labore voluptatem nam id fuga autem. Et ut eos omnis voluptas in porro maiores. Ipsam exercitationem sunt est est est dicta.\", \"post_title\": \"Hic quae molestiae mollitia velit dolorem et quasi.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?95863\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(55, 'post', 'created', 48, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Corrupti dolorem quam sed enim suscipit. Consequatur aut sed id. Dolorum qui tempora et libero. Cum quae neque in a.\", \"post_title\": \"Vero et ipsa maxime minima neque facilis neque.\", \"category_id\": 4, \"featured_image\": \"https://lorempixel.com/840/580/?53366\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(56, 'post', 'created', 49, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 2, \"post_body\": \"Veniam maiores velit aut et corporis voluptas alias. Similique quis cumque mollitia et beatae. Sit ipsam eum corporis mollitia et magnam perferendis numquam. Laudantium iusto voluptatibus illo incidunt quis et quae.\", \"post_title\": \"Consequatur veniam enim qui minima iste dolor.\", \"category_id\": 5, \"featured_image\": \"https://lorempixel.com/840/580/?32911\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(57, 'post', 'created', 50, 'App\\Post', NULL, NULL, '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"post_body\": \"Enim quasi commodi sunt quibusdam consequatur sunt. Molestiae quo alias et odit similique. Dolore ullam aut ut nam. Debitis similique ex sunt nostrum maiores.\", \"post_title\": \"Repellendus recusandae omnis pariatur rem et dicta dolorum.\", \"category_id\": 3, \"featured_image\": \"https://lorempixel.com/840/580/?15419\"}}', '2023-04-08 06:51:19', '2023-04-08 06:51:19'),
-(58, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-04-08 06:51:39', '2023-04-08 06:51:39'),
-(59, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 06:51:48', '2023-04-08 06:51:48'),
-(60, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 06:51:51', '2023-04-08 06:51:51'),
-(61, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 06:51:54', '2023-04-08 06:51:54'),
-(62, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 06:53:05', '2023-04-08 06:53:05'),
-(63, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 06:53:12', '2023-04-08 06:53:12'),
-(64, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 06:53:21', '2023-04-08 06:53:21'),
-(65, 'category', 'created', 6, 'App\\Category', 1, 'App\\User', '{\"attributes\": {\"status\": 1, \"user_id\": 1, \"category_name\": \"TestCat\"}}', '2023-04-08 09:36:45', '2023-04-08 09:36:45'),
-(66, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 09:39:14', '2023-04-08 09:39:14'),
-(67, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 09:39:19', '2023-04-08 09:39:19'),
-(68, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 09:39:22', '2023-04-08 09:39:22'),
-(69, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 09:39:25', '2023-04-08 09:39:25'),
-(70, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-08 09:39:27', '2023-04-08 09:39:27'),
-(71, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-12 12:47:09', '2023-04-12 12:47:09'),
-(72, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-12 12:47:28', '2023-04-12 12:47:28'),
-(73, 'category', 'updated', 1, 'App\\Category', 1, 'App\\User', '{\"old\": {\"category_name\": \"et\"}, \"attributes\": {\"category_name\": \"etfsfds\"}}', '2023-04-12 12:50:58', '2023-04-12 12:50:58'),
-(74, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-12 12:51:03', '2023-04-12 12:51:03'),
-(75, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:43:45', '2023-04-18 10:43:45'),
-(76, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:43:50', '2023-04-18 10:43:50'),
-(77, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:43:53', '2023-04-18 10:43:53'),
-(78, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:43:55', '2023-04-18 10:43:55'),
-(79, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:43:58', '2023-04-18 10:43:58'),
-(80, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:44:00', '2023-04-18 10:44:00'),
-(81, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:44:21', '2023-04-18 10:44:21'),
-(82, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-18 10:44:36', '2023-04-18 10:44:36'),
-(83, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 08:33:25', '2023-04-30 08:33:25'),
-(84, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 08:57:39', '2023-04-30 08:57:39'),
-(85, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 08:57:45', '2023-04-30 08:57:45'),
-(86, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 08:57:51', '2023-04-30 08:57:51'),
-(87, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 08:58:03', '2023-04-30 08:58:03'),
-(88, 'activity', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 08:58:11', '2023-04-30 08:58:11'),
-(89, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 08:58:13', '2023-04-30 08:58:13'),
-(90, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:00:23', '2023-04-30 09:00:23'),
-(91, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"d6SLYQZ31LmYFmbjW1yZ8WDjcB0oHOyYq3ATHgSo\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"Forest Department Dinajpur\", \"default_role\": \"2\", \"company_email\": \"help@email.com\", \"company_phone\": \"+98765432111\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"₹\", \"register_notification_email\": \"0\"}', '2023-04-30 09:25:26', '2023-04-30 09:25:26'),
-(92, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:25:26', '2023-04-30 09:25:26'),
-(93, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"d6SLYQZ31LmYFmbjW1yZ8WDjcB0oHOyYq3ATHgSo\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"Forest Department Dinajpur\", \"default_role\": \"2\", \"company_email\": \"help@email.com\", \"company_phone\": \"+98765432111\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"₹\", \"register_notification_email\": \"0\"}', '2023-04-30 09:25:30', '2023-04-30 09:25:30'),
-(94, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:25:30', '2023-04-30 09:25:30'),
-(95, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:38:47', '2023-04-30 09:38:47'),
-(96, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"d6SLYQZ31LmYFmbjW1yZ8WDjcB0oHOyYq3ATHgSo\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"Forest Department Dinajpur\", \"default_role\": \"2\", \"company_email\": \"help@email.com\", \"company_phone\": \"+98765432111\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"৳\", \"register_notification_email\": \"0\"}', '2023-04-30 09:38:57', '2023-04-30 09:38:57'),
-(97, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:38:57', '2023-04-30 09:38:57'),
-(98, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"d6SLYQZ31LmYFmbjW1yZ8WDjcB0oHOyYq3ATHgSo\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"Forest Department Dinajpur\", \"default_role\": \"2\", \"company_email\": \"dfodinajpur@gmail.com\", \"company_phone\": \"+98765432111\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"৳\", \"register_notification_email\": \"0\"}', '2023-04-30 09:41:28', '2023-04-30 09:41:28'),
-(99, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:41:28', '2023-04-30 09:41:28'),
-(100, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"d6SLYQZ31LmYFmbjW1yZ8WDjcB0oHOyYq3ATHgSo\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"Forest Department Dinajpur\", \"default_role\": \"2\", \"company_email\": \"dfodinajpur@gmail.com\", \"company_phone\": \"01999-006503\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"৳\", \"register_notification_email\": \"0\"}', '2023-04-30 09:43:08', '2023-04-30 09:43:08'),
-(101, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:43:08', '2023-04-30 09:43:08'),
-(102, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:44:58', '2023-04-30 09:44:58'),
-(103, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-04-30 09:53:43', '2023-04-30 09:53:43'),
-(104, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-04-30 13:04:28', '2023-04-30 13:04:28'),
-(105, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-11 11:19:26', '2023-05-11 11:19:26'),
-(106, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-11 11:44:29', '2023-05-11 11:44:29'),
-(107, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-11 11:59:05', '2023-05-11 11:59:05'),
-(108, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-11 12:00:14', '2023-05-11 12:00:14'),
-(109, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-11 12:00:46', '2023-05-11 12:00:46'),
-(110, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-11 13:52:42', '2023-05-11 13:52:42'),
-(111, 'user', 'created', 3, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"SFNTC\", \"email\": \"sfntc@gmail.com\", \"status\": 0, \"password\": \"$2y$10$uEy4NlKg98uHFa5/ijQDQO3Pd4LQ1PSlUQJcB5QyGoCLVFx/mwqMm\", \"phone_number\": \"11112222\", \"profile_photo\": null}}', '2023-05-16 11:52:41', '2023-05-16 11:52:41'),
-(112, 'user', 'updated', 3, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"$2y$10$uEy4NlKg98uHFa5/ijQDQO3Pd4LQ1PSlUQJcB5QyGoCLVFx/mwqMm\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$qQGEqOcnVav/e5zmSqwlBOH/jb2Y44BGv2s95OcjyWDOuhFJ1PEAy\"}}', '2023-05-16 11:52:58', '2023-05-16 11:52:58'),
-(113, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-16 11:56:38', '2023-05-16 11:56:38'),
-(114, 'user', 'updated', 3, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$qQGEqOcnVav/e5zmSqwlBOH/jb2Y44BGv2s95OcjyWDOuhFJ1PEAy\"}, \"attributes\": {\"password\": \"$2y$10$ToqApJlKKItZwfzTMe/QTOHQrxW2KxRrosXhtFZ3aDGqGgvOx/bT6\"}}', '2023-05-16 11:58:12', '2023-05-16 11:58:12'),
-(115, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-16 11:58:17', '2023-05-16 11:58:17'),
-(116, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-17 10:18:04', '2023-05-17 10:18:04'),
-(117, 'settings', 'view', NULL, NULL, 3, 'App\\User', '[]', '2023-05-17 10:33:41', '2023-05-17 10:33:41'),
-(118, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 07:19:02', '2023-05-21 07:19:02'),
-(119, 'permission', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 07:19:07', '2023-05-21 07:19:07'),
-(120, 'permission', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 07:37:15', '2023-05-21 07:37:15'),
-(121, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 07:42:32', '2023-05-21 07:42:32'),
-(122, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:11:59', '2023-05-21 16:11:59'),
-(123, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:12:04', '2023-05-21 16:12:04'),
-(124, 'role', 'created', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:13:54', '2023-05-21 16:13:54'),
-(125, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:13:54', '2023-05-21 16:13:54'),
-(126, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:13:57', '2023-05-21 16:13:57'),
-(127, 'role', 'created', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:14:14', '2023-05-21 16:14:14'),
-(128, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:14:14', '2023-05-21 16:14:14'),
-(129, 'role', 'Edit', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:14:20', '2023-05-21 16:14:20'),
-(130, 'role', 'updated', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:14:46', '2023-05-21 16:14:46'),
-(131, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:14:46', '2023-05-21 16:14:46'),
-(132, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:14:58', '2023-05-21 16:14:58'),
-(133, 'role', 'created', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:15:47', '2023-05-21 16:15:47'),
-(134, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:15:47', '2023-05-21 16:15:47'),
-(135, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:17:06', '2023-05-21 16:17:06'),
-(136, 'role', 'created', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:17:42', '2023-05-21 16:17:42'),
-(137, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:17:43', '2023-05-21 16:17:43'),
-(138, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:28:01', '2023-05-21 16:28:01'),
-(139, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:28:25', '2023-05-21 16:28:25'),
-(140, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:28:31', '2023-05-21 16:28:31'),
-(141, 'role', 'created', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:16', '2023-05-21 16:29:16'),
-(142, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:17', '2023-05-21 16:29:17'),
-(143, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:36', '2023-05-21 16:29:36'),
-(144, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:39', '2023-05-21 16:29:39'),
-(145, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:41', '2023-05-21 16:29:41'),
-(146, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:44', '2023-05-21 16:29:44'),
-(147, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:46', '2023-05-21 16:29:46'),
-(148, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:48', '2023-05-21 16:29:48'),
-(149, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-21 16:29:50', '2023-05-21 16:29:50'),
-(150, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-22 06:04:46', '2023-05-22 06:04:46'),
-(151, 'role', 'Edit', NULL, NULL, 1, 'App\\User', '[]', '2023-05-22 06:04:51', '2023-05-22 06:04:51'),
-(152, 'role', 'updated', NULL, NULL, 1, 'App\\User', '[]', '2023-05-22 06:05:07', '2023-05-22 06:05:07'),
-(153, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-22 06:05:07', '2023-05-22 06:05:07'),
-(154, 'role', 'Edit', NULL, NULL, 1, 'App\\User', '[]', '2023-05-22 06:05:45', '2023-05-22 06:05:45'),
-(155, 'role', 'updated', NULL, NULL, 1, 'App\\User', '[]', '2023-05-22 06:06:03', '2023-05-22 06:06:03'),
-(156, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-22 06:06:03', '2023-05-22 06:06:03'),
-(157, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$ZcnE7sHTcL2k/AYzld5sg.ubdOf6Bsf5lRImCxTQ9cAq5uL/Ut7AO\"}, \"attributes\": {\"password\": \"$2y$10$whsNFzOWZSk.osbKSqzSUe9xiK.46RwAH267eMRbepijiEsnuGZqe\"}}', '2023-05-24 11:58:21', '2023-05-24 11:58:21'),
-(158, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-26 07:17:31', '2023-05-26 07:17:31'),
-(159, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-26 16:57:18', '2023-05-26 16:57:18'),
-(160, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"vUhI0i4rpRFS0oOsvJv0G3FlRI4qk9UgJt6uSXL3\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"বন বিভাগ, দিনাজপুর\", \"default_role\": \"2\", \"company_email\": \"dfodinajpur@gmail.com\", \"company_phone\": \"01999-006503\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"৳\", \"register_notification_email\": \"0\"}', '2023-05-26 16:57:45', '2023-05-26 16:57:45'),
-(161, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-26 16:57:46', '2023-05-26 16:57:46'),
-(162, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-26 16:58:14', '2023-05-26 16:58:14'),
-(163, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"vUhI0i4rpRFS0oOsvJv0G3FlRI4qk9UgJt6uSXL3\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"Forest Department Dinajpur\", \"default_role\": \"2\", \"company_email\": \"dfodinajpur@gmail.com\", \"company_phone\": \"01999-006503\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"৳\", \"register_notification_email\": \"0\"}', '2023-05-26 16:58:35', '2023-05-26 16:58:35'),
-(164, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-26 16:58:35', '2023-05-26 16:58:35'),
-(165, 'settings', 'updated', NULL, NULL, 1, 'App\\User', '{\"_token\": \"vUhI0i4rpRFS0oOsvJv0G3FlRI4qk9UgJt6uSXL3\", \"company_city\": \"Dinajpur\", \"company_logo\": null, \"company_name\": \"Forest Dinajpur\", \"default_role\": \"2\", \"company_email\": \"dfodinajpur@gmail.com\", \"company_phone\": \"01999-006503\", \"lockout_delay\": \"2\", \"company_address\": \"বিভাগীয় বন কর্মকর্তার কার্যালয়, সামাজিক বন বিভাগ, মিশন রোড, দিনাজপুর সদর\", \"record_per_page\": \"15\", \"max_login_attempts\": \"3\", \"company_currency_symbol\": \"৳\", \"register_notification_email\": \"0\"}', '2023-05-26 16:58:47', '2023-05-26 16:58:47'),
-(166, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-26 16:58:47', '2023-05-26 16:58:47'),
-(167, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-05-26 17:12:22', '2023-05-26 17:12:22'),
-(168, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-05-27 05:54:39', '2023-05-27 05:54:39'),
-(169, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-06-26 06:51:58', '2023-06-26 06:51:58'),
-(170, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 07:53:19', '2023-06-26 07:53:19'),
-(171, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 08:00:03', '2023-06-26 08:00:03'),
-(172, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 08:01:01', '2023-06-26 08:01:01'),
-(173, 'user', 'created', 4, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"সদর রেঞ্জ\", \"email\": \"dsadar@mail.com\", \"status\": 1, \"password\": \"$2y$10$bOa.S6WK3k2v1hZgJFOoKOuhqYrBM4m82K8D1IRiuLmIlF8kM68KW\", \"phone_number\": \"0\", \"profile_photo\": null}}', '2023-06-26 08:25:01', '2023-06-26 08:25:01'),
-(174, 'user', 'created', 5, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"চরকাই রেঞ্জ\", \"email\": \"charkai@mail.com\", \"status\": 1, \"password\": \"$2y$10$Yvu2/lIgu5Wdu3k.QKAxn.u6hlQptl4vir7T8hJkbRCBl64R8Xy1e\", \"username\": \"charkai\", \"phone_number\": \"0\", \"profile_photo\": null}}', '2023-06-26 08:30:53', '2023-06-26 08:30:53'),
-(175, 'user', 'created', 6, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"মধ্যপাড়া রেঞ্জ\", \"email\": \"maddhapara@mail.com\", \"status\": 1, \"password\": \"$2y$10$SPun2bbH1Xb8NMA36moFFuq954LoWOM0G/S5GmIhGOa0drXMIzmja\", \"username\": \"maddhapara\", \"designation\": \"রেঞ্জ কর্মকর্তা\", \"phone_number\": null, \"profile_photo\": null}}', '2023-06-26 10:51:29', '2023-06-26 10:51:29'),
-(176, 'user', 'created', 7, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"ঠাকুরগাঁও রেঞ্জ\", \"email\": \"thakurgaon@mail.com\", \"status\": 1, \"password\": \"$2y$10$uyAPNq3EShYDI4RuJHPsPupdbpuNu7W900RCfzQ/yfW0/W8rwUDJm\", \"username\": \"thakurgaon\", \"designation\": \"রেঞ্জ কর্মকর্তা\", \"phone_number\": null, \"profile_photo\": null}}', '2023-06-26 10:55:54', '2023-06-26 10:55:54'),
-(177, 'user', 'created', 8, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"দেবীগঞ্জ রেঞ্জ\", \"email\": \"debiganj@mail.com\", \"status\": 1, \"password\": \"$2y$10$uU6FqTtXS1ZUQa6sPDaVY.g0qk6yB8bgfqCxepUrvetTo5ifk60fG\", \"username\": \"debiganj\", \"designation\": \"রেঞ্জ কর্মকর্তা\", \"phone_number\": null, \"profile_photo\": null}}', '2023-06-26 11:01:32', '2023-06-26 11:01:32'),
-(178, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-06-26 11:47:56', '2023-06-26 11:47:56'),
-(179, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-06-26 11:48:13', '2023-06-26 11:48:13'),
-(180, 'user', 'created', 9, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"ধর্মপুর বিট\", \"email\": \"dharmapurbeat@mail.com\", \"status\": 1, \"password\": \"$2y$10$/9ZGBxpFrq.WEKnGZ1lrTOr/DpVTSNX96w9mNoS8MwrKIFSqYmXKq\", \"username\": \"dharmapurbeat\", \"designation\": \"বিট কর্মকর্তা\", \"phone_number\": null, \"profile_photo\": null}}', '2023-06-26 12:31:26', '2023-06-26 12:31:26'),
-(181, 'user', 'created', 10, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"চরকাই সদর বিট\", \"email\": \"charkisadarbeat@mail.com\", \"status\": 1, \"password\": \"$2y$10$I5VlOcoavUK9eTIlF2JjBeOyklX6rA2/EBaMTb9hdoh8SjnashwXW\", \"username\": \"charkisadarbeat\", \"designation\": \"বিট কর্মকর্তা\", \"phone_number\": null, \"profile_photo\": null}}', '2023-06-26 12:35:30', '2023-06-26 12:35:30'),
-(182, 'user', 'deleted', 9, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"ধর্মপুর বিট\", \"email\": \"dharmapurbeat@mail.com\", \"status\": 1, \"password\": \"$2y$10$/9ZGBxpFrq.WEKnGZ1lrTOr/DpVTSNX96w9mNoS8MwrKIFSqYmXKq\", \"username\": \"dharmapurbeat\", \"designation\": \"বিট কর্মকর্তা\", \"phone_number\": null, \"profile_photo\": null}}', '2023-06-26 20:07:04', '2023-06-26 20:07:04'),
-(183, 'user', 'deleted', 10, 'App\\User', 1, 'App\\User', '{\"attributes\": {\"name\": \"চরকাই সদর বিট\", \"email\": \"charkisadarbeat@mail.com\", \"status\": 1, \"password\": \"$2y$10$I5VlOcoavUK9eTIlF2JjBeOyklX6rA2/EBaMTb9hdoh8SjnashwXW\", \"username\": \"charkisadarbeat\", \"designation\": \"বিট কর্মকর্তা\", \"phone_number\": null, \"profile_photo\": null}}', '2023-06-26 20:07:09', '2023-06-26 20:07:09'),
-(184, 'user', 'updated', 29, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"Re0y6U78\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$82Nsl86zlwp9r97Pt4z9uuQEzbmIR8AQGui3TR3NqLJSndrTehbxy\"}}', '2023-06-26 20:08:57', '2023-06-26 20:08:57'),
-(185, 'user', 'updated', 30, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"v8Ru8l35\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$m5Y55fHFIBkrka6MbWYb0eBUlWuhkMT/uypOqFD8HU9MOTl9Njc56\"}}', '2023-06-26 20:09:18', '2023-06-26 20:09:18'),
-(186, 'user', 'updated', 31, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"j0F00J1f\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$Bcfjs43oIt27NI6IU6/1mOpHAHnG/xAjBZNoP8dQc4x/U/PU3WpaS\"}}', '2023-06-26 20:09:31', '2023-06-26 20:09:31'),
-(187, 'user', 'updated', 32, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"73lL1ln6\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$OLSWUqIgNO9cF03E.nt8ge7CEfAeKHrvtZMkA0dgoPu37fJBWz7AC\"}}', '2023-06-26 20:10:08', '2023-06-26 20:10:08'),
-(188, 'user', 'updated', 33, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"p9U1Rb3O\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$hobl8qHni3hoxBu1IZ1mAer/CIUiebH8Lp5b3/Tdx4SSMHTY/OTti\"}}', '2023-06-26 20:10:20', '2023-06-26 20:10:20'),
-(189, 'user', 'updated', 34, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"Pa265U6F\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$3iflXeSjVTouniTYlJ/i1.Pz4TcibZHWIPKPDsxxq0QSciCYuZ6Vi\"}}', '2023-06-26 20:10:32', '2023-06-26 20:10:32'),
-(190, 'user', 'updated', 35, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"lZW7d19A\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$k0pt53fL0KD3sohtCVYMxeUdfNwSiGNmMRVONApMHIBBvTlSr/r3q\"}}', '2023-06-26 20:10:43', '2023-06-26 20:10:43'),
-(191, 'user', 'updated', 36, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"iLtO899Q\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$fSUfppAg8DQ4SxN7J9sAf.SdSRlIDrTJMTgGoQoeCROvjNaXR0kLC\"}}', '2023-06-26 20:10:57', '2023-06-26 20:10:57'),
-(192, 'user', 'updated', 37, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"GV97X4eQ\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$LBny9o7dl26Z34IlJfEdce5NhSo3leSRoq55AvLJcrUAmXeU5cxam\"}}', '2023-06-26 20:11:12', '2023-06-26 20:11:12'),
-(193, 'user', 'updated', 38, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"yRTJ848G\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$If6FVsoywrz7ferqMieGEeKPjpDdGfV9v1hdis/U0HAdv340.s5au\"}}', '2023-06-26 20:11:37', '2023-06-26 20:11:37');
-INSERT INTO `activity_log` (`id`, `log_name`, `description`, `subject_id`, `subject_type`, `causer_id`, `causer_type`, `properties`, `created_at`, `updated_at`) VALUES
-(194, 'user', 'updated', 39, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"35NzSZy2\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$c7/7zdAP3jHh6lR/A5kEVuGKuntBnggjVQBwuvcC6aEZzVKl8sSW.\"}}', '2023-06-26 20:11:50', '2023-06-26 20:11:50'),
-(195, 'user', 'updated', 40, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"8WZ5i1wz\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$5uqQRzTE1lui1sTFaj6c6.9H7DLcsiSF3D7tPmmvt/ksRM.Mi0MNm\"}}', '2023-06-26 20:12:11', '2023-06-26 20:12:11'),
-(196, 'user', 'updated', 41, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"50C9EcmQ\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$AMEc88a8fS4AD6gCfZt3Sud8CbMpLsEpfxWN73XWA54p.iCOBEFka\"}}', '2023-06-26 20:12:31', '2023-06-26 20:12:31'),
-(197, 'user', 'updated', 42, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"HjB9J04c\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$nExC.iF.6MbiQM6LDRhRDeFLvokuDQywbWF.MabfsJgh4MqiyyNqa\"}}', '2023-06-26 20:12:47', '2023-06-26 20:12:47'),
-(198, 'user', 'updated', 43, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"109SQj99\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$VX8bqupXBYmakxLBzhmkPuqs6XTs7AVFOAIgKqJH3F2dHQwuWjnx2\"}}', '2023-06-26 20:13:06', '2023-06-26 20:13:06'),
-(199, 'user', 'updated', 44, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"3jgVmH87\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$SJd8g7twGFFzqriurZ/.vO6iYnjTBzk9nsCpGtTdmQ5g.ahApoaqu\"}}', '2023-06-26 20:13:22', '2023-06-26 20:13:22'),
-(200, 'user', 'updated', 45, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"a2T2V824\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$sS/FI9m18eeFxxkcRLic5OdkJnQvk784IoTa9g8k3NUSO72UV3mZm\"}}', '2023-06-26 20:13:35', '2023-06-26 20:13:35'),
-(201, 'user', 'updated', 46, 'App\\User', 1, 'App\\User', '{\"old\": {\"status\": 0, \"password\": \"fL6qW2y1\"}, \"attributes\": {\"status\": 1, \"password\": \"$2y$10$/yUE1oc6138xlg9tHbrXC.M.IyIQk50jxfSmtvuRcNsXvemWIZdSa\"}}', '2023-06-26 20:13:52', '2023-06-26 20:13:52'),
-(202, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 20:14:57', '2023-06-26 20:14:57'),
-(203, 'user', 'updated', 29, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$82Nsl86zlwp9r97Pt4z9uuQEzbmIR8AQGui3TR3NqLJSndrTehbxy\"}, \"attributes\": {\"password\": \"$2y$10$QFsdtxb0/NPIkx3LXJzeneWnbOESmVA3hYdG91o1h9MnUcx/p8UUy\"}}', '2023-06-26 20:25:43', '2023-06-26 20:25:43'),
-(204, 'user', 'updated', 30, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$m5Y55fHFIBkrka6MbWYb0eBUlWuhkMT/uypOqFD8HU9MOTl9Njc56\"}, \"attributes\": {\"password\": \"$2y$10$Q4L6K/U3joJTJP7vbT8iE.HkMARCZ0eJ1pPw3YPsL/HiuUsg80dWe\"}}', '2023-06-26 20:26:11', '2023-06-26 20:26:11'),
-(205, 'user', 'updated', 31, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$Bcfjs43oIt27NI6IU6/1mOpHAHnG/xAjBZNoP8dQc4x/U/PU3WpaS\"}, \"attributes\": {\"password\": \"$2y$10$8IpZzh5dFN.J8R/eX9Br5u2bxnGYOc59lL1Q1PI28mHPawE7QCCi6\"}}', '2023-06-26 20:27:29', '2023-06-26 20:27:29'),
-(206, 'user', 'updated', 32, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$OLSWUqIgNO9cF03E.nt8ge7CEfAeKHrvtZMkA0dgoPu37fJBWz7AC\"}, \"attributes\": {\"password\": \"$2y$10$4VRHuTWy3ttGHNJxkpAWm.9yskej/9rs54DS4OJ9fefSa4sRv6iuS\"}}', '2023-06-26 20:28:02', '2023-06-26 20:28:02'),
-(207, 'user', 'updated', 33, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$hobl8qHni3hoxBu1IZ1mAer/CIUiebH8Lp5b3/Tdx4SSMHTY/OTti\"}, \"attributes\": {\"password\": \"$2y$10$kHHxl72z4UxxErvYOPOR3.gY9SqSDqU9x/L3NsT77A3cvki8snZaa\"}}', '2023-06-26 20:28:41', '2023-06-26 20:28:41'),
-(208, 'user', 'updated', 34, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$3iflXeSjVTouniTYlJ/i1.Pz4TcibZHWIPKPDsxxq0QSciCYuZ6Vi\"}, \"attributes\": {\"password\": \"$2y$10$ktC29atUpdiGFbbT7xR44.NUdGxscN1Bi/5Fp7dAIahLnpOKMqGVG\"}}', '2023-06-26 20:29:11', '2023-06-26 20:29:11'),
-(209, 'user', 'updated', 35, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$k0pt53fL0KD3sohtCVYMxeUdfNwSiGNmMRVONApMHIBBvTlSr/r3q\"}, \"attributes\": {\"password\": \"$2y$10$wx5Cbr3vCqgSryfnWdUwiOfPVwOm6mEOovaCngLIA89wlgOlp2rB2\"}}', '2023-06-26 20:30:03', '2023-06-26 20:30:03'),
-(210, 'user', 'updated', 36, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$fSUfppAg8DQ4SxN7J9sAf.SdSRlIDrTJMTgGoQoeCROvjNaXR0kLC\"}, \"attributes\": {\"password\": \"$2y$10$p71FzKKOZiYd5pahPfbT1um9YUDNz4TExbOUEg6SlL1AkOXEgo2j6\"}}', '2023-06-26 20:30:41', '2023-06-26 20:30:41'),
-(211, 'user', 'updated', 37, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$LBny9o7dl26Z34IlJfEdce5NhSo3leSRoq55AvLJcrUAmXeU5cxam\"}, \"attributes\": {\"password\": \"$2y$10$ZZNheqaX1TjXpqgY7V0VYuX.15EyP.ksrsEUtZWqfgvWlCzQ/8KSq\"}}', '2023-06-26 20:31:06', '2023-06-26 20:31:06'),
-(212, 'user', 'updated', 37, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$ZZNheqaX1TjXpqgY7V0VYuX.15EyP.ksrsEUtZWqfgvWlCzQ/8KSq\"}, \"attributes\": {\"password\": \"$2y$10$WzJ36TO9VKTpeF/.OHL6IOotDodbzmGjPc90Bb.T53ydoXZY10V.q\"}}', '2023-06-26 20:31:50', '2023-06-26 20:31:50'),
-(213, 'user', 'updated', 38, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$If6FVsoywrz7ferqMieGEeKPjpDdGfV9v1hdis/U0HAdv340.s5au\"}, \"attributes\": {\"password\": \"$2y$10$figfG78PMco5/KkpCUjykO0YIGuwnH4atxM3S5UAqFrr30pTeKo7q\"}}', '2023-06-26 20:33:41', '2023-06-26 20:33:41'),
-(214, 'user', 'updated', 39, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$c7/7zdAP3jHh6lR/A5kEVuGKuntBnggjVQBwuvcC6aEZzVKl8sSW.\"}, \"attributes\": {\"password\": \"$2y$10$5pJNy7pkSqp3HYt3nqqFI.4NGoi9QGaC32y2sNr2ZzaKN3IeLVjRe\"}}', '2023-06-26 20:34:28', '2023-06-26 20:34:28'),
-(215, 'user', 'updated', 39, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$5pJNy7pkSqp3HYt3nqqFI.4NGoi9QGaC32y2sNr2ZzaKN3IeLVjRe\"}, \"attributes\": {\"password\": \"$2y$10$b7ZUujpsPXGRra9B7iD5GeKK/3KRl9SAWLoEXv8QQErA5mZVcjpYK\"}}', '2023-06-26 20:35:46', '2023-06-26 20:35:46'),
-(216, 'user', 'updated', 40, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$5uqQRzTE1lui1sTFaj6c6.9H7DLcsiSF3D7tPmmvt/ksRM.Mi0MNm\"}, \"attributes\": {\"password\": \"$2y$10$cbPw2/cee2MzhKfhqQ6a9e8sykxdfrdvVbavMMLhbAmaA.U/I/x1y\"}}', '2023-06-26 20:36:18', '2023-06-26 20:36:18'),
-(217, 'user', 'updated', 41, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$AMEc88a8fS4AD6gCfZt3Sud8CbMpLsEpfxWN73XWA54p.iCOBEFka\"}, \"attributes\": {\"password\": \"$2y$10$w927u1p3hkKzedqP5oiECu4BDJ3KzP9upJ11hVI29rpPR.gxhftDW\"}}', '2023-06-26 20:36:40', '2023-06-26 20:36:40'),
-(218, 'user', 'updated', 42, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$nExC.iF.6MbiQM6LDRhRDeFLvokuDQywbWF.MabfsJgh4MqiyyNqa\"}, \"attributes\": {\"password\": \"$2y$10$7dCz652MHd3JAskvv9hoHe448Pxf9BWQRSnML3XZguInyvwLsT9Se\"}}', '2023-06-26 20:38:07', '2023-06-26 20:38:07'),
-(219, 'user', 'updated', 43, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$VX8bqupXBYmakxLBzhmkPuqs6XTs7AVFOAIgKqJH3F2dHQwuWjnx2\"}, \"attributes\": {\"password\": \"$2y$10$IlVr8.xvUG2zfiLUcgDbL.lYsKIMye1ZZaiTIcRUD0TG5eCk1lXnS\"}}', '2023-06-26 20:38:39', '2023-06-26 20:38:39'),
-(220, 'user', 'updated', 43, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$IlVr8.xvUG2zfiLUcgDbL.lYsKIMye1ZZaiTIcRUD0TG5eCk1lXnS\"}, \"attributes\": {\"password\": \"$2y$10$qyR9We69dUSZpDNk2ClwgeOTsSTsu.BApB18pirnKZYpeSk2eJB..\"}}', '2023-06-26 20:53:35', '2023-06-26 20:53:35'),
-(221, 'user', 'updated', 44, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$SJd8g7twGFFzqriurZ/.vO6iYnjTBzk9nsCpGtTdmQ5g.ahApoaqu\"}, \"attributes\": {\"password\": \"$2y$10$vC/Fuc3sbTQzg0GHU4DAY.14469Bq5UP0Fqp9Hfles4yE/gsjzudy\"}}', '2023-06-26 20:53:54', '2023-06-26 20:53:54'),
-(222, 'user', 'updated', 45, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$sS/FI9m18eeFxxkcRLic5OdkJnQvk784IoTa9g8k3NUSO72UV3mZm\"}, \"attributes\": {\"password\": \"$2y$10$1oKzNWLY.pKYJMPpsv0jLueAPswZbmFF78Ltl6bF1cFuTuild8NQG\"}}', '2023-06-26 20:54:14', '2023-06-26 20:54:14'),
-(223, 'user', 'updated', 45, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$1oKzNWLY.pKYJMPpsv0jLueAPswZbmFF78Ltl6bF1cFuTuild8NQG\"}, \"attributes\": {\"password\": \"$2y$10$D5RQZ53o3UXepos8G3j2P.eztRwoTZkQ1kkRbbqWc3fbnEggm6aGm\"}}', '2023-06-26 20:54:50', '2023-06-26 20:54:50'),
-(224, 'user', 'updated', 46, 'App\\User', 1, 'App\\User', '{\"old\": {\"password\": \"$2y$10$/yUE1oc6138xlg9tHbrXC.M.IyIQk50jxfSmtvuRcNsXvemWIZdSa\"}, \"attributes\": {\"password\": \"$2y$10$q6d46XtFi70g9wt5sx9Tx.t8cyrJTMG.CXDPn6MPm8.8Cbk3daQJW\"}}', '2023-06-26 20:55:06', '2023-06-26 20:55:06'),
-(225, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 22:20:32', '2023-06-26 22:20:32'),
-(226, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 22:20:48', '2023-06-26 22:20:48'),
-(227, 'user', 'updated', 29, 'App\\User', 29, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 22:24:36', '2023-06-26 22:24:36'),
-(228, 'user', 'updated', 29, 'App\\User', 29, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-06-26 22:36:01', '2023-06-26 22:36:01'),
-(229, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-07-04 19:00:10', '2023-07-04 19:00:10'),
-(230, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-07-05 14:08:13', '2023-07-05 14:08:13'),
-(231, 'user', 'updated', 4, 'App\\User', 4, 'App\\User', '{\"old\": [], \"attributes\": []}', '2023-07-05 14:08:43', '2023-07-05 14:08:43'),
-(232, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-07-12 13:11:08', '2023-07-12 13:11:08'),
-(233, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-07-12 13:11:49', '2023-07-12 13:11:49'),
-(234, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-07-12 13:11:54', '2023-07-12 13:11:54'),
-(235, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-07-17 09:30:43', '2023-07-17 09:30:43'),
-(236, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-07-17 09:32:06', '2023-07-17 09:32:06'),
-(237, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-07-18 18:47:32', '2023-07-18 18:47:32'),
-(238, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-08-05 20:39:56', '2023-08-05 20:39:56'),
-(239, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-08-26 12:55:38', '2023-08-26 12:55:38'),
-(240, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-08-26 12:56:03', '2023-08-26 12:56:03'),
-(241, 'user', 'updated', 4, 'App\\User', 4, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-08-26 12:58:41', '2023-08-26 12:58:41'),
-(242, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-08-30 21:17:26', '2023-08-30 21:17:26'),
-(243, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-08-30 21:17:34', '2023-08-30 21:17:34'),
-(244, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-14 11:13:35', '2023-10-14 11:13:35'),
-(245, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-14 11:48:36', '2023-10-14 11:48:36'),
-(246, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-14 13:12:21', '2023-10-14 13:12:21'),
-(247, 'settings', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-14 13:12:21', '2023-10-14 13:12:21'),
-(248, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-10-17 22:26:36', '2023-10-17 22:26:36'),
-(249, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-17 22:30:10', '2023-10-17 22:30:10'),
-(250, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-17 22:30:15', '2023-10-17 22:30:15'),
-(251, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 05:27:03', '2023-10-26 05:27:03'),
-(252, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:14:13', '2023-10-26 08:14:13'),
-(253, 'role', 'Edit', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:14:19', '2023-10-26 08:14:19'),
-(254, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:14:38', '2023-10-26 08:14:38'),
-(255, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:14:42', '2023-10-26 08:14:42'),
-(256, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:15:03', '2023-10-26 08:15:03'),
-(257, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:15:05', '2023-10-26 08:15:05'),
-(258, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:15:14', '2023-10-26 08:15:14'),
-(259, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-26 08:16:22', '2023-10-26 08:16:22'),
-(260, 'user', 'created', 47, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"demo\",\"designation\":\"demo_bit\",\"email\":\"demo@gmail.com\",\"username\":\"demo\",\"password\":\"$2y$10$J.\\/P5lMXIZjM.2aw.eEEtuTMteX\\/MhgJKp5q6Xy22\\/pyf7T81zOk.\",\"phone_number\":\"01867090247\",\"profile_photo\":null,\"status\":1}}', '2023-10-28 12:06:54', '2023-10-28 12:06:54'),
-(261, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-28 13:28:34', '2023-10-28 13:28:34'),
-(262, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-28 13:28:44', '2023-10-28 13:28:44'),
-(263, 'permission', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-10-28 13:28:49', '2023-10-28 13:28:49'),
-(264, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-28 13:28:58', '2023-10-28 13:28:58'),
-(265, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-10-28 13:29:03', '2023-10-28 13:29:03'),
-(266, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-10-28 13:29:21', '2023-10-28 13:29:21'),
-(267, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-10-30 11:32:50', '2023-10-30 11:32:50'),
-(268, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-10-31 09:52:58', '2023-10-31 09:52:58'),
-(269, 'user', 'created', 48, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"Demo\",\"designation\":\"Demo\",\"email\":\"deep@gmail.com\",\"username\":\"demo\",\"password\":\"$2y$10$xlJXH.u.MBailKsoezrZxOEpqIYG0\\/2D68\\/b3WgZ7EjHqidTtKsky\",\"phone_number\":\"018797998978\",\"profile_photo\":null,\"status\":1}}', '2023-10-31 10:04:37', '2023-10-31 10:04:37'),
-(270, 'user', 'created', 49, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"5YV4DTuByF\",\"designation\":\"rfijviKUrx\",\"email\":\"mdncr@q0xq.com\",\"username\":\"KP9gOb1Nu0\",\"password\":\"$2y$10$8F.qkGu5UOusl86WA0YCQ.qiM16g9pZVKKN2dwntnQDUO5g8vIzt2\",\"phone_number\":\"4643\",\"profile_photo\":null,\"status\":1}}', '2023-10-31 11:09:42', '2023-10-31 11:09:42'),
-(271, 'user', 'deleted', 47, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"demo\",\"designation\":\"demo_bit\",\"email\":\"demo@gmail.com\",\"username\":\"demo\",\"password\":\"$2y$10$J.\\/P5lMXIZjM.2aw.eEEtuTMteX\\/MhgJKp5q6Xy22\\/pyf7T81zOk.\",\"phone_number\":\"01867090247\",\"profile_photo\":null,\"status\":1}}', '2023-10-31 12:57:41', '2023-10-31 12:57:41'),
-(272, 'user', 'created', 50, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"Demo Bit\",\"designation\":\"Demo Podobi\",\"email\":\"demo@gmail.com\",\"username\":\"demo\",\"password\":\"$2y$10$Ml9hz1DyKE9jd2mmtesowuw1NjkMAo4R9DHWEI6glih\\/V9ox0v7ty\",\"phone_number\":\"018797998978\",\"profile_photo\":null,\"status\":1}}', '2023-10-31 13:11:12', '2023-10-31 13:11:12'),
-(273, 'user', 'deleted', 48, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"Demo\",\"designation\":\"Demo\",\"email\":\"deep@gmail.com\",\"username\":\"demo\",\"password\":\"$2y$10$xlJXH.u.MBailKsoezrZxOEpqIYG0\\/2D68\\/b3WgZ7EjHqidTtKsky\",\"phone_number\":\"018797998978\",\"profile_photo\":null,\"status\":1}}', '2023-10-31 13:11:33', '2023-10-31 13:11:33'),
-(274, 'user', 'deleted', 49, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"5YV4DTuByF\",\"designation\":\"rfijviKUrx\",\"email\":\"mdncr@q0xq.com\",\"username\":\"KP9gOb1Nu0\",\"password\":\"$2y$10$8F.qkGu5UOusl86WA0YCQ.qiM16g9pZVKKN2dwntnQDUO5g8vIzt2\",\"phone_number\":\"4643\",\"profile_photo\":null,\"status\":1}}', '2023-10-31 13:11:40', '2023-10-31 13:11:40'),
-(275, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:16:08', '2023-10-31 13:16:08'),
-(276, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:16:17', '2023-10-31 13:16:17'),
-(277, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:16:59', '2023-10-31 13:16:59'),
-(278, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:17:04', '2023-10-31 13:17:04'),
-(279, 'permission', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:17:10', '2023-10-31 13:17:10'),
-(280, 'permission', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:17:10', '2023-10-31 13:17:10'),
-(281, 'permission', 'created', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:17:49', '2023-10-31 13:17:49'),
-(282, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:17:51', '2023-10-31 13:17:51'),
-(283, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:17:56', '2023-10-31 13:17:56'),
-(284, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:19:47', '2023-10-31 13:19:47'),
-(285, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:19:59', '2023-10-31 13:19:59'),
-(286, 'role', 'Edit', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:20:54', '2023-10-31 13:20:54'),
-(287, 'role', 'updated', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:21:06', '2023-10-31 13:21:06'),
-(288, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:21:08', '2023-10-31 13:21:08'),
-(289, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-10-31 13:21:15', '2023-10-31 13:21:15'),
-(290, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:48:48', '2023-10-31 13:48:48'),
-(291, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-10-31 13:49:00', '2023-10-31 13:49:00'),
-(292, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-10-31 13:50:07', '2023-10-31 13:50:07'),
-(293, 'user', 'created', 51, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"Demo Bit Again\",\"designation\":\"demo bit again\",\"email\":\"demoagain@gmail.com\",\"username\":\"demoagain\",\"password\":\"$2y$10$G.GM5sbmj.nQ8KSD5AYeEuh9AKbBMh0\\/2X2\\/CmhOAfE5.snKzoWmG\",\"phone_number\":\"01867090247\",\"profile_photo\":null,\"status\":1}}', '2023-10-31 14:29:39', '2023-10-31 14:29:39'),
-(294, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-11-01 09:12:47', '2023-11-01 09:12:47'),
-(295, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-11-01 09:18:31', '2023-11-01 09:18:31'),
-(296, 'user', 'created', 52, 'App\\User', 51, 'App\\User', '{\"attributes\":{\"name\":\"Ertugrul\",\"designation\":\"Beyim\",\"email\":\"ertugrul@gmail.com\",\"username\":\"ertugrul\",\"password\":\"$2y$10$k1pUQZ\\/xJX..gbq4l.\\/theYOUi7dKk4bLSlQRMEwNiZC1niDwIpwq\",\"phone_number\":\"018797998978\",\"profile_photo\":null,\"status\":1,\"range_id\":14}}', '2023-11-01 09:31:34', '2023-11-01 09:31:34'),
-(297, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-11-07 17:08:53', '2023-11-07 17:08:53'),
-(298, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-11-07 17:24:38', '2023-11-07 17:24:38'),
-(299, 'permission', 'view', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 19:59:38', '2023-11-07 19:59:38'),
-(300, 'role', 'view', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 19:59:41', '2023-11-07 19:59:41'),
-(301, 'settings', 'view', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 19:59:48', '2023-11-07 19:59:48'),
-(302, 'permission', 'view', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 20:00:07', '2023-11-07 20:00:07'),
-(303, 'permission', 'view', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 20:00:12', '2023-11-07 20:00:12'),
-(304, 'role', 'view', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 20:00:16', '2023-11-07 20:00:16'),
-(305, 'role', 'create', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 20:00:32', '2023-11-07 20:00:32'),
-(306, 'role', 'created', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 20:02:34', '2023-11-07 20:02:34'),
-(307, 'role', 'view', NULL, NULL, 50, 'App\\User', '[]', '2023-11-07 20:02:36', '2023-11-07 20:02:36'),
-(308, 'user', 'created', 53, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"demosfpc\",\"designation\":\"sfpc\",\"email\":\"sfpc@gmail.com\",\"username\":\"demosfpc\",\"password\":\"$2y$10$QB\\/t9hfghLvpcWskF\\/gWMetAiVEFQrcc1IMRAkFRIcww09MlldrE6\",\"phone_number\":\"01867090247\",\"profile_photo\":null,\"status\":1,\"range_id\":13}}', '2023-11-19 11:43:37', '2023-11-19 11:43:37'),
-(309, 'user', 'updated', 1, 'App\\User', 1, 'App\\User', '{\"attributes\":[],\"old\":[]}', '2023-11-19 11:44:34', '2023-11-19 11:44:34');
+(1, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 15:01:19', '2023-12-06 15:01:19'),
+(2, 'role', 'create', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 15:01:26', '2023-12-06 15:01:26'),
+(3, 'role', 'created', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 15:02:51', '2023-12-06 15:02:51'),
+(4, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 15:02:53', '2023-12-06 15:02:53'),
+(5, 'user', 'created', 54, 'App\\User', 1, 'App\\User', '{\"attributes\":{\"name\":\"demorange\",\"designation\":\"demo range\",\"email\":\"demorange@gmail.com\",\"username\":\"demorange\",\"password\":\"$2y$10$l9pJmpiYZjH0cgUhqRrnkeIfXnBwARQ0jhpdUeqyT4HQiYaaKCnje\",\"phone_number\":\"01867090247\",\"profile_photo\":null,\"status\":1,\"range_id\":1}}', '2023-12-06 19:18:10', '2023-12-06 19:18:10'),
+(6, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 19:18:24', '2023-12-06 19:18:24'),
+(7, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 20:51:21', '2023-12-06 20:51:21'),
+(8, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 20:51:26', '2023-12-06 20:51:26'),
+(9, 'permission', 'view', NULL, NULL, 54, 'App\\User', '[]', '2023-12-06 23:06:11', '2023-12-06 23:06:11'),
+(10, 'permission', 'view', NULL, NULL, 54, 'App\\User', '[]', '2023-12-06 23:06:50', '2023-12-06 23:06:50'),
+(11, 'role', 'view', NULL, NULL, 54, 'App\\User', '[]', '2023-12-06 23:06:58', '2023-12-06 23:06:58'),
+(12, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 23:07:15', '2023-12-06 23:07:15'),
+(13, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 23:07:19', '2023-12-06 23:07:19'),
+(14, 'permission', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 23:07:25', '2023-12-06 23:07:25'),
+(15, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 23:08:18', '2023-12-06 23:08:18'),
+(16, 'role', 'Edit', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 23:08:24', '2023-12-06 23:08:24'),
+(17, 'role', 'updated', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 23:08:57', '2023-12-06 23:08:57'),
+(18, 'role', 'view', NULL, NULL, 1, 'App\\User', '[]', '2023-12-06 23:08:59', '2023-12-06 23:08:59');
 
 -- --------------------------------------------------------
 
@@ -380,6 +88,64 @@ CREATE TABLE `beneficiaries` (
 INSERT INTO `beneficiaries` (`id`, `garden_id`, `voter_id`, `mobile`, `details`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, NULL, '321342', 'dsf', '2023-10-21 09:16:46', '2023-10-21 09:16:46', NULL),
 (2, 1, NULL, '321342', 'dsf', '2023-10-28 07:19:20', '2023-10-28 07:19:20', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `benefit_shares`
+--
+
+CREATE TABLE `benefit_shares` (
+  `id` int NOT NULL,
+  `garden_id` int NOT NULL,
+  `office_order_no` varchar(255) NOT NULL,
+  `payment_date` date NOT NULL,
+  `benefit_male` int NOT NULL,
+  `benefit_female` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `benefit_shares`
+--
+
+INSERT INTO `benefit_shares` (`id`, `garden_id`, `office_order_no`, `payment_date`, `benefit_male`, `benefit_female`, `created_at`, `updated_at`) VALUES
+(10, 13, 'hello world', '2023-12-06', 80, 60, '2023-12-06 02:19:33', '2023-12-06 02:19:33'),
+(11, 13, 'hello world 3', '2023-12-20', 80, 60, '2023-12-06 02:38:13', '2023-12-06 02:38:13'),
+(12, 12, 'hello world 4', '2023-12-13', 80, 60, '2023-12-06 02:42:18', '2023-12-06 02:42:18'),
+(13, 12, 'hello world 4', '2023-12-12', 80, 60, '2023-12-06 02:54:03', '2023-12-06 02:54:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `benefit_share_payments`
+--
+
+CREATE TABLE `benefit_share_payments` (
+  `id` int NOT NULL,
+  `benefit_share_id` int NOT NULL,
+  `party_id` int NOT NULL,
+  `institute_id` int NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `benefit_share_payments`
+--
+
+INSERT INTO `benefit_share_payments` (`id`, `benefit_share_id`, `party_id`, `institute_id`, `amount`, `comment`, `created_at`, `updated_at`) VALUES
+(3, 10, 2, 5, '400.00', '', '2023-12-06 02:19:33', '2023-12-06 02:19:33'),
+(4, 10, 2, 5, '400.00', '', '2023-12-06 02:19:33', '2023-12-06 02:19:33'),
+(5, 11, 1, 1, '400.00', '', '2023-12-06 02:38:13', '2023-12-06 02:38:13'),
+(6, 11, 1, 1, '400.00', '', '2023-12-06 02:38:13', '2023-12-06 02:38:13'),
+(7, 12, 2, 3, '70.00', '', '2023-12-06 02:45:13', '2023-12-06 02:45:13'),
+(8, 12, 2, 3, '70.00', '', '2023-12-06 02:45:13', '2023-12-06 02:45:13'),
+(9, 13, 2, 4, '69.00', '', '2023-12-06 02:54:35', '2023-12-06 02:54:35'),
+(10, 13, 2, 3, '69.00', '', '2023-12-06 02:54:35', '2023-12-06 02:54:35');
 
 -- --------------------------------------------------------
 
@@ -944,7 +710,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (6, 'App\\User', 50),
 (6, 'App\\User', 51),
 (6, 'App\\User', 52),
-(8, 'App\\User', 53);
+(8, 'App\\User', 53),
+(9, 'App\\User', 54);
 
 -- --------------------------------------------------------
 
@@ -1334,7 +1101,8 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 (5, 'প্রতিবেদন প্রস্তুতকারী/যাচাইকারী', 'web', '2023-05-21 16:15:47', '2023-05-21 16:15:47'),
 (6, 'বীট', 'web', '2023-05-21 16:17:42', '2023-05-21 16:17:42'),
 (7, 'এসএফএনটিসি', 'web', '2023-05-21 16:29:16', '2023-05-21 16:29:16'),
-(8, 'sfpc', 'web', '2023-11-07 20:02:34', '2023-11-07 20:02:34');
+(8, 'sfpc', 'web', '2023-11-07 20:02:34', '2023-11-07 20:02:34'),
+(9, 'range', 'web', '2023-12-06 15:02:51', '2023-12-06 15:02:51');
 
 -- --------------------------------------------------------
 
@@ -1519,7 +1287,20 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (23, 8),
 (24, 8),
 (25, 8),
-(26, 8);
+(26, 8),
+(1, 9),
+(15, 9),
+(16, 9),
+(17, 9),
+(18, 9),
+(19, 9),
+(20, 9),
+(21, 9),
+(22, 9),
+(23, 9),
+(24, 9),
+(25, 9),
+(26, 9);
 
 -- --------------------------------------------------------
 
@@ -1613,6 +1394,29 @@ INSERT INTO `sfpcs` (`id`, `range_id`, `name`, `name_english`, `office_head_desi
 (23, 13, 'demosfpc', 'demosfpc', 'hello', '2023-11-07 21:02:40', '2023-11-07 21:02:40', NULL),
 (24, 13, 'sfpc_demo', 'sfopc_demo', 'hello', '2023-11-07 21:05:38', '2023-11-07 21:05:38', NULL),
 (25, 13, 'sfpc_demo', 'sfopc_demo', 'hello', '2023-11-07 21:07:07', '2023-11-07 21:07:07', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tffs`
+--
+
+CREATE TABLE `tffs` (
+  `id` int NOT NULL,
+  `garden_id` int NOT NULL,
+  `office_order_no` varchar(255) NOT NULL,
+  `payment_date` date NOT NULL,
+  `tff_payment` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tffs`
+--
+
+INSERT INTO `tffs` (`id`, `garden_id`, `office_order_no`, `payment_date`, `tff_payment`, `created_at`, `updated_at`) VALUES
+(1, 13, 'hello world 3', '2023-12-06', '50.00', '2023-12-06 14:50:25', '2023-12-06 14:50:25');
 
 -- --------------------------------------------------------
 
@@ -2534,7 +2338,8 @@ INSERT INTO `users` (`id`, `name`, `designation`, `email`, `phone_number`, `prof
 (50, 'Demo Bit', 'Demo Podobi', 'demo@gmail.com', '018797998978', NULL, '2023-06-26 22:52:21', 'demo', '$2y$10$QB/t9hfghLvpcWskF/gWMetAiVEFQrcc1IMRAkFRIcww09MlldrE6', NULL, '2023-10-31 13:11:12', '2023-10-31 13:11:12', 1, NULL, 13, NULL),
 (51, 'Demo Bit Again', 'demo bit again', 'demoagain@gmail.com', '01867090247', NULL, '2023-10-31 14:29:39', 'demoagain', '$2y$10$G.GM5sbmj.nQ8KSD5AYeEuh9AKbBMh0/2X2/CmhOAfE5.snKzoWmG', NULL, '2023-10-31 14:29:39', '2023-10-31 14:29:39', 1, NULL, 14, NULL),
 (52, 'Ertugrul', 'Beyim', 'ertugrul@gmail.com', '018797998978', NULL, '2023-11-01 09:31:34', 'ertugrul', '$2y$10$k1pUQZ/xJX..gbq4l./theYOUi7dKk4bLSlQRMEwNiZC1niDwIpwq', NULL, '2023-11-01 09:31:34', '2023-11-01 09:31:34', 1, NULL, 14, NULL),
-(53, 'demosfpc', 'sfpc', 'sfpc@gmail.com', '01867090247', NULL, '2023-11-19 11:43:37', 'demosfpc', '$2y$10$QB/t9hfghLvpcWskF/gWMetAiVEFQrcc1IMRAkFRIcww09MlldrE6', NULL, '2023-11-19 11:43:37', '2023-11-19 11:43:37', 1, NULL, 13, NULL);
+(53, 'demosfpc', 'sfpc', 'sfpc@gmail.com', '01867090247', NULL, '2023-11-19 11:43:37', 'demosfpc', '$2y$10$QB/t9hfghLvpcWskF/gWMetAiVEFQrcc1IMRAkFRIcww09MlldrE6', NULL, '2023-11-19 11:43:37', '2023-11-19 11:43:37', 1, NULL, 13, NULL),
+(54, 'demorange', 'demo range', 'demorange@gmail.com', '01867090247', NULL, '2023-12-06 19:18:09', 'demorange', '$2y$10$l9pJmpiYZjH0cgUhqRrnkeIfXnBwARQ0jhpdUeqyT4HQiYaaKCnje', NULL, '2023-12-06 19:18:09', '2023-12-06 19:18:09', 1, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -2821,7 +2626,7 @@ CREATE TABLE `wood_lot_deposit_payments` (
   `comment` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `wood_lot_deposit_payments`
@@ -2916,6 +2721,18 @@ ALTER TABLE `activity_log`
 -- Indexes for table `beneficiaries`
 --
 ALTER TABLE `beneficiaries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `benefit_shares`
+--
+ALTER TABLE `benefit_shares`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `benefit_share_payments`
+--
+ALTER TABLE `benefit_share_payments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3124,6 +2941,12 @@ ALTER TABLE `sfpcs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tffs`
+--
+ALTER TABLE `tffs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tff_profit_distributions`
 --
 ALTER TABLE `tff_profit_distributions`
@@ -3186,13 +3009,25 @@ ALTER TABLE `wood_lot_payment_histories`
 -- AUTO_INCREMENT for table `activity_log`
 --
 ALTER TABLE `activity_log`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `beneficiaries`
 --
 ALTER TABLE `beneficiaries`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `benefit_shares`
+--
+ALTER TABLE `benefit_shares`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `benefit_share_payments`
+--
+ALTER TABLE `benefit_share_payments`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `bits`
@@ -3348,7 +3183,7 @@ ALTER TABLE `range_thanas`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -3367,6 +3202,12 @@ ALTER TABLE `sfntc`
 --
 ALTER TABLE `sfpcs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `tffs`
+--
+ALTER TABLE `tffs`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tff_profit_distributions`
@@ -3396,7 +3237,7 @@ ALTER TABLE `union_parishads`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `wood_lots`

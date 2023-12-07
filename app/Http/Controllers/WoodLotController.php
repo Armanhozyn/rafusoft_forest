@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Beneficiary;
 use App\Garden;
+use App\GardenBikrito;
 use App\Http\Requests\PaymentRequest;
 use App\Http\Requests\WoodLotRequest;
 use App\WoodLot;
@@ -109,12 +110,21 @@ class WoodLotController extends Controller
     public function create()
     {
         $title = 'Create Wood Lot';
-        $gardens = DB::table('gardens')->latest()->get();
+        // $gardens = DB::table('garden_bikritos')->where('range_id',Auth::user()->id)->latest()->get();
+        $gardens = GardenBikrito::join('gardens','gardens.id','=','garden_bikritos.garden_id')
+                    ->where('gardens.range_id',Auth::user()->range_id)
+                    ->select('gardens.*')
+                    ->latest()
+                    ->get();
         return view('wood-lot.create', compact('gardens','title'));
     }
 
     public function lot_payment(Request $request){
-        $gardens = DB::table('gardens')->latest()->get();
+        $gardens = GardenBikrito::join('gardens','gardens.id','=','garden_bikritos.garden_id')
+        ->where('gardens.range_id',Auth::user()->range_id)
+        ->select('gardens.*')
+        ->latest()
+        ->get();
         $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
         ->join('ranges','ranges.id','gardens.range_id')
         ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
@@ -172,13 +182,26 @@ class WoodLotController extends Controller
 
             })
             ->addColumn('actions',function($row){
-                $collect_money_api = route('woodlot.collect_money',$row->range_lot_no_year);
-                $collect_money = trans('sold_garden.collect_money');
-                $action = <<<CODE
-                <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$collect_money_api' data-original-title='Collect Money details'>
-                    $collect_money
-                </a>
-                CODE;
+
+
+                $prevWoodLotPayment = WoodLotPaymentHistory::where('wood_lot_id',$row->id)->latest()->sum('collection_amount');
+                if($row->quoted_rate == $prevWoodLotPayment){
+                    $action = <<<CODE
+                    <a class='btn btn-success btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='#' data-original-title='Collect Money details'>
+                        Collection Completed
+                    </a>
+                    CODE;
+                    // return back()->with('error', );
+                }else{
+                    $collect_money_api = route('woodlot.collect_money',$row->range_lot_no_year);
+                    $collect_money = trans('sold_garden.collect_money');
+                    $action = <<<CODE
+                    <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$collect_money_api' data-original-title='Collect Money details'>
+                        $collect_money
+                    </a>
+                    CODE;
+                }
+
 
                 return $action;
 
@@ -319,6 +342,18 @@ class WoodLotController extends Controller
     public function payment_submit(PaymentRequest $request)
     {
         $woodlot = WoodLot::where('range_lot_no_year', $request->range_lot_no_year)->first();
+
+        $prevWoodLotPayment = WoodLotPaymentHistory::where('wood_lot_id',$woodlot->id)->latest()->sum('collection_amount');
+
+        $total_amount = $prevWoodLotPayment + $request->collection_amount;
+
+        $left_amount = $woodlot->quoted_rate - $prevWoodLotPayment;
+        if($woodlot->quoted_rate < $total_amount){
+            flash('Collection Amount Cannot be Greater Than ' . $left_amount )->error();
+            return redirect()->back();
+            // return back()->with('error', );
+        }
+
         WoodLotPaymentHistory::create([
             'wood_lot_id' => $woodlot->id,
             'money_collection_slip_no' => $request->money_collection_slip_no,
@@ -344,6 +379,12 @@ class WoodLotController extends Controller
     public function store(WoodLotRequest $request)
     {
         // $request->merge(['user_id' => Auth::user()->id]);
+        $prevlot = WoodLot::where('garden_id',$request->garden_id)->count();
+        $lot_limit = GardenBikrito::where('garden_id',$request->garden_id)->first();
+        if($lot_limit->total_lot_count <= $prevlot){
+            flash('Lot limit Full')->error();
+            return redirect()->back();
+        }
         WoodLot::create($request->except('_token'));
         flash('Woodlot created successfully!')->success();
         return redirect()->route('garden.woodlot.index');

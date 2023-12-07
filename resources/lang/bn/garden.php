@@ -38,5 +38,6 @@ return [
     'benefit_female' => 'উপকারভোগী মহিলা সংখ্যা',
     'benefit_male' => 'উপকারভোগী পুরুষ সংখ্যা',
     'payment_date' => 'তারিখ',
+    'tff_payment' => 'টিএফএফএর প্রদানকৃত অর্থ'
 
 ];

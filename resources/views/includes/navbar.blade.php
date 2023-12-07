@@ -75,6 +75,13 @@
 
                                 @can('view-user')
                                 <li class="nav-item">
+                                    <a href="{{url('/union')}}" class="nav-link"><span class="sidenav-mini-icon">D
+                                        </span><span class="sidenav-normal">{{ __('navbar.unions') }}</span></a>
+                                </li>
+                                @endcan
+
+                                @can('view-user')
+                                <li class="nav-item">
                                     <a href="{{url('/projects')}}" class="nav-link"><span class="sidenav-mini-icon">D
                                         </span><span class="sidenav-normal">{{ __('navbar.projects') }}</span></a>
                                 </li>
@@ -86,12 +93,7 @@
                                         </span><span class="sidenav-normal">{{ __('navbar.ranges') }}</span></a>
                                 </li>
                                 @endcan
-                                @can('view-user')
-                                <li class="nav-item">
-                                    <a href="{{url('/union')}}" class="nav-link"><span class="sidenav-mini-icon">D
-                                        </span><span class="sidenav-normal">{{ __('navbar.unions') }}</span></a>
-                                </li>
-                                @endcan
+
                                 @can('create-user')
                                 <li class="nav-item">
                                     <a href="{{url('/land_owner')}}" class="nav-link"><span class="sidenav-mini-icon">D
@@ -276,6 +278,20 @@
                                     <a href="{{ route('benefit.share') }}" class="nav-link"><span
                                             class="sidenav-mini-icon">D </span><span class="sidenav-normal">{{
                                             __('navbar.profit_share') }}
+                                        </span></a>
+                                </li>
+                                @endcan
+                            </ul>
+                        </div>
+                        <div class="collapse" id="navbar-profit-share">
+                            <ul class="nav nav-sm flex-column">
+
+
+                                @can('create-category')
+                                <li class="nav-item">
+                                    <a href="{{ route('tff') }}" class="nav-link"><span
+                                            class="sidenav-mini-icon">D </span><span class="sidenav-normal">{{
+                                            __('navbar.tff') }}
                                         </span></a>
                                 </li>
                                 @endcan

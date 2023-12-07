@@ -33,6 +33,7 @@ return [
     'bank_deposit_details' => 'ব্যাংক জমার বিবরন',
     'bit' => 'বিট',
     'sfpc' => 'এসএফপিসি',
-    'woodlot_deposite' => ' লটের টাকা জমা'
+    'woodlot_deposite' => ' লটের টাকা জমা',
+    'tff' => 'টিএফএফএর অংশ বিতরণ'
 
 ];

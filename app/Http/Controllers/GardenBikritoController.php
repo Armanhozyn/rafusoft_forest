@@ -15,8 +15,8 @@ class GardenBikritoController extends Controller
 {
 
     public function garden_bikrito(Request $request){
-        $gardens = DB::table('gardens')->latest()->get();
-        $bitList = User::latest()->role('বীট')->get();
+        $gardens = DB::table('gardens')->where('range_id', Auth::user()->range_id)->latest()->get();
+        $bitList = User::where('range_id', Auth::user()->range_id)->latest()->role('বীট')->get();
 
         $startYear = 2000;
         $endYear = date('Y');
@@ -99,12 +99,20 @@ class GardenBikritoController extends Controller
                 $collect_money_api = route('garden.sell.creat',$row->id);
                 $sell_garden = trans('sold_garden.sell_garden');
                 // $collect_money = trans('sold_garden.collect_money');
-                $action = <<<CODE
-                <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$collect_money_api' data-original-title='Collect Money details'>
-                    $sell_garden
-                </a>
-                CODE;
-
+                $isgardensold = GardenBikrito::where('garden_id',$row->id)->first();
+                if($isgardensold){
+                    $action = <<<CODE
+                    <a class='btn btn-success btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='#' data-original-title='Collect Money details'>
+                        Garden Sold
+                    </a>
+                    CODE;
+                }else{
+                    $action = <<<CODE
+                    <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$collect_money_api' data-original-title='Collect Money details'>
+                        $sell_garden
+                    </a>
+                    CODE;
+                }
                 return $action;
 
             })

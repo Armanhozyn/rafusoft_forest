@@ -21,27 +21,41 @@ class WoodlotDepositeController extends Controller
 {
 
     public function woodlot_deposite(Request $request){
-        $gardens = DB::table('gardens')->latest()->get();
-        $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
-        ->join('ranges','ranges.id','gardens.range_id')
-        ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
-        ->join('districts', 'districts.id', '=', 'ranges.district_id')
-        ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-        ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
-        ->latest('gardens.created_at')
+        $gardens = GardenBikrito::join('gardens','gardens.id','=','garden_bikritos.garden_id')
+        ->where('gardens.range_id',Auth::user()->range_id)
+        ->select('gardens.*')
+        ->latest()
         ->get();
+        // $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
+        // ->join('ranges','ranges.id','gardens.range_id')
+        // ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
+        // ->join('districts', 'districts.id', '=', 'ranges.district_id')
+        // ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
+        // ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+        // ->latest('gardens.created_at')
+        // ->get();
+        $woodlots = WoodLot::join('wood_lot_payment_histories', 'wood_lot_payment_histories.wood_lot_id', '=', 'wood_lots.id')
+        ->select('wood_lots.*')
+        ->groupBy('wood_lots.id', 'wood_lots.quoted_rate')
+        ->havingRaw('SUM(wood_lot_payment_histories.collection_amount) = wood_lots.quoted_rate')
+        ->get();
+
+        // dd($woodLots);
 
         if (request()->ajax()) {
 
             $garden_id = str_replace(' ', '', $request->input('garden_id'));
             $range_or_center_lot_no_and_year = str_replace(' ', '', $request->input('range_or_center_lot_no_and_year'));
 
-            $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
+            $woodlots = WoodLot::join('wood_lot_payment_histories', 'wood_lot_payment_histories.wood_lot_id', '=', 'wood_lots.id')
+            ->join('gardens','wood_lots.garden_id','gardens.id')
             ->join('ranges','ranges.id','gardens.range_id')
             ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
             ->join('districts', 'districts.id', '=', 'ranges.district_id')
             ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
             ->select('wood_lots.*','gardens.location as garden_location','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+            ->groupBy('wood_lots.id', 'wood_lots.quoted_rate')
+            ->havingRaw('SUM(wood_lot_payment_histories.collection_amount) = wood_lots.quoted_rate')
             ->when(!empty($garden_id), function ($query) use ($garden_id) {
                 return $query->where('garden_id', $garden_id);
             })

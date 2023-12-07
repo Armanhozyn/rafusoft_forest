@@ -129,9 +129,10 @@ class GardenController extends Controller
         $user = Auth::user();
         // dd($user->name);
         $rangeInfo = $user->name;
-        $sfpcList = Sfpc::where('range_id', $user->range_id)->pluck('name', 'id');
+        // $sfpcList = Sfpc::where('range_id', $user->range_id)->pluck('name', 'id');
+        $sfpcList = User::where('range_id', $user->range_id)->latest()->role('sfpc')->pluck('name', 'id');
         // $bitList = Bit::where('range_id', $user->range_id)->pluck('name', 'id');
-        $bitList = User::latest()->role('বীট')->pluck('name', 'id');
+        $bitList = User::where('range_id', $user->range_id)->latest()->role('বীট')->pluck('name', 'id');
         // dd($sfpcList);
         // dd($bitList);
         // dd($user);
