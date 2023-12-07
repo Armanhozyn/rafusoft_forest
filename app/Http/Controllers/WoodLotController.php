@@ -233,13 +233,18 @@ class WoodLotController extends Controller
     public function all_lot_payment(Request $request)
     {
 
-        $gardens = DB::table('gardens')->latest()->get();
-        $woodlots = WoodLot::join('gardens','wood_lots.garden_id','gardens.id')
+        $gardens = GardenBikrito::join('gardens','gardens.id','=','garden_bikritos.garden_id')
+        ->where('gardens.range_id',Auth::user()->range_id)
+        ->select('gardens.*')
+        ->latest()
+        ->get();
+        $woodlots = WoodLot::join('gardens','wood_lots.garden_id','=','gardens.id')
         ->join('ranges','ranges.id','gardens.range_id')
         ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
         ->join('districts', 'districts.id', '=', 'ranges.district_id')
         ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
         ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+        ->where('gardens.range_id',Auth::user()->range_id)
         ->latest('gardens.created_at')
         ->get();
         if (request()->ajax()) {
@@ -256,6 +261,7 @@ class WoodLotController extends Controller
             ->when(!empty($range_or_center_lot_no_and_year), function ($query) use ($range_or_center_lot_no_and_year) {
                 return $query->where('range_lot_no_year', $range_or_center_lot_no_and_year);
             })
+            ->where('gardens.range_id',Auth::user()->range_id)
             ->latest()
             ->get();
 
