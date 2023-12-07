@@ -35,9 +35,11 @@ class WoodlotDepositeController extends Controller
         // ->latest('gardens.created_at')
         // ->get();
         $woodlots = WoodLot::join('wood_lot_payment_histories', 'wood_lot_payment_histories.wood_lot_id', '=', 'wood_lots.id')
+        ->join('gardens','wood_lots.garden_id','gardens.id')
         ->select('wood_lots.*')
         ->groupBy('wood_lots.id', 'wood_lots.quoted_rate')
         ->havingRaw('SUM(wood_lot_payment_histories.collection_amount) = wood_lots.quoted_rate')
+        ->where('gardens.range_id',Auth::user()->range_id)
         ->get();
 
         // dd($woodLots);
