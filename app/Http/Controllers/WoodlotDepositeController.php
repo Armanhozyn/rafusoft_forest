@@ -36,7 +36,7 @@ class WoodlotDepositeController extends Controller
         // ->get();
         $woodlots = WoodLot::join('wood_lot_payment_histories', 'wood_lot_payment_histories.wood_lot_id', '=', 'wood_lots.id')
         ->select('wood_lots.*')
-        ->groupBy('wood_lots.id', 'wood_lots.quoted_rate','wood_lots.garden_id')
+        ->groupBy('wood_lots.*')
         ->havingRaw('SUM(wood_lot_payment_histories.collection_amount) = wood_lots.quoted_rate')
         ->get();
 
