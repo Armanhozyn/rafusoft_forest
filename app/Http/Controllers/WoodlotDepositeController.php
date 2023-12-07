@@ -53,8 +53,8 @@ class WoodlotDepositeController extends Controller
             ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
             ->join('districts', 'districts.id', '=', 'ranges.district_id')
             ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-            ->select('wood_lots.*','gardens.location as garden_location','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
-            ->groupBy('wood_lots.*')
+            ->select('wood_lots.*','wood_lots.id', 'wood_lots.quoted_rate', 'wood_lots.garden_id', 'wood_lots.division_group_no_year','gardens.location as garden_location','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+            ->groupBy('wood_lots.id', 'wood_lots.quoted_rate', 'wood_lots.garden_id', 'wood_lots.division_group_no_year')
             ->havingRaw('SUM(wood_lot_payment_histories.collection_amount) = wood_lots.quoted_rate')
             ->when(!empty($garden_id), function ($query) use ($garden_id) {
                 return $query->where('garden_id', $garden_id);
