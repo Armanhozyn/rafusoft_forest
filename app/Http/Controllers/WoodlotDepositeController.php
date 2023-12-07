@@ -64,6 +64,7 @@ class WoodlotDepositeController extends Controller
             ->when(!empty($range_or_center_lot_no_and_year), function ($query) use ($range_or_center_lot_no_and_year) {
                 return $query->where('range_lot_no_year', $range_or_center_lot_no_and_year);
             })
+            ->where('gardens.range_id',Auth::user()->range_id)
             ->latest('gardens.created_at')
             ->get();
             return DataTables::of($woodlots)
