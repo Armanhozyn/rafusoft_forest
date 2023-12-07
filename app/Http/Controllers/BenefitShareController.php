@@ -20,8 +20,8 @@ class BenefitShareController extends Controller
 {
 
     public function benefit_share(Request $request){
-        $gardens = DB::table('gardens')->latest()->get();
-        $bitList = User::latest()->role('বীট')->get();
+        $gardens = DB::table('gardens')->where('range_id', Auth::user()->range_id)->latest()->get();
+        $bitList =User::where('range_id', Auth::user()->range_id)->latest()->role('বীট')->get();
 
         $startYear = 2000;
         $endYear = date('Y');
