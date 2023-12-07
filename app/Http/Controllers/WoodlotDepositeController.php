@@ -137,9 +137,11 @@ class WoodlotDepositeController extends Controller
 
             $user = Auth::user();
             $gardens = WoodLot::join('wood_lot_deposit_payments','wood_lot_deposit_payments.wood_lot_id','=','wood_lots.id')
+            ->join('gardens','wood_lots.garden_id','gardens.id')
             ->select('wood_lots.*')
             ->latest()
             ->groupBy('wood_lots.id')
+            ->where('gardens.range_id',Auth::user()->range_id)
             ->get();
             return DataTables::of($gardens)
             ->addIndexColumn()
