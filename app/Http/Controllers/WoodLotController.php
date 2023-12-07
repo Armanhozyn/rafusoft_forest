@@ -134,8 +134,11 @@ class WoodLotController extends Controller
         ->join('districts', 'districts.id', '=', 'ranges.district_id')
         ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
         ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+        ->where('gardens.range_id',Auth::user()->range_id)
         ->latest('gardens.created_at')
         ->get();
+
+
 
         if (request()->ajax()) {
 
