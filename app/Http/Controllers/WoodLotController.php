@@ -20,7 +20,10 @@ class WoodLotController extends Controller
 {
     public function index(Request $request)
     {
-        $woodlots = WoodLot::latest()->get();
+        $woodlots = WoodLot::join('gardens','gardens.id','=','wood_lots.garden_id')
+                    ->select('wood_lots.*')
+                    ->where('gardens.range_id',Auth::user()->range_id)
+                    ->latest()->get();
 
 
         if (request()->ajax()) {
