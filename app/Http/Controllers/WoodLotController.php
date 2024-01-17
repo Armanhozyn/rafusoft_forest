@@ -150,7 +150,7 @@ class WoodLotController extends Controller
             ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
             ->join('districts', 'districts.id', '=', 'ranges.district_id')
             ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-            ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+            ->select('wood_lots.*','wood_lots.id as wood_lot_id','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
             ->when(!empty($garden_id), function ($query) use ($garden_id) {
                 return $query->where('garden_id', $garden_id);
             })
