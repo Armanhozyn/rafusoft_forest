@@ -349,7 +349,7 @@ class WoodLotController extends Controller
     public function collect_money($wood_lot_id)
     {
         $woodlot = WoodLot::find($wood_lot_id);
-        dd($woodlot);
+        $range_lot_year_no = $woodlot->range_lot_no_year;
         return view('wood-lot.collect_money', compact('range_lot_year_no'));
     }
 
