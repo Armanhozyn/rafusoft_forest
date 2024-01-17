@@ -161,6 +161,8 @@ class WoodLotController extends Controller
             ->latest('gardens.created_at')
             ->get();
 
+            dd($woodlots);
+
 
             return DataTables::of($woodlots)
             ->addIndexColumn()
