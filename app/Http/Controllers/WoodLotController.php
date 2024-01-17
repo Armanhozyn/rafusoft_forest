@@ -133,7 +133,7 @@ class WoodLotController extends Controller
         ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
         ->join('districts', 'districts.id', '=', 'ranges.district_id')
         ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-        ->select('wood_lots.*','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+        ->select('wood_lots.*','wood_lots.id as wood_lot_id','gardens.garden_size as garden_size','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
         ->where('gardens.range_id',Auth::user()->range_id)
         ->latest('gardens.created_at')
         ->get();
@@ -160,8 +160,6 @@ class WoodLotController extends Controller
             ->where('gardens.range_id',Auth::user()->range_id)
             ->latest('gardens.created_at')
             ->get();
-
-            dd($woodlots);
 
 
             return DataTables::of($woodlots)
@@ -202,7 +200,7 @@ class WoodLotController extends Controller
                     CODE;
                     // return back()->with('error', );
                 }else{
-                    $collect_money_api = route('woodlot.collect_money',urlencode($row->range_lot_no_year));
+                    $collect_money_api = route('woodlot.collect_money',$row->wood_lot_id);
                     $collect_money = trans('sold_garden.collect_money');
                     $action = <<<CODE
                     <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$collect_money_api' data-original-title='Collect Money details'>
@@ -348,8 +346,10 @@ class WoodLotController extends Controller
         return view('wood-lot.all_lot_payment', compact('gardens','woodlots','title'));
     }
 
-    public function collect_money($range_lot_year_no)
+    public function collect_money($wood_lot_id)
     {
+        $woodlot = WoodLot::find($wood_lot_id);
+        dd($woodlot);
         return view('wood-lot.collect_money', compact('range_lot_year_no'));
     }
 
