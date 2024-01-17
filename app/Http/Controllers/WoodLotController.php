@@ -200,7 +200,7 @@ class WoodLotController extends Controller
                     CODE;
                     // return back()->with('error', );
                 }else{
-                    $collect_money_api = route('woodlot.collect_money',$row->range_lot_no_year);
+                    $collect_money_api = route('woodlot.collect_money',urlencode($row->range_lot_no_year));
                     $collect_money = trans('sold_garden.collect_money');
                     $action = <<<CODE
                     <a class='btn btn-info btn-sm m-1' data-toggle='tooltip' data-placement='top' title='' href='$collect_money_api' data-original-title='Collect Money details'>
