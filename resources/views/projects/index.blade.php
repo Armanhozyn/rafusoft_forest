@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
-@can('create-category')
-    <a href="{{ route('projects.create') }}" class="btn btn-sm btn-neutral">Create Project</a>
+@can('create-project')
+    <a href="{{ route('projects.create') }}" class="btn btn-sm btn-neutral">প্রকল্প তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,8 @@
                 <div class="card-header bg-transparent">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h3 class="mb-0">All Projects</h3>
+                            <h3 class="mb-0">
+                                সব প্রকল্প</h3>
                         </div>
                         <div class="col-lg-4">
                     {!! Form::open(['route' => 'users.index', 'method'=>'get']) !!}
@@ -36,36 +37,36 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($categories as $category)
+                                @foreach($projects as $project)
                                     <tr>
                                         <th scope="row">
-                                            {{$category->name}}
+                                            {{$project->name}}
                                         </th>
 {{--                                         <td class="budget">
-                                            {{$category->user->name}}
+                                            {{$project->user->name}}
                                         </td> --}}
                                         {{-- <td>
-                                            @if($category->status)
+                                            @if($project->status)
                                                 <span class="badge badge-pill badge-lg badge-success">Active</span>
                                             @else
                                                 <span class="badge badge-pill badge-lg badge-danger">Disabled</span>
                                             @endif
                                         </td> --}}
                                         <td>
-                                            {{$category->created_at->diffForHumans()}}
+                                            {{$project->created_at->diffForHumans()}}
                                         </td>
                                         <td class="text-center">
-                                            @can('destroy-category')
-                                            {!! Form::open(['route' => ['category.destroy', $category],'method' => 'delete',  'class'=>'d-inline-block dform']) !!}
+                                            @can('destroy-project')
+                                            {!! Form::open(['route' => ['projects.destroy', $project],'method' => 'delete',  'class'=>'d-inline-block dform']) !!}
                                             @endcan
 
-                                            @can('update-category')
-                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Edit category details" href="{{route('category.edit',$category)}}">
+                                            @can('update-project')
+                                            <a class="btn btn-info btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Edit project details" href="{{route('projects.edit',$project)}}">
                                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                             </a>
                                             @endcan
-                                            @can('destroy-category')
-                                                <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Delete category" href="">
+                                            @can('destroy-project')
+                                                <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Delete project" href="">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             {!! Form::close() !!}
@@ -77,7 +78,7 @@
                                 <tfoot >
                                 <tr>
                                     <td colspan="6">
-                                        {{$categories->links()}}
+                                        {{$projects->links()}}
                                     </td>
                                 </tr>
                                 </tfoot>

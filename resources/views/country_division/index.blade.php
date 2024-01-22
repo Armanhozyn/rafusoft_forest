@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-country_division')
-<a href="{{ route('country_division.create') }}" class="btn btn-sm btn-neutral">Create New Country_division</a>
+<a href="{{ route('country_division.create') }}" class="btn btn-sm btn-neutral">নতুন বিভাগ তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Country_division</h3>
+                        <h3 class="mb-0">সব বিভাগ</h3>
                     </div>
                 </div>
             </div>

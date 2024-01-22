@@ -46,7 +46,7 @@ class LandOwnerController extends Controller
             ->make(true);
         }
         // dd($bits);
-        $title = 'Manage LandOwner';
+        $title = 'জমির মালিক পরিচালনা করুন';
         return view('land_owner.index', compact('land_owners', 'title'));
     }
 

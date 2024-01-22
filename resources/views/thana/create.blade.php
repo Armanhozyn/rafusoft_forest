@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-<a href="{{ route('thana.index') }}" class="btn btn-sm btn-neutral">All Thana</a>
+<a href="{{ route('thana.index') }}" class="btn btn-sm btn-neutral">সব থানা</a>
 @endpush
 @section('content')
 <div class="row">
@@ -8,7 +8,7 @@
         <div class="card mb-5">
             <div class="card-body">
                 {!! Form::open(['route' => 'thana.store']) !!}
-                <h6 class="heading-small text-muted mb-4">Thana information</h6>
+                <h6 class="heading-small text-muted mb-4">থানা</h6>
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-lg-6">
@@ -24,8 +24,8 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 {{-- {{ dd($roles) }} --}}
-                                {{ Form::label('district_id', 'Select District', ['class' => 'form-control-label']) }}
-                                {{ Form::select('district_id', $districtList, null, ['class' => 'form-control', 'placeholder' => 'Select district...']) }}
+                                {{ Form::label('district_id', 'জেলা নির্বাচন করুন', ['class' => 'form-control-label']) }}
+                                {{ Form::select('district_id', $districtList, null, ['class' => 'form-control', 'placeholder' => 'জেলা নির্বাচন করুন...']) }}
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-bit')
-<a href="{{ route('users.create') }}" class="btn btn-sm btn-neutral">Create New Bit</a>
+<a href="{{ route('users.create') }}" class="btn btn-sm btn-neutral">নতুন বিট তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Bit</h3>
+                        <h3 class="mb-0">সব বিট</h3>
                     </div>
                 </div>
             </div>

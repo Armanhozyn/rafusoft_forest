@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-range')
-<a href="{{ route('range.create') }}" class="btn btn-sm btn-neutral">Create New Range</a>
+<a href="{{ route('range.create') }}" class="btn btn-sm btn-neutral">নতুন রেঞ্জ তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Range</h3>
+                        <h3 class="mb-0">সব রেঞ্জ</h3>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-beneficiary')
-<a href="{{ route('beneficiary.create') }}" class="btn btn-sm btn-neutral">Create New Beneficiary</a>
+<a href="{{ route('beneficiary.create') }}" class="btn btn-sm btn-neutral">নতুন সুবিধাভোগী তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Beneficiary</h3>
+                        <h3 class="mb-0">সব সুবিধাভোগী</h3>
                     </div>
                 </div>
             </div>

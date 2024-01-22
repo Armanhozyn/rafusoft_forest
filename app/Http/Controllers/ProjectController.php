@@ -27,12 +27,12 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $categories = Project::where('category_name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
+            $projects = Project::where('category_name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
         } else {
-            $categories = Project::paginate(setting('record_per_page', 15));
+            $projects = Project::paginate(setting('record_per_page', 15));
         }
-        $title = 'Manage Projects';
-        return view('projects.index', compact('categories', 'title'));
+        $title = 'প্রকল্পগুলি পরিচালনা করুন';
+        return view('projects.index', compact('projects', 'title'));
     }
 
     /**
@@ -42,7 +42,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $title = 'Create Project';
+        $title = 'প্রকল্প তৈরি করুন';
         return view('projects.create', compact('title'));
     }
 
@@ -56,7 +56,7 @@ class ProjectController extends Controller
     {
         $request->merge(['user_id' => Auth::user()->id]);
         Project::create($request->except('_token'));
-        flash('Project created successfully!')->success();
+        flash('প্রকল্প created successfully!')->success();
         return redirect()->route('projects.index');
     }
 
@@ -77,11 +77,11 @@ class ProjectController extends Controller
      * @param  \App\Project  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $category)
+    public function edit(Project $project)
     {
-        $title = "Project Details";
-        $category->with('user');
-        return view('projects.edit', compact('title', 'category'));
+        $title = "প্রকল্পের বিস্তারিত বিবরণ";
+        $project->with('user');
+        return view('projects.edit', compact('title', 'project'));
     }
 
     /**
@@ -91,10 +91,10 @@ class ProjectController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectRequest $request, Project $category)
+    public function update(ProjectRequest $request, Project $project)
     {
-        $category->update($request->all());
-        flash('Project updated successfully!')->success();
+        $project->update($request->all());
+        flash('প্রকল্প updated successfully!')->success();
         return back();
     }
 
@@ -104,9 +104,9 @@ class ProjectController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $category)
+    public function destroy(Project $project)
     {
-        $category->delete();
+        $project->delete();
         flash('Project deleted successfully!')->info();
         return back();
     }

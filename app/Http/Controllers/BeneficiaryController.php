@@ -50,7 +50,7 @@ class BeneficiaryController extends Controller
             ->make(true);
         }
         // dd($bits);
-        $title = 'Manage Beneficiary';
+        $title = 'সুবিধাভোগী পরিচালনা করুন';
         return view('beneficiary.index', compact('beneficiaries', 'title'));
     }
 
@@ -61,7 +61,7 @@ class BeneficiaryController extends Controller
      */
     public function create()
     {
-        $title = 'Create Beneficiary';
+        $title = 'সুবিধাভোগী তৈরি করুন';
         $gardens = DB::table('gardens')->latest()->get();
         return view('beneficiary.create', compact('gardens','title'));
     }
@@ -76,7 +76,7 @@ class BeneficiaryController extends Controller
     {
         // $request->merge(['user_id' => Auth::user()->id]);
         Beneficiary::create($request->except('_token'));
-        flash('Beneficiary created successfully!')->success();
+        flash('সুবিধাভোগী created successfully!')->success();
         return redirect()->route('beneficiary.index');
     }
 
@@ -88,7 +88,7 @@ class BeneficiaryController extends Controller
      */
     public function edit(Beneficiary $beneficiary)
     {
-        $title = "Beneficiary Details";
+        $title = "সুবিধাভোগীর বিবরণ";
         $gardens = DB::table('gardens')->latest()->get();
         return view('beneficiary.edit', compact('title', 'beneficiary','gardens'));
     }
@@ -103,7 +103,7 @@ class BeneficiaryController extends Controller
     public function update(BeneficiaryRequest $request, Beneficiary $beneficiary)
     {
         $beneficiary->update($request->all());
-        flash('Bit updated successfully!')->success();
+        flash('সুবিধাভোগী updated successfully!')->success();
         return back();
     }
 
@@ -116,7 +116,7 @@ class BeneficiaryController extends Controller
     public function destroy(Beneficiary $beneficiary)
     {
         $beneficiary->delete();
-        flash('Beneficiary deleted successfully!')->info();
+        flash('সুবিধাভোগী deleted successfully!')->info();
         return back();
     }
 }

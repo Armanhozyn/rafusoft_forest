@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-<a href="{{route('forest_type.index')}}" class="btn btn-sm btn-neutral">All Forest Type</a>
+<a href="{{route('forest_type.index')}}" class="btn btn-sm btn-neutral">সব বাগানের ধরন</a>
 @endpush
 @section('content')
 <div class="row">
@@ -10,7 +10,7 @@
                 @can('update-forest_type')
                 {!! Form::open(['route' => ['forest_type.update', $forest_type], 'method'=>'put']) !!}
                 @endcan
-                <h6 class="heading-small text-muted mb-4">Forest_type information</h6>
+                <h6 class="heading-small text-muted mb-4">বাগান</h6>
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-lg-6">

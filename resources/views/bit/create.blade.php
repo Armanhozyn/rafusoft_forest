@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-    <a href="{{ route('bit.index') }}" class="btn btn-sm btn-neutral">All Bits</a>
+    <a href="{{ route('bit.index') }}" class="btn btn-sm btn-neutral">সব বিট</a>
 @endpush
 @section('content')
     <div class="row">
@@ -8,7 +8,7 @@
             <div class="card mb-5">
                 <div class="card-body">
                     {!! Form::open(['route' => 'bit.store']) !!}
-                    <h6 class="heading-small text-muted mb-4">Bits information</h6>
+                    <h6 class="heading-small text-muted mb-4">বিট</h6>
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">

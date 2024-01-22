@@ -10,13 +10,22 @@ return [
     'office_head_designation' => 'অফিস প্রধান পদবি',
     'created_at' => 'তৈরীর তারিখ',
     'Action' => 'Action',
-    'country_division' => 'দেশ বিভাগ',
+    'country_division' => 'বিভাগ',
     'circle' => 'সার্কেল',
-    'districts' => 'জেলাসমূহ',
+    'districts' => 'জেলা',
     'forest_type' => "বাগানের ধরন",
-    "country_division" => "দেশ বিভাগ",
+    "country_division" => "বিভাগ",
     "thana" => "থানা",
-    "details" => "বিস্তারিত"
+    "details" => "বিস্তারিত",
+    'actions' => "Action",
+    'name_english' => 'ইংরেজি নাম',
+    'district_id' => 'জেলা',
+    'address' => 'ঠিকানা',
+    'phone' => 'ফোন',
+    'description' => 'বর্ণনা',
+    'created_at_read' => 'তৈরির সময়',
+    'mobile' => 'ফোন',
+    'garden_id' => 'বাগানের আইডি'
 
 
 ]

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-<a href="{{route('range.index')}}" class="btn btn-sm btn-neutral">All Range</a>
+<a href="{{route('range.index')}}" class="btn btn-sm btn-neutral">সব রেঞ্জ</a>
 @endpush
 @section('content')
 <div class="row">
@@ -10,7 +10,7 @@
                 @can('update-category')
                 {!! Form::open(['route' => ['range.update', $range], 'method'=>'put']) !!}
                 @endcan
-                <h6 class="heading-small text-muted mb-4">Range information</h6>
+                <h6 class="heading-small text-muted mb-4">রেঞ্জ</h6>
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-lg-6">

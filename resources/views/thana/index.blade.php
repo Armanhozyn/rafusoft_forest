@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-thana')
-<a href="{{ route('thana.create') }}" class="btn btn-sm btn-neutral">Create New Thana</a>
+<a href="{{ route('thana.create') }}" class="btn btn-sm btn-neutral">
+    নতুন থানা তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +12,7 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Thana</h3>
+                        <h3 class="mb-0">সব থানা</h3>
                     </div>
                 </div>
             </div>
@@ -23,7 +24,7 @@
                                 <tr>
                                     <th>{{trans('lang.serial_no')}}</th>
                                     <th>{{trans('lang.name')}}</th>
-                                    <th>{{trans('lang.district')}}</th>
+                                    <th>{{trans('lang.districts')}}</th>
                                     <th>{{trans('lang.created_at')}}</th>
                                     <th>{{trans('lang.Action')}}</th>
                                 </tr>

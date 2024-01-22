@@ -55,7 +55,7 @@ class DistrictController extends Controller
             ->make(true);
         }
         // dd($bits);
-        $title = 'Manage District';
+        $title = 'জেলা পরিচালনা করুন';
         return view('district.index', compact('districts', 'title'));
     }
 
@@ -66,7 +66,7 @@ class DistrictController extends Controller
      */
     public function create()
     {
-        $title = 'Create District';
+        $title = 'জেলা তৈরি করুন';
         $country_divisions = DB::table('country_divisions')->latest()->get();
         return view('district.create', compact('country_divisions','title'));
     }
@@ -81,7 +81,7 @@ class DistrictController extends Controller
     {
         // $request->merge(['user_id' => Auth::user()->id]);
         District::create($request->except('_token'));
-        flash('District created successfully!')->success();
+        flash('জেলা created successfully!')->success();
         return redirect()->route('district.index');
     }
 
@@ -108,7 +108,7 @@ class DistrictController extends Controller
     public function update(DistrictRequest $request, District $district)
     {
         $district->update($request->all());
-        flash('Bit updated successfully!')->success();
+        flash('জেলা updated successfully!')->success();
         return back();
     }
 
@@ -121,7 +121,7 @@ class DistrictController extends Controller
     public function destroy(District $district)
     {
         $district->delete();
-        flash('District deleted successfully!')->info();
+        flash('জেলা deleted successfully!')->info();
         return back();
     }
 }

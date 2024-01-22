@@ -100,7 +100,7 @@ class SfpcController extends Controller
             ->rawColumns(['email_verified_at_read','actions','profile_photo','status'])
             ->make(true);
         }
-        $title = 'Manage sfpcs';
+        $title = 'এসএফপিসি পরিচালনা করুন';
         return view('sfpc.index', compact('sfpcs', 'title'));
     }
 
@@ -111,7 +111,7 @@ class SfpcController extends Controller
      */
     public function create()
     {
-        $title = 'Create Sfpc';
+        $title = 'এসএফপিসি তৈরি করুন';
         $ranges = Range::latest()->get();
 
         return view('sfpc.create', compact('ranges','title'));
@@ -128,7 +128,7 @@ class SfpcController extends Controller
         // $request->merge(['user_id' => Auth::user()->id]);
         $user = User::create($request->except('_token'));
         $user->assignRole('sfpc');
-        flash('Sfpc created successfully!')->success();
+        flash('এসএফপিসি created successfully!')->success();
         return redirect()->route('sfpc.index');
     }
 
@@ -140,7 +140,7 @@ class SfpcController extends Controller
      */
     public function edit(Sfpc $sfpc)
     {
-        $title = "Sfpc Details";
+        $title = "এসএফপিসি বিস্তারিত";
         $ranges = Range::latest()->get();
         return view('sfpc.edit', compact('title', 'sfpc','ranges'));
     }
@@ -155,7 +155,7 @@ class SfpcController extends Controller
     public function update(Request $request, Sfpc $sfpc)
     {
         $sfpc->update($request->all());
-        flash('Sfpc updated successfully!')->success();
+        flash('এসএফপিসি updated successfully!')->success();
         return back();
     }
 
@@ -168,7 +168,7 @@ class SfpcController extends Controller
     public function destroy(Sfpc $sfpc)
     {
         $sfpc->delete();
-        flash('Sfpc deleted successfully!')->info();
+        flash('এসএফপিসি deleted successfully!')->info();
         return back();
     }
 }

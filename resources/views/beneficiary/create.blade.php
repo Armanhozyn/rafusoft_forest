@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-<a href="{{ route('beneficiary.index') }}" class="btn btn-sm btn-neutral">All Beneficiary</a>
+<a href="{{ route('beneficiary.index') }}" class="btn btn-sm btn-neutral">সব সুবিধাভোগী</a>
 @endpush
 @section('content')
 <div class="row">
@@ -8,7 +8,7 @@
         <div class="card mb-5">
             <div class="card-body">
                 {!! Form::open(['route' => 'beneficiary.store']) !!}
-                <h6 class="heading-small text-muted mb-4">Beneficiary information</h6>
+                <h6 class="heading-small text-muted mb-4">সুবিধাভোগী</h6>
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-lg-6">

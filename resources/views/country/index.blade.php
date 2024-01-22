@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @push('pg_btn')
     @can('create-category')
-        <a href="{{ route('country.create') }}" class="btn btn-sm btn-neutral">Create New Country</a>
+        <a href="{{ route('country.create') }}" class="btn btn-sm btn-neutral">
+            নতুন দেশ তৈরি করুন</a>
     @endcan
 @endpush
 @section('content')
@@ -11,7 +12,8 @@
                 <div class="card-header bg-transparent">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h3 class="mb-0">All Countries</h3>
+                            <h3 class="mb-0">
+                                সব দেশ</h3>
                         </div>
                         <div class="col-lg-4">
                             {!! Form::open(['route' => 'users.index', 'method' => 'get']) !!}
@@ -36,10 +38,10 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach ($categories as $category)
+                                    @foreach ($countries as $country)
                                         <tr>
                                             <th scope="row">
-                                                {{ $category->name }}
+                                                {{ $country->name }}
                                             </th>
                                             <td class="budget">
                                                 {{-- {{$category->user->name}} --}}
@@ -52,27 +54,27 @@
                                                 @endif --}}
                                             </td>
                                             <td>
-                                                {{ $category->created_at->diffForHumans() }}
+                                                {{ $country->created_at->diffForHumans() }}
                                             </td>
                                             <td class="text-center">
-                                                @can('destroy-category')
+                                                @can('destroy-country')
                                                     {!! Form::open([
-                                                        'route' => ['category.destroy', $category],
+                                                        'route' => ['country.destroy', $country],
                                                         'method' => 'delete',
                                                         'class' => 'd-inline-block dform',
                                                     ]) !!}
                                                 @endcan
 
-                                                @can('update-category')
+                                                @can('update-country')
                                                     <a class="btn btn-info btn-sm m-1" data-toggle="tooltip"
-                                                        data-placement="top" title="Edit category details"
-                                                        href="{{ route('category.edit', $category) }}">
+                                                        data-placement="top" title="Edit country details"
+                                                        href="{{ route('country.edit', $country) }}">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                                     </a>
                                                 @endcan
-                                                @can('destroy-category')
+                                                @can('destroy-country')
                                                     <button type="submit" class="btn delete btn-danger btn-sm m-1"
-                                                        data-toggle="tooltip" data-placement="top" title="Delete category"
+                                                        data-toggle="tooltip" data-placement="top" title="Delete country"
                                                         href="">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
@@ -85,7 +87,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="6">
-                                            {{ $categories->links() }}
+                                            {{ $countries->links() }}
                                         </td>
                                     </tr>
                                 </tfoot>

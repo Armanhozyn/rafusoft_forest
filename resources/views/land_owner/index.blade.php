@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-land_owner')
-<a href="{{ route('land_owner.create') }}" class="btn btn-sm btn-neutral">Create New Land_owner</a>
+<a href="{{ route('land_owner.create') }}" class="btn btn-sm btn-neutral">নতুন জমির মালিক তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Land_owner</h3>
+                        <h3 class="mb-0">সব জমির মালিকগন</h3>
                     </div>
                 </div>
             </div>

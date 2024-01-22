@@ -50,7 +50,7 @@ class ThanaController extends Controller
             ->rawColumns(['created_at_read','actions'])
             ->make(true);
         }
-        $title = 'ManageThana';
+        $title = 'থানা পরিচালনা করুন';
         return view('thana.index', compact('thanas', 'title'));
     }
 
@@ -61,7 +61,7 @@ class ThanaController extends Controller
     */
     public function create()
     {
-        $title = 'Create Thana';
+        $title = 'থানা তৈরি করুন';
 
         $districtList = District::pluck('name', 'id');
         return view('thana.create', compact('title','districtList'));
@@ -77,7 +77,7 @@ class ThanaController extends Controller
     {
         // $request->merge(['user_id' => Auth::user()->id]);
        Thana::create($request->except('_token'));
-        flash('Thana created successfully!')->success();
+        flash('থানা created successfully!')->success();
         return redirect()->route('thana.index');
     }
 
@@ -89,7 +89,7 @@ class ThanaController extends Controller
     */
     public function edit(Thana $thana)
     {
-        $title = "Thana Details";
+        $title = "থানা বিস্তারিত";
         $districts = District::latest()->get();
         return view('thana.edit', compact('title', 'thana','districts'));
     }
@@ -104,7 +104,7 @@ class ThanaController extends Controller
     public function update(Request $request,Thana $thana)
     {
         $thana ->update($request->all());
-        flash('Thana updated successfully!')->success();
+        flash('থানা updated successfully!')->success();
         return back();
     }
 
@@ -117,7 +117,7 @@ class ThanaController extends Controller
     public function destroy(Thana $thana)
     {
         $thana ->delete();
-        flash('Thana deleted successfully!')->info();
+        flash('থানা deleted successfully!')->info();
         return back();
     }
 }

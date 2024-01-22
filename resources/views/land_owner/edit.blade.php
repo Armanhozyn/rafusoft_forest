@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-<a href="{{route('land_owner.index')}}" class="btn btn-sm btn-neutral">All Land_owner</a>
+<a href="{{route('land_owner.index')}}" class="btn btn-sm btn-neutral">সব জমির মালিকগন</a>
 @endpush
 @section('content')
 <div class="row">

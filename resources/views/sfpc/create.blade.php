@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-    <a href="{{ route('sfpc.index') }}" class="btn btn-sm btn-neutral">All Sfpcs</a>
+    <a href="{{ route('sfpc.index') }}" class="btn btn-sm btn-neutral">সব এসএফপিসি</a>
 @endpush
 @section('content')
     <div class="row">
@@ -8,7 +8,7 @@
             <div class="card mb-5">
                 <div class="card-body">
                     {!! Form::open(['route' => 'sfpc.store']) !!}
-                    <h6 class="heading-small text-muted mb-4">Sfpcs information</h6>
+                    <h6 class="heading-small text-muted mb-4">এসএফপিসি</h6>
                     <div class="pl-lg-4">
                         <div class="row">
                             <div class="col-lg-6">

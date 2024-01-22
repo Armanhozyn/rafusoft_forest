@@ -28,12 +28,12 @@ class CountryController extends Controller
     {
         // dd('works2');
         if ($request->has('search')) {
-            $categories = Country::where('name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
+            $countries = Country::where('name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
         } else {
-            $categories = Country::paginate(setting('record_per_page', 15));
+            $countries = Country::paginate(setting('record_per_page', 15));
         }
-        $title = 'Manage Countries';
-        return view('country.index', compact('categories', 'title'));
+        $title = 'দেশ পরিচালনা করুন';
+        return view('country.index', compact('countries', 'title'));
     }
 
     /**
@@ -43,7 +43,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        $title = 'Create Country';
+        $title = 'দেশ তৈরি করুন';
         return view('country.create', compact('title'));
     }
 
@@ -75,26 +75,26 @@ class CountryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $category)
+    public function edit(Country $country)
     {
-        $title = "Country Details";
-        $category->with('user');
-        return view('country.edit', compact('title', 'category'));
+        $title = "দেশ সম্পাদনা করুন";
+        $country->with('user');
+        return view('country.edit', compact('title', 'country'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(CountryRequest $request, Country $category)
+    public function update(CountryRequest $request, Country $country)
     {
-        $category->update($request->all());
+        $country->update($request->all());
         flash('Country updated successfully!')->success();
         return back();
     }
@@ -102,12 +102,12 @@ class CountryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Category  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $category)
+    public function destroy(Country $country)
     {
-        $category->delete();
+        $country->delete();
         flash('Country deleted successfully!')->info();
         return back();
     }

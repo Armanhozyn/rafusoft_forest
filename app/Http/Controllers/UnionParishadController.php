@@ -32,12 +32,13 @@ class UnionParishadController extends Controller
     {
         // dd('works2');
         if ($request->has('search')) {
-            $categories = UnionParishad::where('name', 'like', '%' . $request->search . '%')->paginate(setting('record_per_page', 15));
+            $unions = UnionParishad::where('name', 'like', '%' . $request->search . '%')
+            ->paginate(setting('record_per_page', 15));
         } else {
-            $categories = UnionParishad::paginate(setting('record_per_page', 15));
+            $unions = UnionParishad::paginate(setting('record_per_page', 15));
         }
-        $title = 'Manage Countries';
-        return view('union.index', compact('categories', 'title'));
+        $title = 'ইউনিয়ন পরিচালনা করুন';
+        return view('union.index', compact('unions', 'title'));
     }
 
     /**
@@ -47,7 +48,7 @@ class UnionParishadController extends Controller
      */
     public function create()
     {
-        $title = 'Create Union';
+        $title = 'ইউনিয়ন তৈরি করুন';
         $thanaList = Thana::latest()->pluck('name', 'id');
         $districtList = District::latest()->pluck('name', 'id');
         $countries = Country::latest()->pluck('name', 'id');
@@ -65,7 +66,7 @@ class UnionParishadController extends Controller
     {
         // $request->merge(['user_id' => Auth::user()->id]);
         UnionParishad::create($request->except('_token'));
-        flash('Country created successfully!')->success();
+        flash('ইউনিয়ন created successfully!')->success();
         return redirect()->route('union.index');
     }
 
@@ -86,12 +87,13 @@ class UnionParishadController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnionParishad $category)
+    public function edit(UnionParishad $union)
     {
-        $title = "Union Details";
+        $title = "ইউনিয়নের বিবরণ";
         // $category->with('user');
-        dd($category);
-        return view('union.edit', compact('title', 'category'));
+        $thanas = Thana::latest()->get();
+        $districts = District::latest()->get();
+        return view('union.edit', compact('title', 'thanas','districts','union'));
     }
 
     /**
@@ -101,10 +103,10 @@ class UnionParishadController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UnionRequest $request, UnionParishad $category)
+    public function update(UnionRequest $request, UnionParishad $union)
     {
-        $category->update($request->all());
-        flash('Union updated successfully!')->success();
+        $union->update($request->all());
+        flash('ইউনিয়ন updated successfully!')->success();
         return back();
     }
 
@@ -114,10 +116,10 @@ class UnionParishadController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UnionParishad $category)
+    public function destroy(UnionParishad $union)
     {
-        $category->delete();
-        flash('Union deleted successfully!')->info();
+        $union->delete();
+        flash('ইউনিয়ন deleted successfully!')->info();
         return back();
     }
 }

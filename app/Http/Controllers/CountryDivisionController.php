@@ -46,7 +46,7 @@ class CountryDivisionController extends Controller
             ->rawColumns(['created_at_read','actions'])
             ->make(true);
         }
-        $title = 'ManageCountry_division';
+        $title = 'বিভাগ পরিচালনা করুন';
         return view('country_division.index', compact('country_divisions', 'title'));
     }
 
@@ -57,7 +57,7 @@ class CountryDivisionController extends Controller
     */
     public function create()
     {
-        $title = 'Create Country_division';
+        $title = 'বিভাগ তৈরি করুন';
         return view('country_division.create', compact('title'));
     }
 
@@ -71,7 +71,7 @@ class CountryDivisionController extends Controller
     {
         // $request->merge(['user_id' => Auth::user()->id]);
        Country_division::create($request->except('_token'));
-        flash('Country_division created successfully!')->success();
+        flash('বিভাগ created successfully!')->success();
         return redirect()->route('country_division.index');
     }
 
@@ -83,7 +83,7 @@ class CountryDivisionController extends Controller
     */
     public function edit(Country_division $country_division)
     {
-        $title = "Country_division Details";
+        $title = "বিভাগ সম্পাদনা করুন";
         return view('country_division.edit', compact('title', 'country_division'));
     }
 
@@ -97,7 +97,7 @@ class CountryDivisionController extends Controller
     public function update(Request $request,Country_division $country_division)
     {
         $country_division ->update($request->all());
-        flash('Country_division updated successfully!')->success();
+        flash('বিভাগ updated successfully!')->success();
         return back();
     }
 
@@ -110,7 +110,7 @@ class CountryDivisionController extends Controller
     public function destroy(Country_division $country_division)
     {
         $country_division ->delete();
-        flash('Country_division deleted successfully!')->info();
+        flash('বিভাগ deleted successfully!')->info();
         return back();
     }
 }

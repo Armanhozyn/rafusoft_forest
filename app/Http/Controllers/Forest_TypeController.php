@@ -46,7 +46,7 @@ class Forest_TypeController extends Controller
             ->rawColumns(['created_at_read','actions'])
             ->make(true);
         }
-        $title = 'Manage Forest Type';
+        $title = 'বাগানের ধরন পরিচালনা করুন';
         return view('forest_type.index', compact('forest_types', 'title'));
     }
 
@@ -57,7 +57,7 @@ class Forest_TypeController extends Controller
     */
     public function create()
     {
-        $title = 'Create ForestType';
+        $title = 'বাগানের ধরন তৈরি করুন';
         return view('forest_type.create', compact('title'));
     }
 
@@ -71,7 +71,7 @@ class Forest_TypeController extends Controller
     {
         // $request->merge(['user_id' => Auth::user()->id]);
        ForestType::create($request->except('_token'));
-        flash('Forest Type created successfully!')->success();
+        flash('বাগানের ধরন created successfully!')->success();
         return redirect()->route('forest_type.index');
     }
 
@@ -83,7 +83,7 @@ class Forest_TypeController extends Controller
     */
     public function edit(ForestType $forest_type)
     {
-        $title = "ForestType Details";
+        $title = "বাগানের ধরন পরিবর্তন";
         return view('forest_type.edit', compact('title', 'forest_type'));
     }
 
@@ -97,7 +97,7 @@ class Forest_TypeController extends Controller
     public function update(Request $request,ForestType $forest_type)
     {
         $forest_type ->update($request->all());
-        flash('ForestType updated successfully!')->success();
+        flash('বাগানের ধরন  updated successfully!')->success();
         return back();
     }
 
@@ -110,7 +110,7 @@ class Forest_TypeController extends Controller
     public function destroy(ForestType $forest_type)
     {
         $forest_type ->delete();
-        flash('ForestType deleted successfully!')->info();
+        flash('বাগানের ধরন  deleted successfully!')->info();
         return back();
     }
 }

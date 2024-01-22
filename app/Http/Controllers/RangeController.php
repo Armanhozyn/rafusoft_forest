@@ -51,7 +51,7 @@ class RangeController extends Controller
             ->make(true);
         }
         // dd($bits);
-        $title = 'Manage Range';
+        $title = 'রেঞ্জ পরিচালনা করুন';
         return view('range.index', compact('ranges', 'title'));
     }
 
@@ -62,7 +62,7 @@ class RangeController extends Controller
      */
     public function create()
     {
-        $title = 'Create Range';
+        $title = 'রেঞ্জ তৈরি করুন';
         $districts = District::latest()->pluck('name', 'id');
         return view('range.create', compact('districts','title'));
     }
@@ -92,7 +92,7 @@ class RangeController extends Controller
                 RangeInUnion::insert($unions);
             }
         }
-        flash('Range created successfully!')->success();
+        flash('রেঞ্জ created successfully!')->success();
         return redirect()->route('range.index');
     }
 
@@ -104,7 +104,7 @@ class RangeController extends Controller
      */
     public function edit(Range $range)
     {
-        $title = "Ranges";
+        $title = "রেঞ্জ";
         $districts = DB::table('districts')->latest()->get();
         return view('range.edit', compact('title', 'range','districts'));
     }
@@ -119,7 +119,7 @@ class RangeController extends Controller
     public function update(RangeRequest $request, Range $range)
     {
         $range->update($request->all());
-        flash('Range updated successfully!')->success();
+        flash('রেঞ্জ updated successfully!')->success();
         return back();
     }
 
@@ -132,7 +132,7 @@ class RangeController extends Controller
     public function destroy(Range $range)
     {
         $range->delete();
-        flash('Range deleted successfully!')->info();
+        flash('রেঞ্জ deleted successfully!')->info();
         return back();
     }
 }

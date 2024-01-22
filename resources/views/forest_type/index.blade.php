@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
 @can('create-forest_type')
-<a href="{{ route('forest_type.create') }}" class="btn btn-sm btn-neutral">Create New Forest_type</a>
+<a href="{{ route('forest_type.create') }}" class="btn btn-sm btn-neutral">নতুন বাগানের ধরন তৈরি করুন</a>
 @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
             <div class="card-header bg-transparent">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mb-0">All Forest_type</h3>
+                        <h3 class="mb-0">সব বাগানের ধরন</h3>
                     </div>
                 </div>
             </div>

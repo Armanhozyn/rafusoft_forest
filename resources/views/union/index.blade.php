@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @push('pg_btn')
-    @can('create-category')
-        <a href="{{ route('union.create') }}" class="btn btn-sm btn-neutral">Create New Union</a>
+    @can('create-union')
+        <a href="{{ route('union.create') }}" class="btn btn-sm btn-neutral">নতুন ইউনিয়ন তৈরি করুন</a>
     @endcan
 @endpush
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="card-header bg-transparent">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h3 class="mb-0">All Union</h3>
+                            <h3 class="mb-0">সব ইউনিয়ন</h3>
                         </div>
                         <div class="col-lg-4">
                             {!! Form::open(['route' => 'users.index', 'method' => 'get']) !!}
@@ -36,43 +36,43 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach ($categories as $category)
+                                    @foreach ($unions as $union)
                                         <tr>
                                             <th scope="row">
-                                                {{ $category->name }}
+                                                {{ $union->name }}
                                             </th>
                                             <td class="budget">
-                                                {{-- {{$category->user->name}} --}}
+                                                {{-- {{$union->user->name}} --}}
                                             </td>
                                             <td>
-                                                {{-- @if ($category->status)
+                                                {{-- @if ($union->status)
                                                     <span class="badge badge-pill badge-lg badge-success">Active</span>
                                                 @else
                                                     <span class="badge badge-pill badge-lg badge-danger">Disabled</span>
                                                 @endif --}}
                                             </td>
                                             <td>
-                                                {{ $category->created_at->diffForHumans() }}
+                                                {{ $union->created_at->diffForHumans() }}
                                             </td>
                                             <td class="text-center">
-                                                @can('destroy-category')
+                                                @can('destroy-union')
                                                     {!! Form::open([
-                                                        'route' => ['union.destroy', $category],
+                                                        'route' => ['union.destroy', $union],
                                                         'method' => 'delete',
                                                         'class' => 'd-inline-block dform',
                                                     ]) !!}
                                                 @endcan
 
-                                                @can('update-category')
+                                                @can('update-union')
                                                     <a class="btn btn-info btn-sm m-1" data-toggle="tooltip"
-                                                        data-placement="top" title="Edit category details"
-                                                        href="{{ route('union.edit', $category) }}">
+                                                        data-placement="top" title="Edit union details"
+                                                        href="{{ route('union.edit', $union) }}">
                                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                                     </a>
                                                 @endcan
-                                                @can('destroy-category')
+                                                @can('destroy-union')
                                                     <button type="submit" class="btn delete btn-danger btn-sm m-1"
-                                                        data-toggle="tooltip" data-placement="top" title="Delete category"
+                                                        data-toggle="tooltip" data-placement="top" title="Delete union"
                                                         href="">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
@@ -85,7 +85,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="6">
-                                            {{ $categories->links() }}
+                                            {{ $unions->links() }}
                                         </td>
                                     </tr>
                                 </tfoot>

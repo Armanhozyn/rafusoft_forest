@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('pg_btn')
-<a href="{{ route('land_owner.index') }}" class="btn btn-sm btn-neutral">All Land_owner</a>
+<a href="{{ route('land_owner.index') }}" class="btn btn-sm btn-neutral">সব জমির মালিকগন</a>
 @endpush
 @section('content')
 <div class="row">
@@ -8,7 +8,7 @@
         <div class="card mb-5">
             <div class="card-body">
                 {!! Form::open(['route' => 'land_owner.store']) !!}
-                <h6 class="heading-small text-muted mb-4">Land_owner information</h6>
+                <h6 class="heading-small text-muted mb-4">জমির মালিকগন</h6>
                 <div class="pl-lg-4">
                     <div class="row">
                         <div class="col-lg-6">

@@ -103,7 +103,7 @@ class BitController extends Controller
             ->make(true);
         }
         // dd($bits);
-        $title = 'Manage Bits';
+        $title = 'বিট পরিচালনা করুন';
         return view('bit.index', compact('bits', 'title'));
     }
 
@@ -114,7 +114,7 @@ class BitController extends Controller
      */
     public function create()
     {
-        $title = 'Create Bit';
+        $title = 'বিট তৈরি করুন';
         $ranges = Range::latest()->get();
         return view('bit.create', compact('ranges','title'));
     }
@@ -130,7 +130,7 @@ class BitController extends Controller
         // $request->merge(['user_id' => Auth::user()->id]);
         $user = User::create($request->except('_token'));
         $user->assignRole("বীট");
-        flash('Bit created successfully!')->success();
+        flash('বিট created successfully!')->success();
         return redirect()->route('bit.index');
     }
 
@@ -142,7 +142,7 @@ class BitController extends Controller
      */
     public function edit(Bit $bit)
     {
-        $title = "Bit Details";
+        $title = "বিট বিবরণ";
         $ranges = Range::latest()->get();
         return view('bit.edit', compact('title', 'bit','ranges'));
     }
@@ -157,7 +157,7 @@ class BitController extends Controller
     public function update(Request $request, Bit $bit)
     {
         $bit->update($request->all());
-        flash('Bit updated successfully!')->success();
+        flash('বিট updated successfully!')->success();
         return back();
     }
 
@@ -170,7 +170,7 @@ class BitController extends Controller
     public function destroy(Bit $bit)
     {
         $bit->delete();
-        flash('Bit deleted successfully!')->info();
+        flash('বিট deleted successfully!')->info();
         return back();
     }
 }
