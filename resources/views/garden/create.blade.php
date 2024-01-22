@@ -569,6 +569,7 @@
 
 
         $('#parties-table tbody').on('click', 'button.remove-btn', function() {
+            debugger;
             $(this).closest('tr').remove();
             tableToData();
         });
@@ -635,6 +636,7 @@
 
         function tableToData() {
             var tableData = [];
+            let totalPercentage = 0;
             $("#parties-table tbody tr").each(function(rowIndex, row) {
                 var rowData = {};
                 $(row).find("td:not(:last-child)").each(function(colIndex, cell) {
@@ -648,10 +650,12 @@
                     }
                 });
                 tableData.push(rowData);
+                totalPercentage = totalPercentage + parseInt( rowData['প্রাপ্য হার']);
             });
 
             var jsonData = JSON.stringify(tableData);
             console.log(jsonData);
+            $('#totalPercent').text(totalPercentage);
             $('#parties-input').val(jsonData);
         }
 
