@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GardenInUnion extends Model
 {
-    public function union()
-    {
-        return $this->hasOne(UnionParishad::class, 'id', 'union_parishad_id');
-    }
+
+    protected $tables = "garden_in_unions";
+    protected $fillable = [ 'garden_id','union_parishad_id'];
 }

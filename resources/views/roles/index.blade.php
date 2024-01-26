@@ -45,10 +45,10 @@
                                             </a>
                                             @endcan
                                             @can('destroy-roles')
-                                                <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Delete role" href="">
+                                                {{-- <button type="submit" class="btn delete btn-danger btn-sm m-1" data-toggle="tooltip" data-placement="top" title="Delete role" href="">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                                {!! Form::close() !!}
+                                                {!! Form::close() !!} --}}
                                             @endcan
                                             @else
                                             <span class="text-muted text-small">-</span>

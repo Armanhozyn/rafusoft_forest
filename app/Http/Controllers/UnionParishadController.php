@@ -49,7 +49,10 @@ class UnionParishadController extends Controller
     public function create()
     {
         $title = 'ইউনিয়ন তৈরি করুন';
-        $thanaList = Thana::latest()->pluck('name', 'id');
+        $thanaList = Thana::join('districts', 'districts.id', '=', 'thanas.district_id')
+        ->select('thanas.*','thanas.name as thana_name','thanas.id as thana_id', 'districts.name as district_name')
+        ->latest()
+        ->pluck('thana_name', 'thana_id');
         $districtList = District::latest()->pluck('name', 'id');
         $countries = Country::latest()->pluck('name', 'id');
         // dd($thanaList);

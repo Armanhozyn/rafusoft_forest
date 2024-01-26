@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\BitInThana;
+use App\BitInUnion;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Range;
@@ -47,7 +49,11 @@ class UserController extends Controller
     {
         $title = 'Create user';
         $roles = Role::latest()->get();
-        $ranges = Range::pluck('name', 'id');
+        $ranges = Range::join('districts', 'districts.id', '=', 'ranges.district_id')
+        ->select('ranges.*','ranges.name as range_name','ranges.id as range_id', 'districts.name as district_name')
+        ->latest()
+        ->pluck('range_name','range_id');
+        // $ranges = Range::pluck('name', 'id');
         // dd($ranges);
         return view('users.create', compact('roles', 'title', 'ranges'));
     }
@@ -60,17 +66,45 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        if($request->role == 6){
+        if($request->role == 'বীট' || $request->role == 'এসএফপিসি' || $request->role == 'তথ্য প্রদানকারী (রেঞ্জ/কেন্দ্র)'){
             $request->validate([
                 'range_id' => 'required',
             ]);
         }
 
-        $userData = $request->except(['role', 'profile_photo']);
+        $userData = $request->except(['role', 'profile_photo','union_parishad_id','thana_id']);
         if ($request->profile_photo) {
             $userData['profile_photo'] = parse_url($request->profile_photo, PHP_URL_PATH);
         }
         $user = User::create($userData);
+        $unions = $request->union_parishad_id;
+        $thanas = $request->thana_id;
+        if ($user && $request->role == 'বীট') {
+            $bitId = $user->id;
+            $unions = array_map(function ($value) use ($bitId) {
+                return [
+                    'bit_id' => $bitId,
+                    'union_id' => $value
+                ];
+            }, $unions);
+
+            // dd($unions);
+            if (!empty($unions)) {
+                BitInUnion::insert($unions);
+            }
+
+            $thanas = array_map(function ($value) use ($bitId) {
+                return [
+                    'bit_id' => $bitId,
+                    'thana_id' => $value
+                ];
+            }, $thanas);
+
+            if (!empty($thanas)) {
+                BitInThana::insert($thanas);
+            }
+
+        }
         $user->assignRole($request->role);
         flash('User created successfully!')->success();
         return redirect()->route('users.index');

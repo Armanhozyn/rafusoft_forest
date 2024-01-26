@@ -12,6 +12,8 @@ use App\District;
 use App\Project;
 use App\ForestType;
 use App\GardenInformation;
+use App\GardenInThana;
+use App\GardenInUnion;
 use App\GardenType;
 use App\UnionParishad;
 use Illuminate\Http\Request;
@@ -48,17 +50,15 @@ class GardenController extends Controller
 
             $gardens =Garden::join('ranges','ranges.id','gardens.range_id')
             ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
-            ->join('districts', 'districts.id', '=', 'ranges.district_id')
-            ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-            ->select('gardens.*','ranges.name as range_name','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+            ->join('districts', 'districts.id', '=', 'gardens.district_id')
+            ->select('gardens.*','ranges.name as range_name','districts.name as district_name','forest_types.name as forest_type_name')
             ->latest('gardens.created_at')
             ->get();
         }else{
             $gardens =Garden::join('ranges','ranges.id','gardens.range_id')
             ->join('forest_types', 'forest_types.id', '=', 'gardens.forest_type_id')
-            ->join('districts', 'districts.id', '=', 'ranges.district_id')
-            ->join('thanas', 'thanas.id', '=', 'ranges.thana_id')
-            ->select('gardens.*','ranges.name as range_name','districts.name as district_name','thanas.name as thana_name','forest_types.name as forest_type_name')
+            ->join('districts', 'districts.id', '=', 'gardens.district_id')
+            ->select('gardens.*','ranges.name as range_name','districts.name as district_name','forest_types.name as forest_type_name')
             ->where('gardens.range_id',$user->range_id)
             ->latest('gardens.created_at')
             ->get();
@@ -71,6 +71,22 @@ class GardenController extends Controller
             ->addColumn('created_at_read',function($row){
                 return $row->created_at->diffForHumans();
 
+            })
+            ->addColumn('thana_name',function($row){
+
+                $thanas = GardenInThana::join('thanas','thanas.id','=','garden_in_thanas.thana_id')
+                ->where('garden_in_thanas.garden_id' , '=',$row->id)
+                ->select('thanas.id as thana_id','thanas.name as thana_name')
+                ->get('thana_name','thana_id');
+
+                $thana_html = "";
+                foreach ($thanas as $thana) {
+                    $thana_html .= <<<CODE
+                        $thana->thana_name,
+                    CODE;
+                }
+
+                return $thana_html;
             })
             ->addColumn('agreement_attachment',function($row){
 
@@ -130,7 +146,7 @@ class GardenController extends Controller
         // dd($user->name);
         $rangeInfo = $user->name;
         // $sfpcList = Sfpc::where('range_id', $user->range_id)->pluck('name', 'id');
-        $sfpcList = User::where('range_id', $user->range_id)->latest()->role('sfpc')->pluck('name', 'id');
+        $sfpcList = User::where('range_id', $user->range_id)->latest()->role('এসএফপিসি')->pluck('name', 'id');
         // $bitList = Bit::where('range_id', $user->range_id)->pluck('name', 'id');
         $bitList = User::where('range_id', $user->range_id)->latest()->role('বীট')->pluck('name', 'id');
         // dd($sfpcList);
@@ -233,7 +249,9 @@ class GardenController extends Controller
 
         // dd($request->all());
 
-        $create = Garden::create($request->except('_token', 'parties', 'contract_attachment'));
+        $create = Garden::create($request->except('_token', 'parties', 'contract_attachment','union_parishad_id','thana_id'));
+        $unions = $request->union_parishad_id;
+        $thanas = $request->thana_id;
         if (!empty($create)) {
             $gardenId = $create->id;
             if (!empty($parties)) {
@@ -266,7 +284,28 @@ class GardenController extends Controller
                 // dd($updatedArray);
                 PartyInGarden::insert($updatedArray);
             }
+            $unions = array_map(function ($value) use ($gardenId) {
+                return [
+                    'garden_id' => $gardenId,
+                    'union_parishad_id' => $value
+                ];
+            }, $unions);
 
+            // dd($unions);
+            if (!empty($unions)) {
+                GardenInUnion::insert($unions);
+            }
+
+            $thanas = array_map(function ($value) use ($gardenId) {
+                return [
+                    'garden_id' => $gardenId,
+                    'thana_id' => $value
+                ];
+            }, $thanas);
+
+            if (!empty($thanas)) {
+                GardenInThana::insert($thanas);
+            }
             // dd($create);
         }
         // dd($create);

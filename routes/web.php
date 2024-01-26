@@ -151,7 +151,9 @@ Route::group(['middleware' => ['auth', 'verified', 'setLanguage']], function () 
 
     Route::get('ajax/upazilla-by-district/{district_id}', [AjaxController::class, 'getUpazillaByDistrict'])->name('upozila_by_district');
     Route::get('ajax/woodlot-by-garder/{garden_id}', [AjaxController::class, 'getWoodLotByGarden'])->name('wood_lot_by_garden');
-    Route::get('ajax/union-by-thana/{thana_id}', [AjaxController::class, 'getUnionByUpazilla'])->name("union_by_thana");
+    Route::post('ajax/union-by-thana', [AjaxController::class, 'getUnionByUpazilla'])->name("union_by_thana");
+    Route::get('ajax/get-range-by-id/{rangeId}', [AjaxController::class, 'getRangeById'])->name("get_range_by_id");
+    Route::get('ajax/get-range-by-bit-id/{bitId}', [AjaxController::class, 'getRangeByBitId'])->name("get_range_by_bit_id");
     Route::get('ajax/garden-info/{garden_id}', [AjaxController::class, 'getGardenInfo']);
     Route::get('ajax/garden-by-bit/{bit_id}', [AjaxController::class, 'GardenByBit'])->name('garden_by_bit');
     Route::get('ajax/institute-by-party/{party_id}', [AjaxController::class, 'instituteByParty'])->name('institute_by_party');

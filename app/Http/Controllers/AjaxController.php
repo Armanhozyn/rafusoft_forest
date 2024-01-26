@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\BitInThana;
+use App\BitInUnion;
 use App\Garden;
 use App\GardenInformation;
 use App\Institute;
 use App\Party;
 use App\PartyInGarden;
+use App\Range;
+use App\RangeInUnion;
+use App\RangeThana;
 use App\Thana;
 use App\UnionParishad;
+use App\User;
 use App\WoodLot;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
@@ -124,10 +131,10 @@ class AjaxController extends Controller
 
     }
 
-    public function getUnionByUpazilla($upazillaId)
+    public function getUnionByUpazilla(Request $request)
     {
         // dd($districtId);
-        $districtList = UnionParishad::where('thana_id', $upazillaId)->pluck('name', 'id');;
+        $districtList = UnionParishad::whereIn('thana_id', $request->unionIds)->pluck('name', 'id');;
 
         $data = [
             'success' => true,
@@ -153,5 +160,67 @@ class AjaxController extends Controller
 
         // Using the response() helper function
         return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function getRangeById($rangeId){
+
+        $districts = Range::join('districts','ranges.district_id','=','districts.id')
+                    ->where('ranges.id',$rangeId)
+                    ->select('districts.id as district_id','districts.name as district_name')
+                    ->pluck('district_name','district_id');
+
+
+        $thanas = RangeThana::join('thanas','thanas.id','=','range_thanas.thana_id')
+                    ->where('range_thanas.range_id' , '=',$rangeId)
+                    ->select('thanas.id as thana_id','thanas.name as thana_name')
+                    ->pluck('thana_name','thana_id');
+
+        $unions = RangeInUnion::join('union_parishads','union_parishads.id','=','range_in_unions.union_parishad_id')
+        ->where('range_in_unions.range_id' , '=',$rangeId)
+        ->select('union_parishads.id as union_parishad_id', 'union_parishads.name as union_parishad_name')
+        ->pluck('union_parishad_name', 'union_parishad_id');
+
+        $data = [
+            'success' => true,
+            'districts' => $districts,
+            'thanas' => $thanas,
+            'unions' => $unions,
+            'message' => 'Range list fetched successfully',
+        ];
+
+        // Using the response() helper function
+        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
+
+    }
+
+    public function getRangeByBitId($bitId){
+
+        $districts = User::join('districts','users.district_id','=','districts.id')
+                    ->where('users.id',$bitId)
+                    ->select('districts.id as district_id','districts.name as district_name')
+                    ->pluck('district_name','district_id');
+
+
+        $thanas = BitInThana::join('thanas','thanas.id','=','bit_in_thanas.thana_id')
+                    ->where('bit_in_thanas.bit_id' , '=',$bitId)
+                    ->select('thanas.id as thana_id','thanas.name as thana_name')
+                    ->pluck('thana_name','thana_id');
+
+        $unions = BitInUnion::join('union_parishads','union_parishads.id','=','bit_in_unions.union_id')
+        ->where('bit_in_unions.bit_id' , '=',$bitId)
+        ->select('union_parishads.id as union_parishad_id', 'union_parishads.name as union_parishad_name')
+        ->pluck('union_parishad_name', 'union_parishad_id');
+
+        $data = [
+            'success' => true,
+            'districts' => $districts,
+            'thanas' => $thanas,
+            'unions' => $unions,
+            'message' => 'Range list fetched successfully',
+        ];
+
+        // Using the response() helper function
+        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE);
+
     }
 }

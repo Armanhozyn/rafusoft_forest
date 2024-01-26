@@ -64,6 +64,24 @@
                                     {{ Form::label('sfpc_id', __('garden.select_sfpc'), ['class' => 'form-control-label']) }}
                                     {{ Form::select('sfpc_id', $sfpcList, null, ['class' => 'form-control form-control-sm', 'placeholder' => 'Select SFPC...', 'id' => 'sfpc-list']) }}
                                 </div>
+
+                                <div class="form-group" id='district_wrap'>
+                                    {{ Form::label('district', 'জেলা', ['class' => 'form-control-label']) }}
+                                    {{ Form::select('district_id', [], null, ['class' => 'form-control', 'placeholder' => 'বাগানের ধরন নির্বাচন করুন...', 'id' => 'district']) }}
+                                </div>
+
+
+                                <div class="form-group" id='thana_wrap'>
+                                    {{ Form::label('thana', '
+                                    থানা', ['class' => 'form-control-label']) }}
+                                    {{ Form::select('thana_id[]', [], null, ['multiple'=> 'multiple','class' => 'form-control', 'placeholder' => '
+                                    থানা নির্বাচন করুন...', 'id' => 'thana']) }}
+                                </div>
+
+                                <div class="form-group" id='union_wrap'>
+                                    {{ Form::label('union', 'ইউনিয়ন পরিষদ', ['class' => 'form-control-label']) }}
+                                    {{ Form::select('union_parishad_id[]', [], null, ['multiple'=> 'multiple','class' => 'form-control', 'placeholder' => 'ইউনিয়ন পরিষদ নির্বাচন করুন...', 'id' => 'union']) }}
+                                </div>
                                 {{-- <div class="form-group">
                                     <label for="garden_id" class="form-control-label">বাগান নির্বাচন করুন</label>
                                     <select id="garden_id" name="garden_information_id" class="form-control form-control-sm">
@@ -269,9 +287,9 @@
                 $('<option>').val(index).text(party).appendTo(selectElement);
             });
 
-            $('#bit-list').on('change', function() {
-                $('#sfpc-list').val('');
-            });
+            // $('#bit-list').on('change', function() {
+
+            // });
 
             $('#sfpc-list').on('change', function() {
                 $('#bit-list').val('');
@@ -852,55 +870,48 @@
             return;
         });
 
-        $('#district').change(function() {
-            debugger;
-            $('#thana').html('');
-            $('#union').html('');
-            var dropdown = $('#thana'); // Assuming you have a dropdown with id "myDropdown"
-                dropdown.html('');
-            let disctrictId = $(this).val();
-            console.log(disctrictId);
 
-            // debugger;
-            var routeUrl = "{{ route('upozila_by_district',0) }}";
-            var generatedUrl = routeUrl.replace('0', disctrictId);
 
-            $.get(generatedUrl, function(response) {
-                // Success callback
-                console.log("Response:", response);
-                dropdown.append($('<option></option>').attr('value', '').text('উপজেলা নির্বাচন করুন...'));
-                $.each(response.data, function(key, value) {
-                    dropdown.append($('<option></option>').attr('value', key).text(value));
+
+        $('#bit-list').change(function(){
+                $('#sfpc-list').val('');
+                debugger;
+                $('#thana').html('');
+                $('#union').html('');
+                $('#district').html('');
+                let bitId = $(this).val();
+
+                // debugger;
+                var routeUrl = "{{ route('get_range_by_bit_id',0) }}";
+                var generatedUrl = routeUrl.replace('0', bitId);
+
+                $.get(generatedUrl, function(response) {
+                    // Success callback
+                    console.log("Response:", response);
+
+
+                    $('#district').append($('<option></option>').attr('value', '').text('জেলা নির্বাচন করুন...'));
+                    $.each(response.districts, function(key, value) {
+                        $('#district').append($('<option selected></option>').attr('value', key).text(value));
+                    });
+
+                    $('#thana').append($('<option></option>').attr('value', '').text('থানা নির্বাচন করুন...'));
+                    $.each(response.thanas, function(key, value) {
+                        $('#thana').append($('<option selected></option>').attr('value', key).text(value));
+                    });
+
+                    $('#union').append($('<option></option>').attr('value', '').text('ইউনিয়ন পরিষদ নির্বাচন করুন...'));
+                    $.each(response.unions, function(key, value) {
+                        $('#union').append($('<option selected></option>').attr('value', key).text(value));
+                    });
+
+
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    // Error callback
+                    console.error("Error:", errorThrown);
                 });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                // Error callback
-                console.error("Error:", errorThrown);
-            });
-
-        });
-
-
-        $('#thana').change(function(){
-            $('#union').html('');
-            var dropdown = $('#union'); // Assuming you have a dropdown with id "myDropdown"
-                dropdown.html('');
-            let unionId = $(this).val();
-            console.log(unionId);
-            var routeUrl = "{{ route('union_by_thana',0) }}";
-            var generatedUrl = routeUrl.replace('0', unionId);
-            $.get(generatedUrl, function(response) {
-                // Success callback
-                console.log("Response:", response);
-                dropdown.append($('<option></option>').attr('value', '').text('ইউনিয়ন নির্বাচন করুন...'));
-                $.each(response.data, function(key, value) {
-                    dropdown.append($('<option></option>').attr('value', key).text(value));
-                });
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                // Error callback
-                console.error("Error:", errorThrown);
-            });
-
-        });
+                return;
+        })
     </script>
 
 

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RangeRequest;
 use App\Range;
 use App\RangeInUnion;
+use App\RangeThana;
+use App\Thana;
 use DataTables;
 use Illuminate\Support\Facades\DB;
 
@@ -76,8 +78,9 @@ class RangeController extends Controller
     public function store(RangeRequest $request)
     {
         // $request->merge(['user_id' => Auth::user()->id]);
-        $create = Range::create($request->except('_token','union_parishad_id'));
+        $create = Range::create($request->except('_token','union_parishad_id','thana_id'));
         $unions = $request->union_parishad_id;
+        $thanas = $request->thana_id;
         if ($create) {
             $rangeId = $create->id;
             $unions = array_map(function ($value) use ($rangeId) {
@@ -91,6 +94,18 @@ class RangeController extends Controller
             if (!empty($unions)) {
                 RangeInUnion::insert($unions);
             }
+
+            $thanas = array_map(function ($value) use ($rangeId) {
+                return [
+                    'range_id' => $rangeId,
+                    'thana_id' => $value
+                ];
+            }, $thanas);
+
+            if (!empty($thanas)) {
+                RangeThana::insert($thanas);
+            }
+
         }
         flash('রেঞ্জ created successfully!')->success();
         return redirect()->route('range.index');
@@ -106,7 +121,17 @@ class RangeController extends Controller
     {
         $title = "রেঞ্জ";
         $districts = DB::table('districts')->latest()->get();
-        return view('range.edit', compact('title', 'range','districts'));
+        $thanas = RangeThana::join('thanas','thanas.id','=','range_thanas.thana_id')
+                    ->where('range_thanas.range_id' , '=',$range->id)
+                    ->select('thanas.id as thana_id','thanas.name as thana_name')
+                    ->pluck('thana_name','thana_id');
+
+        $unions = RangeInUnion::join('union_parishads','union_parishads.id','=','range_in_unions.union_parishad_id')
+        ->where('range_in_unions.range_id' , '=',$range->id)
+        ->select('union_parishads.id as union_parishad_id', 'union_parishads.name as union_parishad_name')
+        ->pluck('union_parishad_name', 'union_parishad_id');
+
+        return view('range.edit', compact('title', 'range','districts','thanas','unions'));
     }
 
     /**
@@ -118,7 +143,44 @@ class RangeController extends Controller
      */
     public function update(RangeRequest $request, Range $range)
     {
-        $range->update($request->all());
+        $update = $range->update($request->except('_token','union_parishad_id','thana_id'));
+
+        $unions = $request->union_parishad_id;
+        $thanas = $request->thana_id;
+        if ($update) {
+            $rangeId = $range->id;
+
+            $deleteUnion = RangeInUnion::where('range_id',$rangeId)->delete();
+            if($deleteUnion){
+                $unions = array_map(function ($value) use ($rangeId) {
+                    return [
+                        'range_id' => $rangeId,
+                        'union_parishad_id' => $value
+                    ];
+                }, $unions);
+
+                // dd($unions);
+                if (!empty($unions)) {
+                    RangeInUnion::insert($unions);
+                }
+            }
+
+            $deleteThana= RangeThana::where('range_id',$rangeId)->delete();
+            if($deleteThana){
+                $thanas = array_map(function ($value) use ($rangeId) {
+                    return [
+                        'range_id' => $rangeId,
+                        'thana_id' => $value
+                    ];
+                }, $thanas);
+
+                if (!empty($thanas)) {
+                    RangeThana::insert($thanas);
+                }
+            }
+
+
+        }
         flash('রেঞ্জ updated successfully!')->success();
         return back();
     }

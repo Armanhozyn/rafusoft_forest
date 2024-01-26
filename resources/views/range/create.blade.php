@@ -35,8 +35,10 @@
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label('thana', 'উপজেলা', ['class' => 'form-control-label']) }}
-                                {{ Form::select('thana_id', [], null, ['class' => 'form-control', 'placeholder' => 'উপজেলা নির্বাচন করুন...', 'id' => 'thana']) }}
+                                {{ Form::label('thana', '
+                                থানা', ['class' => 'form-control-label']) }}
+                                {{ Form::select('thana_id[]', [], null, ['multiple'=> 'multiple','class' => 'form-control', 'placeholder' => '
+                                থানা নির্বাচন করুন...', 'id' => 'thana']) }}
                             </div>
 
                             <div class="form-group">
@@ -90,7 +92,7 @@ $('#district').change(function() {
     $.get(generatedUrl, function(response) {
         // Success callback
         console.log("Response:", response);
-        dropdown.append($('<option></option>').attr('value', '').text('উপজেলা নির্বাচন করুন...'));
+        dropdown.append($('<option></option>').attr('value', '').text('থানা নির্বাচন করুন...'));
         $.each(response.data, function(key, value) {
             dropdown.append($('<option></option>').attr('value', key).text(value));
         });
@@ -104,16 +106,25 @@ $('#district').change(function() {
 
 $('#thana').change(function(){
     $('#union').html('');
+    debugger;
     var dropdown = $('#union'); // Assuming you have a dropdown with id "myDropdown"
         dropdown.html('');
     let unionId = $(this).val();
     console.log(unionId);
-    var routeUrl = "{{ route('union_by_thana',0) }}";
-    var generatedUrl = routeUrl.replace('0', unionId);
-    $.get(generatedUrl, function(response) {
+    var routeUrl = "{{ route('union_by_thana') }}";
+    var requestData = {
+        unionIds: unionId
+    };
+    // var generatedUrl = routeUrl.replace('0', unionId);
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.post(routeUrl,requestData, function(response) {
         // Success callback
         console.log("Response:", response);
-        dropdown.append($('<option></option>').attr('value', '').text('ইউনিয়ন নির্বাচন করুন...'));
+        // dropdown.append($('<option></option>').attr('value', '').text('ইউনিয়ন নির্বাচন করুন...'));
         $.each(response.data, function(key, value) {
             dropdown.append($('<option></option>').attr('value', key).text(value));
         });
